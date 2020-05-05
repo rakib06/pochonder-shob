@@ -124,5 +124,3 @@ dmypy.json
 .pyre/
 
 # End of https://www.gitignore.io/api/python
-core/__pycache__/admin.cpython-36.pyc
-core/__pycache__/models.cpython-36.pyc
