@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}
+Pochonder Sob
+{% endblock %}
+{% block content %}
+
+<!-- ##### Main Content Wrapper Start ##### -->
+<div class="main-content-wrapper d-flex clearfix">
+
+    {% include "layouts/mobile.html"%}
+    {% include "layouts/sidebar.html"%}
+
+    <!-- Product Catagories/Shops/Service Area Area Start -->
+    <div class="products-catagories-area clearfix">
+        <div class="amado-pro-catagory clearfix">
+
+            {% include "items/category.html" %}
+
+        </div>
+    </div>
+    <!-- Product Catagories/Shops/Service Area End -->
+</div>
+<!-- ##### Main Content Wrapper End ##### -->
+
+{% endblock content %}
