@@ -12,7 +12,7 @@ from .views import (
     RequestRefundView,
     ShopView,
     ProductDetailView,
-    CartView, CheckoutView
+    CartView, CheckoutView, AdminView
 
 )
 
@@ -26,6 +26,7 @@ urlpatterns = [
     path('product-example/', ProductDetailView.as_view(), name='product-detail'),
     path('cart-example/', CartView.as_view(), name='cart'),
     path('checkout-example/', CheckoutView.as_view(), name='checkout'),
+    path('admin-example/', AdminView.as_view(), name='admin_shop'),
     # end extra
     path('order-summary/', OrderSummaryView.as_view(), name='order-summary'),
     path('product/<slug>/', ItemDetailView.as_view(), name='product'),

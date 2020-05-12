@@ -375,6 +375,12 @@ class CheckoutView(ListView):
     template_name = "checkout.html"
 
 
+class AdminView(ListView):
+    model = Item
+    paginate_by = 10
+    template_name = "admin/index.html"
+
+
 class OrderSummaryView(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
         try:

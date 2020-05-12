@@ -21,6 +21,9 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+
+    'shop'
 ]
 
 MIDDLEWARE = [
@@ -98,3 +101,4 @@ if ENVIRONMENT == 'production':
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 STRIPE_SECRET_KEY = ''
+
