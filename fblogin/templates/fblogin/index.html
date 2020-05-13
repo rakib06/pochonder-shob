@@ -1,4 +1,6 @@
 {% load static %}
+{% load socialaccount %}
+{% providers_media_js %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,7 +19,8 @@
     <link href="{% static 'shop/css/font-face.css' %}" rel="stylesheet" media="all">
     <link href="{% static 'shop/vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
     <link href="{% static 'shop/vendor/font-awesome-5/css/fontawesome-all.min.css' %}" rel="stylesheet" media="all">
-    <link href="{% static 'shop/vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'shop/vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet"
+        media="all">
 
     <!-- Bootstrap CSS-->
     <link href="{% static 'shop/vendor/bootstrap-4.1/bootstrap.min.css' %}" rel="stylesheet" media="all">
@@ -71,15 +74,20 @@
                                 <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">sign in</button>
                                 <div class="social-login-content">
                                     <div class="social-button">
-                                        <button class="au-btn au-btn--block au-btn--blue m-b-20">sign in with facebook</button>
-                                        <button class="au-btn au-btn--block au-btn--blue2">sign in with twitter</button>
-                                    </div>
+                                        
+                                        <a class=" au-btn au-btn--block au-btn--blue m-b-20"
+                                            href="{% provider_login_url "facebook" method="js_sdk" %}">sign
+                                            up with facebook</a>
+
+                                        <button class="au-btn au-btn--block au-btn--blue2">sign in with
+                                            twitter</button>
                                 </div>
-                            </form>
-                            <div class="register-link">
-                                <p>
-                                    Don't you have account?
-                                    <a href="{% static 'shop/#">Sign Up Here</a>
+                        </div>
+                        </form>
+                        <div class="register-link">
+                            <p>
+                                Don't you have account?
+                                <a href="{% static 'shop/#">Sign Up Here</a>
                                 </p>
                             </div>
                         </div>
@@ -92,27 +100,31 @@
 
     <!-- Jquery JS-->
     <script src="{% static  'shop/vendor/jquery-3.2.1.min.js' %}"></script>
-                                            <!-- Bootstrap JS-->
-                                            <script src="{% static  'shop/vendor/bootstrap-4.1/popper.min.js' %}"></script>
-                                            <script src="{% static  'shop/vendor/bootstrap-4.1/bootstrap.min.js' %}"></script>
-                                            <!-- Vendor JS       -->
-                                            <script src="{% static  'shop/vendor/slick/slick.min.js' %}">
-                                            </script>
-                                            <script src="{% static  'shop/vendor/wow/wow.min.js' %}"></script>
-                                            <script src="{% static  'shop/vendor/animsition/animsition.min.js' %}"></script>
-                                            <script src="{% static  'shop/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js' %}">
-                                            </script>
-                                            <script src="{% static  'shop/vendor/counter-up/jquery.waypoints.min.js' %}"></script>
-                                            <script src="{% static  'shop/vendor/counter-up/jquery.counterup.min.js' %}">
-                                            </script>
-                                            <script src="{% static  'shop/vendor/circle-progress/circle-progress.min.js' %}"></script>
-                                            <script src="{% static  'shop/vendor/perfect-scrollbar/perfect-scrollbar.js' %}"></script>
-                                            <script src="{% static  'shop/vendor/chartjs/Chart.bundle.min.js' %}"></script>
-                                            <script src="{% static  'shop/vendor/select2/select2.min.js' %}">
-                                            </script>
+                                    <!-- Bootstrap JS-->
+                                    <script src="{% static  'shop/vendor/bootstrap-4.1/popper.min.js' %}"></script>
+                                    <script src="{% static  'shop/vendor/bootstrap-4.1/bootstrap.min.js' %}"></script>
+                                    <!-- Vendor JS       -->
+                                    <script src="{% static  'shop/vendor/slick/slick.min.js' %}">
+                                    </script>
+                                    <script src="{% static  'shop/vendor/wow/wow.min.js' %}"></script>
+                                    <script src="{% static  'shop/vendor/animsition/animsition.min.js' %}"></script>
+                                    <script
+                                        src="{% static  'shop/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js' %}">
+                                        </script>
+                                    <script
+                                        src="{% static  'shop/vendor/counter-up/jquery.waypoints.min.js' %}"></script>
+                                    <script src="{% static  'shop/vendor/counter-up/jquery.counterup.min.js' %}">
+                                    </script>
+                                    <script
+                                        src="{% static  'shop/vendor/circle-progress/circle-progress.min.js' %}"></script>
+                                    <script
+                                        src="{% static  'shop/vendor/perfect-scrollbar/perfect-scrollbar.js' %}"></script>
+                                    <script src="{% static  'shop/vendor/chartjs/Chart.bundle.min.js' %}"></script>
+                                    <script src="{% static  'shop/vendor/select2/select2.min.js' %}">
+                                    </script>
 
-                                            <!-- Main JS-->
-                                            <script src="{% static  'shop/js/main.js' %}"></script>
+                                    <!-- Main JS-->
+                                    <script src="{% static  'shop/js/main.js' %}"></script>
 
 </body>
 
