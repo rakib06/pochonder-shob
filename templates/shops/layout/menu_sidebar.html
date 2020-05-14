@@ -1,0 +1,34 @@
+{% load static %}
+<aside class="menu-sidebar d-none d-lg-block">
+    <div class="logo">
+        <a href="{% static 'shop/#">
+            <img src="{%  static 'shop/images/icon/logo.png' %}" alt="Cool Admin" />
+        </a>
+    </div>
+    <div class="menu-sidebar__content js-scrollbar1">
+        <nav class="navbar-sidebar">
+            <ul class="list-unstyled navbar__list">
+
+
+                <li>
+                    <a href="{% static 'shop/chart.html' %}">
+                        <i class="fas fa-chart-bar"></i>Orders</a>
+                </li>
+                <li>
+                    <a href="{% static 'shop/table.html' %}">
+                        <i class="fas fa-table"></i>Add Item </a>
+                </li>
+                <li>
+                    <a href="{% static 'shop/form.html' %}">
+                        <i class="far fa-check-square"></i>Your Shop Profile </a>
+                </li>
+
+
+
+
+
+            </ul>
+        </nav>
+    </div>
+</aside>
+<!-- END MENU SIDEBAR-->

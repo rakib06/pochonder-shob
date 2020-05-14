@@ -1,0 +1,35 @@
+{% extends "shops/base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="section__content section__content--p30">
+    <div class="container-fluid">
+
+
+
+        <h1>ABCD</h1>
+
+        {% include "shops/form_item.html" %}
+        <div class="row m-t-30">
+            <div class="col-md-12">
+                <!-- DATA TABLE-->
+                <h3 class="title-5 m-b-35">Item table</h3>
+                <div class="table-responsive m-b-40">
+                    <!-- ITEM OR order Table--->
+
+                    {% include "shops/items.html" %}
+                </div>
+                <!-- END DATA TABLE-->
+            </div>
+        </div>
+        <!-- FOOTER -->
+        {% include "shops/layout/footer.html" %}
+    </div>
+</div>
+
+
+
+
+
+
+{% endblock content %}

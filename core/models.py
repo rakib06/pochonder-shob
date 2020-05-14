@@ -64,9 +64,9 @@ class Item(models.Model):
                              max_length=4, null=True)
     label = models.CharField(choices=LABEL_CHOICES, max_length=1)
     slug = models.SlugField()
-    description = models.TextField()
+    description = models.CharField(max_length=200, null=True)
     shop = models.ForeignKey(Shop, on_delete=models.SET_NULL, null=True)
-    image = models.ImageField()
+    image = models.ImageField(null=True)
 
     def __str__(self):
         return self.title
@@ -114,7 +114,7 @@ class OrderItem(models.Model):
 
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
-                             on_delete=models.CASCADE)
+                             on_delete=models.CASCADE, null=True)
     ref_code = models.CharField(max_length=20, blank=True, null=True)
     items = models.ManyToManyField(OrderItem)
     start_date = models.DateTimeField(auto_now_add=True)
