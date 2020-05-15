@@ -1,4 +1,4 @@
-{% extends "shops/base.html" %}
+{% extends "store/base.html" %}
 {% load static %}
 {% block content %}
 
@@ -9,7 +9,7 @@
 
         <h1>ABCD</h1>
 
-        {% include "shops/form_item.html" %}
+
         <div class="row m-t-30">
             <div class="col-md-12">
                 <!-- DATA TABLE-->
@@ -17,13 +17,13 @@
                 <div class="table-responsive m-b-40">
                     <!-- ITEM OR order Table--->
 
-                    {% include "shops/items.html" %}
+                    {% include "store/items.html" %}
                 </div>
                 <!-- END DATA TABLE-->
             </div>
         </div>
         <!-- FOOTER -->
-        {% include "shops/layout/footer.html" %}
+        {% include "store/layout/footer.html" %}
     </div>
 </div>
 

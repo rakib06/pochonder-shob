@@ -8,4 +8,4 @@ class ShopForm(ModelForm):
     class Meta:
         model = Shop
         fields = '__all__'
-        exclude = ['user']
+        # exclude = ['user']

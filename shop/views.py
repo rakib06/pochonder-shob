@@ -1,13 +1,49 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, View
+from django.views.generic import ListView, DetailView, CreateView
 # Create your views here.
 from .models import Shop
 from django.contrib.auth.decorators import login_required
 
 
-def ShopProfile(request):
-    context = {}
-    return render(request, "shops/shop_form.html", context)
+from django.conf import settings
+from django.core.files.storage import FileSystemStorage
+
+'''
+def shop_profile(request):
+    if request.method == 'POST':
+        form = ShopForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = ShopForm()
+
+    return render(request, 'shop/shop_from.html', {
+        'form': form
+    })
+
+'''
+
+
+def home(request):
+    pass
+
+
+def products(request):
+    pass
+
+
+def orders(request):
+    pass
+
+
+def customer(request):
+    pass
+
+
+class ShopProfile(ListView):
+    model = Shop
+    template_name = "store/shop_form.html"
 
 
 class cardView(ListView):
@@ -60,4 +96,4 @@ class buttonView(ListView):
 class IndexView(ListView):
     model = Shop
     # template_name = "shop/login.html"
-    template_name = "shops/main.html"
+    template_name = "store/main.html"
