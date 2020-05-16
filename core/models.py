@@ -4,29 +4,10 @@ from django.db import models
 from django.db.models import Sum
 from django.shortcuts import reverse
 from django_countries.fields import CountryField
+from django.contrib.auth.models import User
 
-
-ADDRESS_CHOICES = (
-    ('B', 'Billing'),
-    ('S', 'Shipping'),
-)
-
-COLOR_CHOICES = (
-    ('BL', 'Black'),
-    ('WT', 'White'),
-    ('RD', 'Red'),
-    ('NA', 'Not applicable'),
-
-
-)
-
-LABEL_CHOICES = (
-
-    ('P', 'primary'),
-    ('S', 'secondary'),
-    ('D', 'danger')
-
-)
+# discount/new/ Eid Offer
+from django.utils.safestring import mark_safe
 
 
 class UserProfile(models.Model):
@@ -39,34 +20,84 @@ class UserProfile(models.Model):
         return self.user.username
 
 
+class ShopType(models.Model):
+    title = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.title
+
+
 class Shop(models.Model):
+    title = models.CharField(max_length=100)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    photo = models.ImageField(upload_to='shops/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+    slug = models.SlugField()
+    shop_type = models.ManyToManyField(ShopType)
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url_1(self):
+        return reverse("core:shop-items", kwargs={
+            # ei khane sudu oi shop er jinish jeno dekhay sei babostha korte hobe
+            'slug': self.slug
+        })
+
+    def get_category(self):
+        return ", ".join([p.title for p in self.shop_type.all()])
+
+    def image_tag(self):
+        if self.photo:
+            return mark_safe('<img src="%s" style="width: 45px; height:45px;" />' % self.photo.url)
+        else:
+            return 'No Image Found'
+    image_tag.short_description = 'Image'
+    get_category.short_description = 'Category'
+
+    def get_absolute_url(self):
+        return reverse("core:shop-items", kwargs={
+            # ei khane sudu oi shop er jinish jeno dekhay sei babostha korte hobe
+            'id': self.id
+        })
+
+
+class Category(models.Model):
     name = models.CharField(max_length=100)
+    for_shop = models.ManyToManyField(Shop)
 
     def __str__(self):
         return self.name
 
 
-class Category(models.Model):
+class Label(models.Model):
     name = models.CharField(max_length=100)
+    for_shop = models.ManyToManyField(Shop)
 
     def __str__(self):
         return self.name
 
 
 class Item(models.Model):
+
+    shop = models.ForeignKey(Shop, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     price = models.FloatField()
     discount_price = models.FloatField(blank=True, null=True)
-    # category = models.CharField(choices=CATEGORY_CHOICES, max_length=2)
-    category = models.ManyToManyField(
-        Category)
-    color = models.CharField(choices=COLOR_CHOICES,
-                             max_length=4, null=True)
-    label = models.CharField(choices=LABEL_CHOICES, max_length=1)
+    category = models.ForeignKey(
+        Category, on_delete=models.SET_NULL, null=True)
+    label = models.ForeignKey(
+        Label, on_delete=models.SET_NULL, null=True)
     slug = models.SlugField(max_length=140, unique=True)
-    description = models.CharField(max_length=200, null=True)
-    shop = models.ForeignKey(Shop, on_delete=models.SET_NULL, null=True)
-    image = models.ImageField(null=True)
+    description = models.TextField()
+    image = models.ImageField()
+
+    def image_tag(self):
+        if self.image:
+            return mark_safe('<img src="%s" style="width: 45px; height:45px;" />' % self.image.url)
+        else:
+            return 'No Image Found'
+    image_tag.short_description = 'Image'
 
     def _get_unique_slug(self):
         slug = slugify(self.title)
@@ -77,13 +108,20 @@ class Item(models.Model):
             num += 1
         return unique_slug
 
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = self._get_unique_slug()
-        super().save(*args, **kwargs)
+    def get_thumb(self):
+        host = urlparse(self.url).hostname
+        if host.startswith('www.'):
+            host = host[4:]
+        thumb = 'https://api.thumbalizr.com/?url=http://' + host + '&width=125'
+        return thumb
 
     def __str__(self):
         return self.title
+
+    @property
+    def shop_name(self):
+        print('------------Ship', self.shop__title)
+        return self.shop__title
 
     def get_absolute_url(self):
         return reverse("core:product", kwargs={
@@ -126,26 +164,37 @@ class OrderItem(models.Model):
         return self.get_total_item_price()
 
 
+PAYMENT_CHOICES = (
+    ('B', 'BKash'),
+    ('C', 'Cash On'),
+    ('O', 'Others')
+)
+
+
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
-                             on_delete=models.CASCADE, null=True)
+                             on_delete=models.CASCADE)
     ref_code = models.CharField(max_length=20, blank=True, null=True)
     items = models.ManyToManyField(OrderItem)
     start_date = models.DateTimeField(auto_now_add=True)
     ordered_date = models.DateTimeField()
     ordered = models.BooleanField(default=False)
-    shipping_address = models.ForeignKey(
-        'Address', related_name='shipping_address', on_delete=models.SET_NULL, blank=True, null=True)
-    billing_address = models.ForeignKey(
-        'Address', related_name='billing_address', on_delete=models.SET_NULL, blank=True, null=True)
-    payment = models.ForeignKey(
-        'Payment', on_delete=models.SET_NULL, blank=True, null=True)
+    shipping_address = models.CharField(max_length=200)
+    # 'Address', related_name='shipping_address', on_delete=models.SET_NULL, blank=True, null=True)
+
+    # billing_address = models.ForeignKey('Address', related_name = 'billing_address', on_delete = models.SET_NULL, blank = True, null = True)
+    # payment = models.ForeignKey('Payment', on_delete=models.SET_NULL, blank=True, null=True)
+
     coupon = models.ForeignKey(
         'Coupon', on_delete=models.SET_NULL, blank=True, null=True)
     being_delivered = models.BooleanField(default=False)
     received = models.BooleanField(default=False)
+
     refund_requested = models.BooleanField(default=False)
     refund_granted = models.BooleanField(default=False)
+    mobile_number = models.CharField(max_length=11)
+    payment_option = models.CharField(
+        choices=PAYMENT_CHOICES, max_length=2, null=True)
 
     '''
     1. Item added to cart
@@ -171,13 +220,14 @@ class Order(models.Model):
 
 
 class Address(models.Model):
+
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE)
     street_address = models.CharField(max_length=100)
     apartment_address = models.CharField(max_length=100)
-    country = CountryField(multiple=False)
-    zip = models.CharField(max_length=100)
-    address_type = models.CharField(max_length=1, choices=ADDRESS_CHOICES)
+    # country = CountryField(multiple=False)
+    # zip = models.CharField(max_length=100)
+    # address_type = models.CharField(max_length=1, choices=ADDRESS_CHOICES)
     default = models.BooleanField(default=False)
 
     def __str__(self):
@@ -187,6 +237,7 @@ class Address(models.Model):
         verbose_name_plural = 'Addresses'
 
 
+'''
 class Payment(models.Model):
     stripe_charge_id = models.CharField(max_length=50)
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
@@ -196,6 +247,8 @@ class Payment(models.Model):
 
     def __str__(self):
         return self.user.username
+
+'''
 
 
 class Coupon(models.Model):

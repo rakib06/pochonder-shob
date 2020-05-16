@@ -1,39 +1,31 @@
 from django import forms
 from django_countries.fields import CountryField
 from django_countries.widgets import CountrySelectWidget
-
+from .models import Shop, Item
 
 PAYMENT_CHOICES = (
-    ('S', 'Stripe'),
-    ('P', 'PayPal')
+    ('B', 'BKash'),
+    ('C', 'Cash On Delivery'),
+    ('O', 'Others')
 )
 
 
+class ShopForm(forms.ModelForm):
+    class Meta:
+        model = Shop
+        fields = ('title', 'photo', )
+
+
+class ItemForm(forms.ModelForm):
+    class Meta:
+        model = Item
+        fields = ('title', 'price', 'discount_price', 'category',
+                  'label', 'slug', 'description', 'image',)
+
+
 class CheckoutForm(forms.Form):
-    shipping_address = forms.CharField(required=False)
-    shipping_address2 = forms.CharField(required=False)
-    shipping_country = CountryField(blank_label='(select country)').formfield(
-        required=False,
-        widget=CountrySelectWidget(attrs={
-            'class': 'custom-select d-block w-100',
-        }))
-    shipping_zip = forms.CharField(required=False)
-
-    billing_address = forms.CharField(required=False)
-    billing_address2 = forms.CharField(required=False)
-    billing_country = CountryField(blank_label='(select country)').formfield(
-        required=False,
-        widget=CountrySelectWidget(attrs={
-            'class': 'custom-select d-block w-100',
-        }))
-    billing_zip = forms.CharField(required=False)
-
-    same_billing_address = forms.BooleanField(required=False)
-    set_default_shipping = forms.BooleanField(required=False)
-    use_default_shipping = forms.BooleanField(required=False)
-    set_default_billing = forms.BooleanField(required=False)
-    use_default_billing = forms.BooleanField(required=False)
-
+    shipping_address = forms.CharField(required=True)
+    mobile_number = forms.CharField(required=True)
     payment_option = forms.ChoiceField(
         widget=forms.RadioSelect, choices=PAYMENT_CHOICES)
 
