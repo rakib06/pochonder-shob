@@ -43,9 +43,15 @@ class Shop(models.Model):
             # ei khane sudu oi shop er jinish jeno dekhay sei babostha korte hobe
             'slug': self.slug
         })
+    # shop category
 
     def get_category(self):
         return ", ".join([p.title for p in self.shop_type.all()])
+
+    def get_shop_offer(self):
+        offers = Label.objects.filter(for_shop=self.id)
+
+        return ", ".join([p.name for p in offers.all()])
 
     def image_tag(self):
         if self.photo:

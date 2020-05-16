@@ -1,12 +1,13 @@
 {% load static %}
+{% for item in object_list %}
 <div class="single-products-catagory clearfix">
-    <a href="shop.html">
-        <img src="{% static 'user/img/bg-img/1.jpg'%}" alt="">
+    <a href="{{ item.get_absolute_url }}l">
+        <img src="{{ item.photo.url }}" alt="">
         <!-- Hover Content -->
         <div class="hover-content">
             <div class="line"></div>
-            <p>From 180</p>
-            <h4>Modern Chair</h4>
+            <p>{{ item.get_category }}</p>
+            <h4>{{ item.title }}</h4>
         </div>
     </a>
 </div>
