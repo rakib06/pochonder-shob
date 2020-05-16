@@ -12,6 +12,7 @@ urlpatterns = [
 
     path('checkout/', IndexView.as_view(),
          name='checkout'),    # extra add
+    
 
 ]
 
