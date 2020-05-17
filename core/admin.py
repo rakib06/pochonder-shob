@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .models import (Item, OrderItem, Order, Shop, Coupon,
-                     Refund, Address, UserProfile, Category, Label, ShopType)
+                     Refund, Address, UserProfile, Category, Offer, ShopType, Area)
 from django.contrib.contenttypes.admin import GenericTabularInline
 
 
@@ -62,13 +62,22 @@ class AddressAdmin(admin.ModelAdmin):
     search_fields = ['user', 'street_address', 'apartment_address', ]
 
 '''
+@admin.register(ShopType)
+class ShopType(admin.ModelAdmin):
+    list_display = ['title', 'created_at', 'updated_at']
 
 
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
 
-    list_display = ['image_tag', 'title', 'price',
-                    'discount_price', 'category', ]
+    list_display = ['image_tag', 'title',
+                    'price', 'discount_price', 'category', 'created_at', 'updated_at']
+
+    def changelist_view(self, request, extra_context=None):
+        if not request.user.is_superuser:
+            self.list_display = ('image_tag', 'title', 'price',
+                                 'discount_price', 'category',)
+        return super().changelist_view(request, extra_context)
 
     def get_fields(self, request, obj=None):
         fields = list(super().get_fields(request, obj))
@@ -84,7 +93,7 @@ class ItemAdmin(admin.ModelAdmin):
             return excluded + ['slug']
 
         return excluded
-
+    ordering = ('-created_at',)
     # sudhu matro tar shop er item gulo e dekhabe
     def get_queryset(self, request):
 
@@ -101,6 +110,12 @@ class ItemAdmin(admin.ModelAdmin):
 
 
 # admin.site.register(Item, ItemAdmin)
+
+@admin.register(Area)
+class AreaAdmin(admin.ModelAdmin):
+
+    list_display = ['image_tag', 'name', 'created_at', 'updated_at']
+
 
 @admin.register(Shop)
 class ShopAdmin(admin.ModelAdmin):
@@ -135,6 +150,5 @@ admin.site.register(Refund)
 # admin.site.register(Address, AddressAdmin)
 admin.site.register(UserProfile)
 admin.site.register(Category)
-admin.site.register(Label)
+admin.site.register(Offer)
 admin.site.register(OrderItem, OrderItemAdmin)
-admin.site.register(ShopType)

@@ -8,9 +8,32 @@ from django.contrib.auth.models import User
 
 # discount/new/ Eid Offer
 from django.utils.safestring import mark_safe
+import uuid
 
 
-class UserProfile(models.Model):
+class TimeStampMixin(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        abstract = True
+
+
+# class area for jolil tower, shopping complex, nixon market etc
+class Area(TimeStampMixin):
+    name = models.CharField(max_length=100)
+    image = models.ImageField(
+        upload_to='area', default='ps/5.png')
+
+    def image_tag(self):
+        if self.image:
+            return mark_safe('<img src="%s" style="width: 45px; height:45px;" />' % self.image.url)
+        else:
+            return 'No Image Found'
+    image_tag.short_description = 'Image'
+
+
+class UserProfile(TimeStampMixin):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     stripe_customer_id = models.CharField(max_length=50, blank=True, null=True)
@@ -20,20 +43,21 @@ class UserProfile(models.Model):
         return self.user.username
 
 
-class ShopType(models.Model):
+class ShopType(TimeStampMixin):
     title = models.CharField(max_length=100)
 
     def __str__(self):
         return self.title
 
 
-class Shop(models.Model):
+class Shop(TimeStampMixin):
     title = models.CharField(max_length=100)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     photo = models.ImageField(upload_to='shops/')
-    uploaded_at = models.DateTimeField(auto_now_add=True)
     slug = models.SlugField()
     shop_type = models.ManyToManyField(ShopType)
+    area = models.ForeignKey(
+        Area, null=True, blank=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
@@ -49,7 +73,7 @@ class Shop(models.Model):
         return ", ".join([p.title for p in self.shop_type.all()])
 
     def get_shop_offer(self):
-        offers = Label.objects.filter(for_shop=self.id)
+        offers = Offer.objects.filter(for_shop=self.id)
 
         return ", ".join([p.name for p in offers.all()])
 
@@ -68,7 +92,19 @@ class Shop(models.Model):
         })
 
 
-class Category(models.Model):
+class Category(TimeStampMixin):
+    name = models.CharField(max_length=100)
+    for_shop = models.ManyToManyField(Shop)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Category'
+        verbose_name_plural = 'Categories'
+
+
+class Offer(TimeStampMixin):
     name = models.CharField(max_length=100)
     for_shop = models.ManyToManyField(Shop)
 
@@ -76,15 +112,7 @@ class Category(models.Model):
         return self.name
 
 
-class Label(models.Model):
-    name = models.CharField(max_length=100)
-    for_shop = models.ManyToManyField(Shop)
-
-    def __str__(self):
-        return self.name
-
-
-class Item(models.Model):
+class Item(TimeStampMixin):
 
     shop = models.ForeignKey(Shop, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
@@ -92,9 +120,9 @@ class Item(models.Model):
     discount_price = models.FloatField(blank=True, null=True)
     category = models.ForeignKey(
         Category, on_delete=models.SET_NULL, null=True)
-    label = models.ForeignKey(
-        Label, on_delete=models.SET_NULL, null=True)
-    slug = models.SlugField(max_length=140, unique=True)
+    Offer = models.ForeignKey(
+        Offer, on_delete=models.SET_NULL, null=True)
+    slug = models.SlugField(unique=True, default=uuid.uuid1)
     description = models.TextField()
     image = models.ImageField()
 
@@ -145,7 +173,7 @@ class Item(models.Model):
         })
 
 
-class OrderItem(models.Model):
+class OrderItem(TimeStampMixin):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE)
     ordered = models.BooleanField(default=False)
@@ -177,7 +205,7 @@ PAYMENT_CHOICES = (
 )
 
 
-class Order(models.Model):
+class Order(TimeStampMixin):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE)
     ref_code = models.CharField(max_length=20, blank=True, null=True)
@@ -225,7 +253,7 @@ class Order(models.Model):
         return total
 
 
-class Address(models.Model):
+class Address(TimeStampMixin):
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE)
@@ -244,7 +272,7 @@ class Address(models.Model):
 
 
 '''
-class Payment(models.Model):
+class Payment(TimeStampMixin):
     stripe_charge_id = models.CharField(max_length=50)
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.SET_NULL, blank=True, null=True)
@@ -257,7 +285,7 @@ class Payment(models.Model):
 '''
 
 
-class Coupon(models.Model):
+class Coupon(TimeStampMixin):
     code = models.CharField(max_length=15)
     amount = models.FloatField()
 
@@ -265,7 +293,7 @@ class Coupon(models.Model):
         return self.code
 
 
-class Refund(models.Model):
+class Refund(TimeStampMixin):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     reason = models.TextField()
     accepted = models.BooleanField(default=False)

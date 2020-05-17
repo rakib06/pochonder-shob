@@ -8,7 +8,7 @@ from django.views.generic import ListView, DetailView, View, CreateView
 from django.shortcuts import redirect
 from django.utils import timezone
 from .forms import ItemForm, ShopForm, CheckoutForm, CouponForm, RefundForm, PaymentForm
-from .models import Item, OrderItem, Order, Address, Refund, UserProfile, Shop, Category, Label
+from .models import Item, OrderItem, Order, Address, Refund, UserProfile, Shop, Category, Offer
 
 
 import random
@@ -326,7 +326,7 @@ class CustomerOrderStatusView(LoginRequiredMixin, View):
 def all_offer_cat(request):
     try:
         category = Category.objects.all()
-        offer = Label.objects.all()
+        offer = Offer.objects.all()
         context = {'category': category, 'offer': offer}
     # print(items)
         return render(request, 'home.html', context)
@@ -341,7 +341,7 @@ def get_items(request, id):
         # print('...............................', type(slug))
         items = Item.objects.filter(shop=id)
         category = Category.objects.filter(for_shop=id)
-        offer = Label.objects.filter(for_shop=id)
+        offer = Offer.objects.filter(for_shop=id)
         print('-------77777777777777777777777777777777777-----------------', category)
         context = {'items': items, 'category': category, 'offer': offer}
 
@@ -360,7 +360,7 @@ def get_shop_cat_items(request, id):
         # print('...............................', type(slug))
         category = Category.objects.filter(for_shop=id)
         items = Item.objects.filter(category=id)
-        offer = Label.objects.filter(for_shop=id)
+        offer = Offer.objects.filter(for_shop=id)
         print('-------77777777777777777777777777777777777-----------------', category)
         context = {'items': items, 'category': category, 'offer': offer}
 
@@ -378,8 +378,8 @@ def get_shopoffe(request, id):
         print('0000000000000000000000000', id)
         # print('...............................', type(slug))
         category = Category.objects.filter(for_shop=id)
-        items = Item.objects.filter(label=id)
-        offer = Label.objects.filter(for_shop=id)
+        items = Item.objects.filter(Offer=id)
+        offer = Offer.objects.filter(for_shop=id)
         print('-------77777777777777777777777777777777777-----------------', category)
         context = {'items': items, 'category': category, 'offer': offer}
 

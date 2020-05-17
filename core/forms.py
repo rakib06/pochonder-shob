@@ -20,7 +20,7 @@ class ItemForm(forms.ModelForm):
     class Meta:
         model = Item
         fields = ('title', 'price', 'discount_price', 'category',
-                  'label', 'slug', 'description', 'image',)
+                  'Offer', 'slug', 'description', 'image',)
 
 
 class CheckoutForm(forms.Form):
@@ -34,7 +34,7 @@ class CouponForm(forms.Form):
     code = forms.CharField(widget=forms.TextInput(attrs={
         'class': 'form-control',
         'placeholder': 'Promo code',
-        'aria-label': 'Recipient\'s username',
+        'aria-Offer': 'Recipient\'s username',
         'aria-describedby': 'basic-addon2'
     }))
 
