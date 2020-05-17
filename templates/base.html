@@ -24,22 +24,25 @@
 
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="md-form active-pink active-pink-2 mb-3 mt-1">
 
         <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="search-content">
+
+                        <form action="#" method="get">
+                            <input class="form-control" name="search" id="search">
 
 
-            <div class="search-content">
-                <form action="#" method="get">
-                    <input type="search" name="search" id="search">
+                        </form>
 
-                    <button type=" submit"><img src="{% static 'user/img/core-img/search.png' %}" alt=""></button>
+                    </div>
 
-                </form>
-
+                </div>
             </div>
-    </nav>
-
+        </div>
+    </div>
 
     {% block content %}
     {% endblock content %}
@@ -101,7 +104,9 @@
     }
 
     // Start typing
-    function run() {
+
+
+    (function run() {
         let phrases = [
             "আপনার আশেপাশের পছন্দের সব শপিং মল বা সেবা খুজুন ",
             "আপনার পছন্দের শপ খুজুন ",
@@ -111,11 +116,33 @@
         ];
 
         printPhrases(phrases, $('#search'));
-    }
+        setTimeout(run, 15000);
 
-    run();
+    })();
 
 
+
+    // setInterval(function () { H alert("ello") }, 3000);
+    /*
+        // create 1 second interval with immediate execution
+        var myInterval = setIntervalImmediately(_ => {
+            let phrases = [
+                "আপনার আশেপাশের পছন্দের সব শপিং মল বা সেবা খুজুন ",
+                "আপনার পছন্দের শপ খুজুন ",
+                "পছন্দের পণ্য খুজুন ",
+                "নতুন : জলিল টাওয়ারের পণ্য খুজুন "
+
+            ];
+
+            printPhrases(phrases, $('#search'));
+        }, 1000);
+
+        // clear interval after 4.5 seconds
+        setTimeout(_ => {
+            clearInterval(myInterval);
+        }, 4500);
+
+    */
 
 </script>
 
