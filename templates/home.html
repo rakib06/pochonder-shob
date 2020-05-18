@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+Pochonder Sob
+{% endblock %}
+{% block content %}
+
+<!-- ##### Main Content Wrapper Start ##### -->
+<div class="main-content-wrapper d-flex clearfix">
+
+    {% include "layouts/mobile.html"%}
+    {% include "layouts/sidebar.html"%}
+    {% include "layouts/search.html"%}
+    <!-- Product Catagories/store/Service Area Area Start -->
+    <div class="products-catagories-area clearfix">
+        <div class="panel panel-success">
+            <div class="panel-heading">Markets </div>
+
+        </div>
+        <div class="amado-pro-catagory clearfix">
+
+            {% for item in markets %}
+            <div class="single-products-catagory clearfix">
+
+
+
+                <a href="{{ item.get_absolute_url }}">
+                    <div>
+                        <img src="{{ item.image.url }}" alt="">
+                        <!-- Hover Content -->
+                    </div>
+                    <div class="content">
+
+                        <!--- shop type-->
+                        <strong>{{ item.get_category }}</strong>
+
+                        <p style="margin-bottom:0;">{{ item.name }}
+
+                        </p>
+
+                        <hr color="black">
+
+                    </div>
+                </a>
+            </div>
+            {%endfor%}
+        </div>
+
+        <br>
+
+        <div class="panel panel-info">
+            <div class="panel-heading">Shops </div>
+
+        </div>
+
+        <div class="amado-pro-catagory clearfix">
+
+            {% for item in shops %}
+            <div class="single-products-catagory clearfix">
+
+
+
+                <a href="{{ ite.get_absolute_url }}">
+                    <div>
+                        <img src="{{ item.photo.url }}" alt="">
+                        <!-- Hover Content -->
+                    </div>
+                    <div class="content">
+                        <div class="line">
+                            <p>
+                                <span class="">{{ item.get_shop_offer }} </span>
+                            </p>
+
+
+                        </div>
+                        <!--- shop type-->
+                        <strong>{{ item.get_category }}</strong>
+
+                        <p style="margin-bottom:0;">{{ item.title }},
+                            {{ item.area }}
+                        </p>
+
+                        <strong>({{ item.get_shop_type }} Shop)</strong>
+                        <hr color="red">
+                    </div>
+                </a>
+            </div>
+            {%endfor%}
+
+        </div>
+        <br>
+
+
+        <div class="panel panel-danger">
+            <div class="panel-heading">Products & Service</div>
+
+        </div>
+
+
+
+        <div class="amado-pro-catagory clearfix">
+
+            {% for ite in items %}
+            <div class="single-products-catagory clearfix">
+
+
+
+                <a href="{{ ite.get_absolute_url }}">
+                    <div>
+                        <img src="{{ ite.image.url }}" alt="">
+                        <!-- Hover Content -->
+                    </div>
+                    <div class="content">
+                        <div class="line">
+                            <span class="badge badge-pill badge-light">{{ item.title }} </span>
+
+                        </div>
+                        <!--- shop type-->
+                        <strong>{{ item.price }}</strong>
+
+                        <p style="margin-bottom:0;">{{ item.title }},
+                            {{ item.area }}
+                        </p>
+
+                        <strong>{{ item.get_shop_type }}</strong>
+
+                    </div>
+                </a>
+            </div>
+            {%endfor%}
+
+        </div>
+    </div>
+    <!-- Product Catagories/store/Service Area End -->
+
+</div>
+<!-- ##### Main Content Wrapper End ##### -->
+
+{% endblock content %}

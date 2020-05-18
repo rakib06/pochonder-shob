@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 from .views import (
     ItemDetailView,
     CheckoutView,
-    HomeView,
+    # HomeView,
     OrderSummaryView,
     add_to_cart,
     remove_from_cart,
@@ -19,12 +19,15 @@ from .views import (
     add_item, add_shop,
     CustomerOrderStatusView,
     get_shop_cat_items,
+    home_view
 )
 app_name = 'core'
 
 urlpatterns = [
-    path('all', HomeView.as_view(), name='home'),
-    path('', ShopsView.as_view(), name='shops'),
+    # path('all', HomeView.as_view(), name='home'),
+    # path('', ShopsView.as_view(), name='shops'),
+    path('', home_view, name='home'),
+
     path('shop-items/<id>/', get_items, name='shop-items'),
     path('shops-cat/<id>', get_shop_cat_items,
          name='shops-cat'),

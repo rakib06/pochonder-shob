@@ -25,6 +25,9 @@ class Area(TimeStampMixin):
     image = models.ImageField(
         upload_to='area', default='ps/5.png')
 
+    def __str__(self):
+        return self.name
+
     def image_tag(self):
         if self.image:
             return mark_safe('<img src="%s" style="width: 45px; height:45px;" />' % self.image.url)
@@ -63,6 +66,7 @@ class Shop(TimeStampMixin):
         return self.title
 
     def get_absolute_url_1(self):
+
         return reverse("core:shop-items", kwargs={
             # ei khane sudu oi shop er jinish jeno dekhay sei babostha korte hobe
             'slug': self.slug
@@ -70,12 +74,20 @@ class Shop(TimeStampMixin):
     # shop category
 
     def get_category(self):
+
+        cats = Category.objects.filter(for_shop=self.id)
+
+        return ", ".join([p.name for p in cats])
+
+    def get_shop_type(self):
+
         return ", ".join([p.title for p in self.shop_type.all()])
 
     def get_shop_offer(self):
         offers = Offer.objects.filter(for_shop=self.id)
 
         return ", ".join([p.name for p in offers.all()])
+        # return offers
 
     def image_tag(self):
         if self.photo:
@@ -112,6 +124,20 @@ class Offer(TimeStampMixin):
         return self.name
 
 
+class Size(TimeStampMixin):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
+class Color(TimeStampMixin):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
 class Item(TimeStampMixin):
 
     shop = models.ForeignKey(Shop, on_delete=models.CASCADE)
@@ -119,11 +145,13 @@ class Item(TimeStampMixin):
     price = models.FloatField()
     discount_price = models.FloatField(blank=True, null=True)
     category = models.ForeignKey(
-        Category, on_delete=models.SET_NULL, null=True)
+        Category, on_delete=models.SET_NULL, null=True, default="")
     Offer = models.ForeignKey(
-        Offer, on_delete=models.SET_NULL, null=True)
+        Offer, on_delete=models.SET_NULL, null=True, default="")
     slug = models.SlugField(unique=True, default=uuid.uuid1)
-    description = models.TextField()
+    description = models.TextField(
+        null=True, default="No description available")
+    size = models.ManyToManyField(Size, default="")
     image = models.ImageField()
 
     def image_tag(self):

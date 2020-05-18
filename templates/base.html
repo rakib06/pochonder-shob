@@ -19,6 +19,10 @@
     <link rel="stylesheet" href="{% static 'user/css/core-style.css' %}">
     <link rel="stylesheet" href="{% static 'user/style.css' %}">
 
+    <!-- bootstarp -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+
 </head>
 
 
@@ -56,76 +60,56 @@
     {% block extra_scripts %}
     {% endblock extra_scripts %}
 
-</body>
-<script>
+    <script>
 
-    // Add something to given element placeholder
-    function addToPlaceholder(toAdd, el) {
-        el.attr('placeholder', el.attr('placeholder') + toAdd);
-        // Delay between symbols "typing" 
-        return new Promise(resolve => setTimeout(resolve, 100));
-    }
+        // Add something to given element placeholder
+        function addToPlaceholder(toAdd, el) {
+            el.attr('placeholder', el.attr('placeholder') + toAdd);
+            // Delay between symbols "typing" 
+            return new Promise(resolve => setTimeout(resolve, 100));
+        }
 
-    // Cleare placeholder attribute in given element
-    function clearPlaceholder(el) {
-        el.attr("placeholder", "");
-    }
+        // Cleare placeholder attribute in given element
+        function clearPlaceholder(el) {
+            el.attr("placeholder", "");
+        }
 
-    // Print one phrase
-    function printPhrase(phrase, el) {
-        return new Promise(resolve => {
-            // Clear placeholder before typing next phrase
-            clearPlaceholder(el);
-            let letters = phrase.split('');
-            // For each letter in phrase
-            letters.reduce(
-                (promise, letter, index) => promise.then(_ => {
-                    // Resolve promise when all letters are typed
-                    if (index === letters.length - 1) {
-                        // Delay before start next phrase "typing"
-                        setTimeout(resolve, 1000);
-                    }
-                    return addToPlaceholder(letter, el);
-                }),
+        // Print one phrase
+        function printPhrase(phrase, el) {
+            return new Promise(resolve => {
+                // Clear placeholder before typing next phrase
+                clearPlaceholder(el);
+                let letters = phrase.split('');
+                // For each letter in phrase
+                letters.reduce(
+                    (promise, letter, index) => promise.then(_ => {
+                        // Resolve promise when all letters are typed
+                        if (index === letters.length - 1) {
+                            // Delay before start next phrase "typing"
+                            setTimeout(resolve, 1000);
+                        }
+                        return addToPlaceholder(letter, el);
+                    }),
+                    Promise.resolve()
+                );
+            });
+        }
+
+        // Print given phrases to element
+        function printPhrases(phrases, el) {
+            // For each phrase
+            // wait for phrase to be typed
+            // before start typing next
+            phrases.reduce(
+                (promise, phrase) => promise.then(_ => printPhrase(phrase, el)),
                 Promise.resolve()
             );
-        });
-    }
+        }
 
-    // Print given phrases to element
-    function printPhrases(phrases, el) {
-        // For each phrase
-        // wait for phrase to be typed
-        // before start typing next
-        phrases.reduce(
-            (promise, phrase) => promise.then(_ => printPhrase(phrase, el)),
-            Promise.resolve()
-        );
-    }
-
-    // Start typing
+        // Start typing
 
 
-    (function run() {
-        let phrases = [
-            "আপনার আশেপাশের পছন্দের সব শপিং মল বা সেবা খুজুন ",
-            "আপনার পছন্দের শপ খুজুন ",
-            "পছন্দের পণ্য খুজুন ",
-            "নতুন : জলিল টাওয়ারের পণ্য খুজুন "
-
-        ];
-
-        printPhrases(phrases, $('#search'));
-        setTimeout(run, 15000);
-
-    })();
-
-
-
-    // setInterval(function () { H alert("ello") }, 3000);
-    /*
-        // create 1 second interval with immediate execution
-        var myInterval = setIntervalImmediately(_ => {
+        (function run() {
             let phrases = [
                 "আপনার আশেপাশের পছন্দের সব শপিং মল বা সেবা খুজুন ",
                 "আপনার পছন্দের শপ খুজুন ",
@@ -135,15 +119,36 @@
             ];
 
             printPhrases(phrases, $('#search'));
-        }, 1000);
+            setTimeout(run, 15000);
 
-        // clear interval after 4.5 seconds
-        setTimeout(_ => {
-            clearInterval(myInterval);
-        }, 4500);
+        })();
 
-    */
 
-</script>
+
+    // setInterval(function () { H alert("ello") }, 3000);
+        /*
+            // create 1 second interval with immediate execution
+            var myInterval = setIntervalImmediately(_ => {
+                let phrases = [
+                    "আপনার আশেপাশের পছন্দের সব শপিং মল বা সেবা খুজুন ",
+                    "আপনার পছন্দের শপ খুজুন ",
+                    "পছন্দের পণ্য খুজুন ",
+                    "নতুন : জলিল টাওয়ারের পণ্য খুজুন "
+
+                ];
+
+                printPhrases(phrases, $('#search'));
+            }, 1000);
+
+            // clear interval after 4.5 seconds
+            setTimeout(_ => {
+                clearInterval(myInterval);
+            }, 4500);
+
+        */
+
+    </script>
+
+</body>
 
 </html>

@@ -8,13 +8,22 @@ from django.views.generic import ListView, DetailView, View, CreateView
 from django.shortcuts import redirect
 from django.utils import timezone
 from .forms import ItemForm, ShopForm, CheckoutForm, CouponForm, RefundForm, PaymentForm
-from .models import Item, OrderItem, Order, Address, Refund, UserProfile, Shop, Category, Offer
+from .models import Item, OrderItem, Order, Address, Refund, UserProfile, Shop, Category, Offer, Area
 
 
 import random
 import string
 import stripe
 stripe.api_key = settings.STRIPE_SECRET_KEY
+
+
+def home_view(request):
+    markets = Area.objects.all()
+    shops = Shop.objects.all()
+    print(shops)
+    items = Item.objects.all()
+    context = {'items': items, 'shops': shops, 'markets': markets}
+    return render(request, 'home.html', context)
 
 
 def add_shop(request):
@@ -286,12 +295,6 @@ class ShopsView(ListView):
     template_name = "shops.html"
 
 
-class HomeView(ListView):
-    model = Item
-    paginate_by = 10
-    template_name = "home.html"
-
-
 class OrderSummaryView(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
         try:
@@ -334,6 +337,8 @@ def all_offer_cat(request):
         messages.info(
             self.request, "Sorry! Hopefully they will update their products soon!")
         return redirect("core:checkout")
+
+# can ciew market, shops, and products,
 
 
 def get_items(request, id):

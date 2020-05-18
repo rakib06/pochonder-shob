@@ -2,17 +2,27 @@
 
 {% for item in object_list %}
 <div class="single-products-catagory clearfix">
+
+
+
     <a href="{{ item.get_absolute_url }}">
-        <img src="{{ item.photo.url }}" alt="">
-        <!-- Hover Content -->
-        <div class="hover-content">
+        <div>
+            <img src="{{ item.photo.url }}" alt="">
+            <!-- Hover Content -->
+        </div>
+        <div class="content">
             <div class="line">
-                <span class="badge badge-pill badge-light">{{ item.get_shop_offer }}</span>
+                <span class="badge badge-pill badge-light">{{ item.get_shop_offer }} </span>
 
             </div>
-            <h4>{{ item.get_category }}</h4>
-            <p>{{ item.title }}</p>
+            <!--- shop type-->
+            <strong>{{ item.get_category }}</strong>
 
+            <p style="margin-bottom:0;">{{ item.title }},
+                {{ item.area }}
+            </p>
+
+            <strong>{{ item.get_shop_type }}</strong>
 
         </div>
     </a>

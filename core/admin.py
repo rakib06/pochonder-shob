@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .models import (Item, OrderItem, Order, Shop, Coupon,
-                     Refund, Address, UserProfile, Category, Offer, ShopType, Area)
+                     Refund, Address, UserProfile, Category, Offer, ShopType, Area, Size)
 from django.contrib.contenttypes.admin import GenericTabularInline
 
 
@@ -152,3 +152,4 @@ admin.site.register(UserProfile)
 admin.site.register(Category)
 admin.site.register(Offer)
 admin.site.register(OrderItem, OrderItemAdmin)
+admin.site.register(Size)
