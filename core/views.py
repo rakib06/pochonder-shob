@@ -16,14 +16,28 @@ import string
 import stripe
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
+context = dict()
+
 
 def home_view(request):
+    global context
     markets = Area.objects.all()
     shops = Shop.objects.all()
     print(shops)
     items = Item.objects.all()
-    context = {'items': items, 'shops': shops, 'markets': markets}
+    cats = Category.objects.all()
+    con = {'items': items, 'shops': shops,
+           'markets': markets, 'cats': cats}
+    for key, value in con.items():
+        print('---------------------->>>>>>>>>>>>>......', key, value)
+        context[key] = value
     return render(request, 'home.html', context)
+
+
+def side_bar(request):
+    shops = Shop.objects.all()
+    context = {'shoping': shops}
+    return render(request, 'layouts/sidebar.html', context)
 
 
 def add_shop(request):

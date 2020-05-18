@@ -100,29 +100,33 @@ Pochonder Sob
 
         <div class="amado-pro-catagory clearfix">
 
-            {% for ite in items %}
+            {% for item in items %}
             <div class="single-products-catagory clearfix">
 
 
 
-                <a href="{{ ite.get_absolute_url }}">
+                <a href="{{ item.get_absolute_url }}">
                     <div>
-                        <img src="{{ ite.image.url }}" alt="">
+                        <img src="{{ item.image.url }}" alt="">
                         <!-- Hover Content -->
                     </div>
                     <div class="content">
-                        <div class="line">
-                            <span class="badge badge-pill badge-light">{{ item.title }} </span>
+                        <p>
+                            {% if item.get_size %}
+                            Avialable Size:
+                            <span class="badge badge-pill badge-success">
+                                {% for size in item.get_size %}
+                                {{ size }}
+                                {% endfor %}
+                            </span>
+                            {% endif %}
+                        <p>
+                            <!--- shop type-->
+                            <strong>{{ item.price }}</strong>
 
-                        </div>
-                        <!--- shop type-->
-                        <strong>{{ item.price }}</strong>
 
-                        <p style="margin-bottom:0;">{{ item.title }},
-                            {{ item.area }}
-                        </p>
 
-                        <strong>{{ item.get_shop_type }}</strong>
+                            <strong>{{ item.size__title }}</strong>
 
                     </div>
                 </a>

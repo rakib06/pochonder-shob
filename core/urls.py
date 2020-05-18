@@ -19,7 +19,8 @@ from .views import (
     add_item, add_shop,
     CustomerOrderStatusView,
     get_shop_cat_items,
-    home_view
+    home_view,
+    side_bar
 )
 app_name = 'core'
 

@@ -124,12 +124,6 @@ class Offer(TimeStampMixin):
         return self.name
 
 
-class Size(TimeStampMixin):
-    name = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.name
-
 
 class Color(TimeStampMixin):
     name = models.CharField(max_length=100)
@@ -151,7 +145,6 @@ class Item(TimeStampMixin):
     slug = models.SlugField(unique=True, default=uuid.uuid1)
     description = models.TextField(
         null=True, default="No description available")
-    size = models.ManyToManyField(Size, default="")
     image = models.ImageField()
 
     def image_tag(self):
@@ -185,6 +178,11 @@ class Item(TimeStampMixin):
         print('------------Ship', self.shop__title)
         return self.shop__title
 
+    @property
+    def get_size(self):
+        x = Size.objects.filter(for_item=self.id)
+        return x
+
     def get_absolute_url(self):
         return reverse("core:product", kwargs={
             'slug': self.slug
@@ -199,6 +197,14 @@ class Item(TimeStampMixin):
         return reverse("core:remove-from-cart", kwargs={
             'slug': self.slug
         })
+
+
+class Size(TimeStampMixin):
+    name = models.CharField(max_length=100)
+    for_item = models.ManyToManyField(Item)
+
+    def __str__(self):
+        return self.name
 
 
 class OrderItem(TimeStampMixin):
