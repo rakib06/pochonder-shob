@@ -2,6 +2,11 @@ from django.urls import path
 from django.conf.urls import include, url
 from django.conf import settings
 from django.conf.urls.static import static
+
+from django.conf.urls import url
+
+from django.views.static import serve
+
 from .views import (
     ItemDetailView,
     CheckoutView,
@@ -50,6 +55,11 @@ urlpatterns = [
     # path('request-refund/', RequestRefundView.as_view(), name='request-refund'),
     url(r'^uploads/simple/$', add_shop, name='add_shop'),
     url(r'^uploads/form/$', add_item, name='add_item'),
+    url(r'^image/(?P<path>.*)$', serve,
+        {'document_root': settings.MEDIA_ROOT}),
+
+    url(r'^static/(?P<path>.*)$', serve,
+        {'document_root': settings.STATIC_ROOT}),
 ]
 
 if settings.DEBUG:
