@@ -2,7 +2,7 @@
 import django_heroku
 from .base import *
 import dj_database_url
-
+from home.aws.conf import *
 
 # WSGI_APPLICATION = 'home.wsgi.prod.application'
 WSGI_APPLICATION = 'home.wsgi.prod.application'
@@ -63,16 +63,16 @@ django_heroku.settings(locals())
 STRIPE_SECRET_KEY = ''
 
 # S3 BUCKETS CONFIG
-
-AWS_ACCESS_KEY_ID = 'AKIAQ7KLZJXGHUYS5RWN'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'rockib-ps-1'
+'''
+AWS_ACCESS_KEY_ID = 'AKIAQ7KLZJXGOENX2XTT'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'pochondo'
 
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
+'''
 
 '''
 <?xml version="1.0" encoding="UTF-8"?>
