@@ -1,1 +1,1 @@
-web: gunicorn pochondo.wsgi.wp:application --log-file - 
+web: gunicorn home.wsgi.prod:application --log-file - 
