@@ -34,8 +34,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 PROJECT_ROOT = os.path.join(os.path.abspath(__file__))
 MIDDLEWARE += [
