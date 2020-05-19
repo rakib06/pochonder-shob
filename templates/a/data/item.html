@@ -55,15 +55,35 @@
                     <i class="fa fa-star" aria-hidden="true"></i>
                     <i class="fa fa-star" aria-hidden="true"></i>
                 </div>
+
+                {% comment %} <form class="d-flex justify-content-left">
+                    <!-- Default input -->
+                    <input type="number" value="1" aria-label="Search" class="form-control" style="width: 100px">
+                    <button class="btn btn-primary btn-md my-0 p" type="submit">
+                        Add to cart
+                        <i class="fas fa-shopping-cart ml-1"></i>
+                    </button>
+
+                </form> {% endcomment %}
                 <div class="cart">
-                    <a href="cart.html" data-toggle="tooltip" data-placement="left"
-                        title="Add {{ item.title }} to Card "><img src="{% static 'amado/img/core-img/cart.png' %}"
-                            alt=""></a>
+                    <a href="{{ item.get_add_to_cart_url }}" data-toggle="tooltip" data-placement="left"
+                        title="Add {{ item.title }} to Cart">
+
+                        <img src="{% static 'amado/img/core-img/cart.png' %}" alt="">
+                    </a>
+                </div>
+                <div class="cart">
+                    <a href="{{ item.get_remove_from_cart_url }}" data-toggle="tooltip" data-placement="left"
+                        title="Delete {{ item.title }} from Cart">
+
+                        <img src="{% static 'amado/img/core-img/delete.png' %}" alt="">
+                    </a>
                 </div>
             </div>
-            <!-- End Ratings & Cart -->
-
         </div>
+        <!-- End Ratings & Cart -->
+
     </div>
+</div>
 </div>
 {% endfor %}

@@ -61,3 +61,28 @@ if os.getcwd() == '/app':
 django_heroku.settings(locals())
 
 STRIPE_SECRET_KEY = ''
+
+# S3 BUCKETS CONFIG
+
+AWS_ACCESS_KEY_ID = 'AKIAQ7KLZJXGHUYS5RWN'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'rockib-ps-1'
+
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+
+'''
+<?xml version="1.0" encoding="UTF-8"?>
+<CORSConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+<CORSRule>
+    <AllowedOrigin>*</AllowedOrigin>
+    <AllowedMethod>GET</AllowedMethod>
+    <AllowedMethod>POST</AllowedMethod>
+    <AllowedMethod>PUT</AllowedMethod>
+    <AllowedHeader>*</AllowedHeader>
+</CORSRule>
+</CORSConfiguration>
+'''
