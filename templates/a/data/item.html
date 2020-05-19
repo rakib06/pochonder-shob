@@ -1,0 +1,69 @@
+{% load static %}
+
+
+<!-- Single Product Area -->
+{% for item in items %}
+<div class="col-12 col-sm-6 col-md-12 col-xl-6">
+    <div class="single-product-wrapper">
+        <!-- Product Image -->
+        <div class="product-img">
+            <img src="{{ item.image.url }}" alt="">
+            <!-- Hover Thumb 
+                <img class="hover-img" src="{% static 'amado/img/product-img/product2.jpg' %}" alt="">
+                -->
+        </div>
+        <!-- Product Image -->
+
+        <!-- Product Description -->
+        <div class="product-description d-flex align-items-center justify-content-between">
+            <!-- Product Meta Data -->
+            <div class="product-meta-data">
+                <div class="line"></div>
+                <p class="product-price">{{ item.title }}</p>
+                <p class="lead">
+                    <strong>
+                        {% if item.discount_price  %}
+                        <span class="mr-1">
+                            <del> {{item.price }} ‎৳</del>
+                        </span>
+                        <span class="mr-1">
+                            {{ item.discount_price }}‎৳
+                        </span>
+
+                        {% else %}
+                        {{ item.price }}
+                        {% endif %}
+                    </strong>
+                </p>
+                <a href="{{ item.get_absolute_url }}">
+                    <h6>{{ item.Offer}} </h6>
+                </a>
+                {% if item.get_size != "" %}
+                <a href="{{ item.get_absolute_url }}">
+                    <h6>Available Size: {{ item.get_size}} </h6>
+                </a>
+                {% endif %}
+            </div>
+            <!-- Product Meta Data -->
+
+            <!-- Ratings & Cart -->
+            <div class="ratings-cart text-right">
+                <div class="ratings">
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                </div>
+                <div class="cart">
+                    <a href="cart.html" data-toggle="tooltip" data-placement="left"
+                        title="Add {{ item.title }} to Card "><img src="{% static 'amado/img/core-img/cart.png' %}"
+                            alt=""></a>
+                </div>
+            </div>
+            <!-- End Ratings & Cart -->
+
+        </div>
+    </div>
+</div>
+{% endfor %}

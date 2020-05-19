@@ -31,7 +31,7 @@ def home_view(request):
     for key, value in con.items():
         print('---------------------->>>>>>>>>>>>>......', key, value)
         context[key] = value
-    return render(request, 'home.html', context)
+    return render(request, 'a/base.html', context)
 
 
 def side_bar(request):

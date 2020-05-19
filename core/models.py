@@ -34,6 +34,11 @@ class Area(TimeStampMixin):
         else:
             return 'No Image Found'
     image_tag.short_description = 'Image'
+    @property
+    def shops_count(self):
+        x = Shop.objects.filter(area=self.id).count()
+        print('*********************8888', x)
+        return x
 
 
 class UserProfile(TimeStampMixin):
@@ -64,6 +69,12 @@ class Shop(TimeStampMixin):
 
     def __str__(self):
         return self.title
+
+    @property
+    def items_count(self):
+        x = Item.objects.filter(shop=self.id).count()
+        print('*********************8888', x)
+        return x
 
     def get_absolute_url_1(self):
 
@@ -124,7 +135,6 @@ class Offer(TimeStampMixin):
         return self.name
 
 
-
 class Color(TimeStampMixin):
     name = models.CharField(max_length=100)
 
@@ -181,7 +191,8 @@ class Item(TimeStampMixin):
     @property
     def get_size(self):
         x = Size.objects.filter(for_item=self.id)
-        return x
+
+        return ", ".join([p.name for p in x])
 
     def get_absolute_url(self):
         return reverse("core:product", kwargs={
