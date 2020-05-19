@@ -1,4 +1,5 @@
 {% load static %}
+{% load cart_template_tags %}
 <!-- Header Area Start -->
 <header class="header-area clearfix">
     <!-- Close Icon -->
@@ -13,13 +14,20 @@
     <nav class="nav">
         <ul>
             <p>
-
-                <li>
-                    <a href="cart.html" class="cart-nav"><img src="{% static 'user/img/core-img/cart.png' %}" alt="">
-                        Cart
-                        <span>(0)</span></a>
-                </li>
                 <li class="active"><a href="{% url 'core:home' %}">Home</a></li>
+
+                {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                    <a href="{% url 'core:order-summary' %}" class="nav-link waves-effect"> <img
+                            src="{% static 'user/img/core-img/cart.png' %}" alt="">
+                        Cart
+                        <span> ({{ request.user|cart_item_count }}) </span>
+
+
+                    </a>
+                </li>
+                {% endif %}
+
 
             </p>
 

@@ -1,1 +1,24 @@
 {% extends "base.html" %}
+
+{% block search %}
+{% endblock search %}
+
+{% block content %}
+
+<!-- ##### Main Content Wrapper Start ##### -->
+<div class="main-content-wrapper d-flex clearfix">
+
+    {% include "layouts/navbar.html"%}
+    {% include "layouts/mobile.html"%}
+    {% include "layouts/sidebar.html"%}
+    {% include "layouts/search.html"%}
+
+    <div class="products-catagories-area clearfix">
+        <div class="panel panel-success">
+            {% block content1%}
+            {% endblock content1%}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -21,10 +21,11 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
+    'crispy_forms',
 
 
 ]
-
+CRISPY_TEMPLATE_PACK = 'uni_form'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

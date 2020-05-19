@@ -2,12 +2,12 @@
 {% load static %}
 {% block title %}
 Pochonder Sob
-{% endblock %}
+{% endblock title %}
 {% block content %}
 
 <!-- ##### Main Content Wrapper Start ##### -->
 <div class="main-content-wrapper d-flex clearfix">
-
+    {% include "layouts/navbar.html"%}
     {% include "layouts/mobile.html"%}
     {% include "layouts/sidebar.html"%}
     {% include "layouts/search.html"%}
