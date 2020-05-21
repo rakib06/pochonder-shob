@@ -57,10 +57,11 @@ if os.getcwd() == '/app':
     DATABASES['default'].update(db_from_env)
     # Honor the 'X-forwarded-Proto' header for request.is_secure().
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SECURE_SSL_REDIRECT = True
 
     # Allow all host headers
     ALLOWED_HOSTS = ['pochonder-shob.herokuapp.com', 'pochonder-shob.com']
-    DEBUG = True
+    DEBUG = False
     AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID", "")
     AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY", "")
     AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME", "")
