@@ -51,6 +51,14 @@ class Area(TimeStampMixin):
             img.thumbnail(new_img)
             img.save(self.image.path)  # saving image at the same path
 
+    def get_absolute_url(self):
+
+        return reverse("core:area-shops", kwargs={
+            # ei khane sudu oi shop er jinish jeno dekhay sei babostha korte hobe
+            'id': self.id
+        })
+    # shop category
+
 
 class UserProfile(TimeStampMixin):
     user = models.OneToOneField(
@@ -269,6 +277,10 @@ class OrderItem(TimeStampMixin):
 
     def __str__(self):
         return f"{self.quantity} of {self.item.title}"
+
+    @property
+    def get_image(self):
+        return self.item.image
 
     def get_total_item_price(self):
         return self.quantity * self.item.price

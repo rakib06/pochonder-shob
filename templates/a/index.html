@@ -7,6 +7,9 @@
 
 <!-- Product Catagories Area Start -->
 <div class="products-catagories-area clearfix">
+
+
+
     <h3> Markets </h3>
     <div class="amado-pro-catagory clearfix">
 
@@ -38,7 +41,7 @@
         <!-- Single Catagory -->
         {% for item in shops %}
         <div class="single-products-catagory clearfix">
-            <a href="shop.html">
+            <a href="{{ item.get_absolute_url }}">
                 <img src="{{ item.photo.url }}" alt="">
                 <!-- Hover Content -->
                 <div class="content">

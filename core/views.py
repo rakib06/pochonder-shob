@@ -119,7 +119,7 @@ class CheckoutView(View):
                 context.update(
                     {'default_shipping_address': shipping_address_qs[0]})
 
-            return render(self.request, "checkout.html", context)
+            return render(self.request, "a/checkout.html", context)
         except ObjectDoesNotExist:
             messages.info(self.request, "You do not have an active order")
             return redirect("core:checkout")
@@ -316,7 +316,7 @@ class OrderSummaryView(LoginRequiredMixin, View):
             context = {
                 'object': order
             }
-            return render(self.request, 'a/order_summary.html', context)
+            return render(self.request, 'a/cart.html', context)
         except ObjectDoesNotExist:
             messages.warning(self.request, "You do not have an active order")
             return redirect("/")
@@ -365,7 +365,7 @@ def get_items(request, id):
         context = {'items': items, 'category': category, 'offer': offer}
 
         print(items)
-        return render(request, 'shop-items.html', context)
+        return render(request, 'a/main/items.html', context)
     except ObjectDoesNotExist:
         messages.info(
             self.request, "Sorry! Hopefully they will update their products soon!")
@@ -374,7 +374,7 @@ def get_items(request, id):
 
 def get_shops(request, id):
     try:
-        # print('...............................', type(slug))
+        print('............................... get shop ##########')
         shops = Shop.objects.filter(area=id)
         # category = Category.objects.filter(for_shop=id)
         # offer = Offer.objects.filter(for_shop=id)
@@ -382,7 +382,7 @@ def get_shops(request, id):
         # context = {'items': items, 'category': category, 'offer': offer}
         context = {'shops': shops}
         # print(items)
-        return render(request, 'main/shops.html', context)
+        return render(request, 'a/main/shops.html', context)
     except ObjectDoesNotExist:
         messages.info(
             self.request, "Sorry! Hopefully they will update their products soon!")
