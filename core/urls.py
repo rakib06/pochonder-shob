@@ -25,7 +25,8 @@ from .views import (
     CustomerOrderStatusView,
     get_shop_cat_items,
     home_view,
-    side_bar
+    side_bar,
+    get_shops,
 )
 app_name = 'core'
 
@@ -35,6 +36,7 @@ urlpatterns = [
     path('', home_view, name='home'),
 
     path('shop-items/<id>/', get_items, name='shop-items'),
+    path('area/<id>/', get_shops, name='area-shops'),
     path('shops-cat/<id>', get_shop_cat_items,
          name='shops-cat'),
     path('offer-shop/<id>', get_shop_cat_items,

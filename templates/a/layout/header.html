@@ -13,6 +13,7 @@
     <!-- Amado Nav -->
     <nav class="amado-nav">
         <ul>
+
             <li><a href="index.html">Home</a></li>
             {% if request.user.is_authenticated %}
             <li>
@@ -34,8 +35,7 @@
         </ul>
     </nav>
 
-    <!-- Cart Menu -->
-
+    <!-- Cart Menu
     <div class="cart-fav-search mb-100">
 
         <a href="cart.html" class="cart-nav"><img src="{% static 'amado/img/core-img/cart.png' %}" alt=""> Cart
@@ -46,19 +46,30 @@
         <a href="#" class="search-nav"><img src="{% static 'amado/img/core-img/search.png' %}" alt="">
             Search</a>
     </div>
+     -->
 
-    <!-- Button Group -->
+
+    <!-- Button Group 
     <div class="amado-btn-group mt-30 mb-100">
         <a href="#" class="btn amado-btn mb-15">%Discount%</a>
         <a href="#" class="btn amado-btn active">New this week</a>
     </div>
-
-    <!-- Social Button -->
+-->
+    <!-- Social Button 
     <div class="social-info d-flex justify-content-between">
         <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
         <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
         <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
         <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
     </div>
+    -->
+    {% if request.user.is_authenticated %}
+
+    <p>
+        <span class=""> Hello {{ request.user.username }}! </span>
+
+    </p>
+
+    {% endif %}
 </header>
 <!-- Header Area End -->

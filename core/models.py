@@ -46,7 +46,7 @@ class Area(TimeStampMixin):
 
         img = Image.open(self.image.path)  # Open image using self
 
-        if img.height > 300 or img.width > 300:
+        if img.height != 300 or img.width != 300:
             new_img = (300, 300)
             img.thumbnail(new_img)
             img.save(self.image.path)  # saving image at the same path
@@ -73,7 +73,7 @@ class Shop(TimeStampMixin):
     title = models.CharField(max_length=100)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     photo = models.ImageField(upload_to='shops/')
-    slug = models.SlugField()
+    slug = models.SlugField(verbose_name="Shop URL")
     shop_type = models.ManyToManyField(ShopType)
     area = models.ForeignKey(
         Area, null=True, blank=True, on_delete=models.CASCADE)

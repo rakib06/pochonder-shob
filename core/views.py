@@ -31,7 +31,7 @@ def home_view(request):
     for key, value in con.items():
         print('---------------------->>>>>>>>>>>>>......', key, value)
         context[key] = value
-    return render(request, 'a/base.html', context)
+    return render(request, 'a/index.html', context)
 
 
 def side_bar(request):
@@ -366,6 +366,23 @@ def get_items(request, id):
 
         print(items)
         return render(request, 'shop-items.html', context)
+    except ObjectDoesNotExist:
+        messages.info(
+            self.request, "Sorry! Hopefully they will update their products soon!")
+        return redirect("core:checkout")
+
+
+def get_shops(request, id):
+    try:
+        # print('...............................', type(slug))
+        shops = Shop.objects.filter(area=id)
+        # category = Category.objects.filter(for_shop=id)
+        # offer = Offer.objects.filter(for_shop=id)
+        print('-------77777777777777777777777777777777777-----------------', shops)
+        # context = {'items': items, 'category': category, 'offer': offer}
+        context = {'shops': shops}
+        # print(items)
+        return render(request, 'main/shops.html', context)
     except ObjectDoesNotExist:
         messages.info(
             self.request, "Sorry! Hopefully they will update their products soon!")
