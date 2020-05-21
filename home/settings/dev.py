@@ -16,3 +16,8 @@ DATABASES = {
 CORS_ORIGIN_ALLOW_ALL = True
 
 STRIPE_SECRET_KEY = ''
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static_files')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+MEDIA_URL = '/image/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static_files/image')
