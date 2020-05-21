@@ -412,7 +412,7 @@ def get_shopoffe(request, id):
 
 class ItemDetailView(DetailView):
     model = Item
-    template_name = "product.html"
+    template_name = "a/product-details.html"
 
 
 @login_required

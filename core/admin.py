@@ -70,8 +70,11 @@ class ShopType(admin.ModelAdmin):
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
 
-    list_display = ['image_tag', 'title',
+    list_display = ['image_tag', 'title', 'in_stock',
                     'price', 'discount_price', 'category', 'created_at', 'updated_at']
+
+    list_editable = ['in_stock',
+                     'price', 'discount_price', ]
 
     def changelist_view(self, request, extra_context=None):
         if not request.user.is_superuser:

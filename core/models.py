@@ -177,6 +177,11 @@ class Item(TimeStampMixin):
     description = models.TextField(
         null=True, default="No description available")
     image = models.ImageField(upload_to='products/')
+    in_stock = models.BooleanField(default=True)
+    @property
+    def discount(self):
+        dp = -((self.price - self.discount_price)/self.price) * 100
+        return float("{:.2f}".format(dp))
 
     def image_tag(self):
         if self.image:
@@ -208,6 +213,12 @@ class Item(TimeStampMixin):
     def shop_name(self):
         print('------------Ship', self.shop__title)
         return self.shop__title
+
+    @property
+    def market_name(self):
+
+        market = self.shop.area
+        return market.name
 
     @property
     def get_size(self):

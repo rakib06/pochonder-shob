@@ -2,8 +2,19 @@
 
 
 <!-- Single Product Area -->
-{% for item in shops %}
+{% if markets %}
 <div class="col-12 col-sm-6 col-md-12 col-xl-6">
+    <h3> Shops </h3>
+
+</div>
+<div class="col-12 col-sm-6 col-md-12 col-xl-6">
+
+</div>
+{% endif %}
+{% for item in shops %}
+
+<div class="col-12 col-sm-6 col-md-12 col-xl-6">
+
     <div class="single-product-wrapper">
         <!-- Product Image -->
         <div class="product-img">
