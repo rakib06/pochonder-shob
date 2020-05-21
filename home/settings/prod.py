@@ -56,12 +56,12 @@ if os.getcwd() == '/app':
     db_from_env = dj_database_url.config(conn_max_age=500)
     DATABASES['default'].update(db_from_env)
     # Honor the 'X-forwarded-Proto' header for request.is_secure().
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
     SECURE_SSL_REDIRECT = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
     # Allow all host headers
     ALLOWED_HOSTS = ['pochonder-shob.herokuapp.com', 'pochonder-shob.com']
-    DEBUG = False
+    DEBUG = True
     AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID", "")
     AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY", "")
     AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME", "")
