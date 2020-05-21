@@ -30,7 +30,12 @@
                         src="{% static 'amado/img/core-img/cart.png' %}" alt=""> Cart
                     <span>({{ request.user|cart_item_count }}) </span></a>
             </li>
+            <li>
+                <a href="{% url 'core:customer-order' %}">
 
+                    My Orders </a>
+                </a>
+            </li>
             <li>
                 <a class="nav-link waves-effect" href="{% url 'account_logout' %}"> Logout
                 </a>

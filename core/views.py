@@ -131,14 +131,22 @@ class CheckoutView(View):
         try:
             order = Order.objects.get(user=self.request.user, ordered=False)
             if form.is_valid():
+
                 payment_option = form.cleaned_data.get(
                     'payment_option')
                 order.payment_option = payment_option
                 print('payment_option = ', payment_option)
                 mobile_number = form.cleaned_data.get(
                     'mobile_number')
+
+                comment = form.cleaned_data.get(
+                    'comment')
+                customer_name = form.cleaned_data.get(
+                    'customer_name')
+                order.customer_name = customer_name
+                order.comment = comment
                 order.mobile_number = mobile_number
-                print('mobile', mobile_number)
+                print('mobile', mobile_number, comment, customer_name)
                 try:
                     print("User is entering a new shipping address")
                     shipping_address = form.cleaned_data.get(
@@ -345,10 +353,10 @@ class CustomerOrderStatusView(LoginRequiredMixin, View):
 
             context = {'object': user_orders}
             print(user_orders)
-            return render(self.request, 'customer_order.html', context)
+            return render(self.request, 'a/my_order.html', context)
         except ObjectDoesNotExist:
             messages.info(
-                self.request, "Sorry! Hopefully they will update their products soon!")
+                self.request, "Sorry! You have no order! ")
             return redirect("core:home")
 
 

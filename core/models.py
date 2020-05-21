@@ -319,6 +319,8 @@ class Order(TimeStampMixin):
     ordered_date = models.DateTimeField()
     ordered = models.BooleanField(default=False)
     shipping_address = models.CharField(max_length=200)
+    comment = models.CharField(max_length=200, default="NA")
+    customer_name = models.CharField(max_length=200, default="NA")
     # 'Address', related_name='shipping_address', on_delete=models.SET_NULL, blank=True, null=True)
 
     # billing_address = models.ForeignKey('Address', related_name = 'billing_address', on_delete = models.SET_NULL, blank = True, null = True)
@@ -326,8 +328,12 @@ class Order(TimeStampMixin):
 
     coupon = models.ForeignKey(
         'Coupon', on_delete=models.SET_NULL, blank=True, null=True)
-    being_delivered = models.BooleanField(default=False)
-    received = models.BooleanField(default=False)
+    being_packed = models.BooleanField(
+        default=False, verbose_name="Packing Status")
+    being_delivered = models.BooleanField(
+        default=False, verbose_name="Shiping Status")
+
+    received = models.BooleanField(default=False, verbose_name="Received ")
 
     refund_requested = models.BooleanField(default=False)
     refund_granted = models.BooleanField(default=False)

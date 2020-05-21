@@ -26,6 +26,8 @@ class ItemForm(forms.ModelForm):
 class CheckoutForm(forms.Form):
     shipping_address = forms.CharField(required=True)
     mobile_number = forms.CharField(required=True)
+    comment = forms.CharField(required=False)
+    customer_name = forms.CharField(required=True)
     payment_option = forms.ChoiceField(
         widget=forms.RadioSelect, choices=PAYMENT_CHOICES)
 

@@ -1,0 +1,101 @@
+{% extends "a/base1.html" %}
+{% load static %}
+
+{% block content%}
+<div class="cart-table-area section-padding-100">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-lg-8">
+                <div class="checkout_details_area mt-50 clearfix">
+                    <h1> Order Status for {{ request.user}} </h1>
+
+                    {% for item in object %}
+
+
+
+                    <p> Pochondoo Orderd ID: 1602{{ item.id}}</p>
+                    <p>
+                        {% if item.ordered %}
+
+                        <i class=" fa fa-check-square"></i>
+                        Ordered
+
+
+                        {% else %}
+
+                        <i class=" fa fa-spinner fa-spin"></i>
+                        Not Ordered
+
+                        {% endif %}
+
+
+                        {% if item.being_packed %}
+
+                        <i class=" fa fa-spinner fa-spin"></i>
+                        Packed
+
+
+                        {% else %}
+
+                        <i class=" fa fa-spinner fa-spin"></i>
+                        Packing
+
+                        {% endif %}
+
+
+
+                        {% if item.being_delivered %}
+
+                        <i class=" fa fa-check-square"></i>
+                        On the way
+
+
+                        {% else %}
+
+                        <i class=" fa fa-spinner fa-spin"></i>
+                        On the way
+
+                        {% endif %}
+
+
+                        {% if item.received %}
+
+                        <i class=" fa fa-check-square"></i>
+                        Received
+
+
+                        {% else %}
+
+                        <i class=" fa fa-spinner fa-spin"></i>
+                        Wait to receive
+
+                        {% endif %}
+
+                    </p>
+
+
+
+
+
+
+
+                    <h4>
+                        <strong>
+                            <p class="lead">
+                                Total Amount: {{ item.get_total }} BDT
+                            </p>
+                        </strong>
+                    </h4>
+
+
+
+
+
+
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
