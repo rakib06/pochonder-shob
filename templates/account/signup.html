@@ -11,8 +11,7 @@
             <div class="col-12 col-lg-8">
                 <div class="checkout_details_area mt-50 clearfix">
                     <h1>{% trans "Sign Up" %}</h1>
-                    <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign
-                            in</a>.{% endblocktrans %}</p>
+
                     <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
                         {% csrf_token %}
                         {{ form|crispy }}
@@ -21,6 +20,10 @@
                         {% endif %}
                         <button class='btn btn-primary' type="submit">{% trans "Sign Up" %} &raquo;</button>
                     </form>
+                    <p>{% blocktrans %}Already have an account? Then please
+                        <br>
+                        <a class="btn amado-btn w-0" href="{{ login_url }}">
+                            Login</a>.{% endblocktrans %}</p>
                 </div>
             </div>
         </div>
