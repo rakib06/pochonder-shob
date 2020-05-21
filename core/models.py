@@ -40,17 +40,18 @@ class Area(TimeStampMixin):
         x = Shop.objects.filter(area=self.id).count()
         print('*********************8888', x)
         return x
-
+    '''
     def save(self):
         super().save()  # saving image first
 
-        img = Image.open(self.image.path)  # Open image using self
+        img = Image.open(self.image.url)  # Open image using self
 
         if img.height != 300 or img.width != 300:
             new_img = (300, 300)
             img.thumbnail(new_img)
             # saving image at the same path
-            img.save(self.image.path)
+            image.save(self.image.url)
+    '''
 
     def get_absolute_url(self):
 
@@ -133,7 +134,7 @@ class Shop(TimeStampMixin):
             # ei khane sudu oi shop er jinish jeno dekhay sei babostha korte hobe
             'id': self.id
         })
-
+    '''
     def save(self):
         super().save()  # saving image first
 
@@ -143,6 +144,8 @@ class Shop(TimeStampMixin):
             new_img = (300, 300)
             img.thumbnail(new_img)
             img.save(self.photo.path)
+
+    '''
 
 
 class Category(TimeStampMixin):
@@ -250,6 +253,7 @@ class Item(TimeStampMixin):
             'slug': self.slug
         })
 
+    '''
     def save(self):
         super().save()  # saving image first
 
@@ -259,6 +263,7 @@ class Item(TimeStampMixin):
             new_img = (300, 300)
             img.thumbnail(new_img)
             img.save(self.image.path)
+    '''
 
 
 class Size(TimeStampMixin):
