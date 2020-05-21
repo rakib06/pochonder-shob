@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 # discount/new/ Eid Offer
 from django.utils.safestring import mark_safe
 import uuid
+from PIL import Image
 
 
 class TimeStampMixin(models.Model):
@@ -39,6 +40,16 @@ class Area(TimeStampMixin):
         x = Shop.objects.filter(area=self.id).count()
         print('*********************8888', x)
         return x
+
+    def save(self):
+        super().save()  # saving image first
+
+        img = Image.open(self.image.path)  # Open image using self
+
+        if img.height > 300 or img.width > 300:
+            new_img = (300, 300)
+            img.thumbnail(new_img)
+            img.save(self.image.path)  # saving image at the same path
 
 
 class UserProfile(TimeStampMixin):
@@ -114,6 +125,16 @@ class Shop(TimeStampMixin):
             'id': self.id
         })
 
+    def save(self):
+        super().save()  # saving image first
+
+        img = Image.open(self.photo.path)  # Open image using self
+
+        if img.height > 300 or img.width > 300:
+            new_img = (300, 300)
+            img.thumbnail(new_img)
+            img.save(self.photo.path)
+
 
 class Category(TimeStampMixin):
     name = models.CharField(max_length=100)
@@ -155,7 +176,7 @@ class Item(TimeStampMixin):
     slug = models.SlugField(unique=True, default=uuid.uuid1)
     description = models.TextField(
         null=True, default="No description available")
-    image = models.ImageField()
+    image = models.ImageField(upload_to='products/')
 
     def image_tag(self):
         if self.image:
@@ -208,6 +229,16 @@ class Item(TimeStampMixin):
         return reverse("core:remove-from-cart", kwargs={
             'slug': self.slug
         })
+
+    def save(self):
+        super().save()  # saving image first
+
+        img = Image.open(self.image.path)  # Open image using self
+
+        if img.height > 300 or img.width > 300:
+            new_img = (300, 300)
+            img.thumbnail(new_img)
+            img.save(self.image.path)
 
 
 class Size(TimeStampMixin):

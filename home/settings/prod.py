@@ -99,9 +99,18 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static_files'),
 ]
 
+# var = 'run'
+var = 'test'
+
 AWS_ACCESS_KEY_ID = 'AKIAQ7KLZJXGHOYLWLWI'
 AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'rkc-s3-bucket-1'
+# AWS_STORAGE_BUCKET_NAME = 'rkc-s3-bucket-1'
+# AWS_STORAGE_BUCKET_NAME = 'rk-s3-bucket'
+AWS_STORAGE_BUCKET_NAME = ''
+if var == 'run':
+    AWS_STORAGE_BUCKET_NAME = 'rk-s3-bucket'
+else:
+    AWS_STORAGE_BUCKET_NAME = 'rkc-s3-bucket-1'
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 
 AWS_S3_OBJECT_PARAMETERS = {
@@ -112,8 +121,15 @@ AWS_LOCATION = 'static_files'
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 # STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
 # STATIC_URL = 'https://rk-s3-bucket.s3.amazonaws.com/'
-STATIC_URL = 'https://rk-s3-bucket.s3.ap-south-1.amazonaws.com/'
+
+# STATIC_URL = 'https://rkc-s3-bucket-1.s3.ap-south-1.amazonaws.com/'
+if var == 'run':
+    STATIC_URL = 'https://rk-s3-bucket.s3.ap-south-1.amazonaws.com/'
+else:
+    STATIC_URL = 'https: // rkc-s3-bucket-1.s3.ap-south-1.amazonaws.com/'
+
 DEFAULT_FILE_STORAGE = 'home.settings.storage_backends.MediaStorage'
 AWS_DEFAULT_ACL = None
+
 ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 CORS_ORIGIN_ALLOW_ALL = True
