@@ -49,12 +49,15 @@
                             </tr>
                             {% empty %}
                             <tr>
-                                <td colspan='5'>Your cart is empty</td>
+                                <td>Your cart is empty</td>
+
                             </tr>
                             <tr>
-                                <td colspan="5">
-                                    <a class='btn btn-primary float-right' href='/'>Continue shopping</a>
-                                </td>
+                                <hr>
+
+                                <a class="btn amado-btn w-100" href='/'>Continue shopping</a>
+
+
                             </tr>
                             {% endfor %}
                             {% if object.coupon %}
@@ -82,11 +85,13 @@
             <div class="col-12 col-lg-4">
                 <div class="cart-summary">
                     <h5>Cart Total</h5>
+                    {% if object.get_total %}
                     <ul class="summary-table">
-                        <li><span>subtotal:</span> <span>$140.00</span></li>
+                        <li><span>subtotal:</span> <span>{{object.get_total}}</span></li>
                         <li><span>delivery:</span> <span>Free</span></li>
-                        <li><span>total:</span> <span>$140.00</span></li>
+                        <li><span>total:</span> <span>{{object.get_total}}</span></li>
                     </ul>
+                    {% endif %}
                     <div class="cart-btn mt-100">
                         <a href='/checkout/' class="btn amado-btn w-100">Checkout</a>
 

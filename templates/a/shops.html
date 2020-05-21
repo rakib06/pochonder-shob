@@ -1,0 +1,42 @@
+{% extends "a/base1.html" %}
+{% load static %}
+<!-- Header Area End -->
+
+{% block content %}
+<!-- Header Area End -->
+
+<!-- Product Catagories Area Start -->
+<div class="products-catagories-area clearfix">
+
+
+
+
+
+
+    <!-- Shops -->
+
+    <div class="amado-pro-catagory clearfix">
+
+        <!-- Single Catagory -->
+        {% for item in object_list %}
+        <div class="single-products-catagory clearfix">
+            <a href="{{ item.get_absolute_url }}">
+                <img src="{{ item.photo.url }}" alt="">
+                <!-- Hover Content -->
+                <div class="content">
+                    <div class="line"></div>
+
+                    <h4>{{ item.title }} </h4>
+
+                    <h6>{{ item.area}} </h6>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+
+
+
+    </div>
+</div>
+<!-- Product Catagories Area End -->
+{% endblock %}

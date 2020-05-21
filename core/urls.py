@@ -18,7 +18,9 @@ from .views import (
     # PaymentView,
     AddCouponView,
     ShopCreate,
+    MarketsView,
     ShopsView,
+    ProductsView,
     get_items,
     # RequestRefundView,
     add_item, add_shop,
@@ -27,6 +29,7 @@ from .views import (
     home_view,
     side_bar,
     get_shops,
+
 )
 app_name = 'core'
 
@@ -34,6 +37,10 @@ urlpatterns = [
     # path('all', HomeView.as_view(), name='home'),
     # path('', ShopsView.as_view(), name='shops'),
     path('', home_view, name='home'),
+
+    path('markets/', MarketsView.as_view(), name='markets'),
+    path('shops/', ShopsView.as_view(), name='shops'),
+    path('products/', ProductsView.as_view(), name='products'),
 
     path('shop-items/<id>/', get_items, name='shop-items'),
     path('area/<id>/', get_shops, name='area-shops'),

@@ -303,10 +303,22 @@ class PaymentView(View):
 '''
 
 
+class MarketsView(ListView):
+    model = Area
+    paginate_by = 10
+    template_name = "a/markets.html"
+
+
 class ShopsView(ListView):
     model = Shop
     paginate_by = 10
-    template_name = "shops.html"
+    template_name = "a/shops.html"
+
+
+class ProductsView(ListView):
+    model = Item
+    paginate_by = 10
+    template_name = "a/products.html"
 
 
 class OrderSummaryView(LoginRequiredMixin, View):
