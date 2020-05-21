@@ -100,7 +100,7 @@ STATICFILES_DIRS = [
 ]
 
 # var = 'run'
-var = 'test'
+var = 'run'
 
 AWS_ACCESS_KEY_ID = 'AKIAQ7KLZJXGHOYLWLWI'
 AWS_SECRET_ACCESS_KEY = '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'
