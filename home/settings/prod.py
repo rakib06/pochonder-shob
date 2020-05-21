@@ -66,6 +66,14 @@ if os.getcwd() == '/app':
 
 django_heroku.settings(locals())
 
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID", "")
+AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY", "")
+AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME", "")
+AWS_QUERYSTRING_AUTH = False
+AWS_S3_CUSTOM_DOMAIN = os.environ.get("AWS_S3_CUSTOM_DOMAIN", "")
+MEDIA_ROOT = os.environ.get("MEDIA_URL", "static_files/image")
+MEDIA_URL = '/image/'
 
 # S3 BUCKETS CONFIG
 '''
@@ -95,6 +103,7 @@ AWS_S3_FILE_OVERWRITE = False
 '''
 # CORS_ORIGIN_ALLOW_ALL = True
 # CORS_ORIGIN_WHITELIST = ['http://localhost:3000', '127.0.0.1']
+'''
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static_files'),
 ]
@@ -110,8 +119,14 @@ AWS_S3_OBJECT_PARAMETERS = {
 
 AWS_LOCATION = 'static_files'
 
+'''
+# Ignore aws for static file access
+
 # STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 # STATIC_URL = 'https://rk-s3-bucket.s3.ap-south-1.amazonaws.com/'
+
+
+'''
 
 # STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
 # STATIC_URL = 'https://rk-s3-bucket.s3.amazonaws.com/'
