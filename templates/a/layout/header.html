@@ -15,15 +15,7 @@
         <ul>
 
             <li><a href="/">Home</a></li>
-            {% if not request.user.is_authenticated %}
 
-            <li>
-                <!--Login/ easy signup a niye jabe -->
-                <a href="{% url 'account_login' %}" class="cart-nav"><img
-                        src="{% static 'amado/img/core-img/cart.png' %}" alt=""> Cart
-                    <span>(0) </span></a>
-            </li>
-            {% endif %}
             <!--
                 <li class="active"><a href="shop.html">Search</a></li>
             -->
@@ -38,12 +30,6 @@
                         src="{% static 'amado/img/core-img/cart.png' %}" alt=""> Cart
                     <span>({{ request.user|cart_item_count }}) </span></a>
             </li>
-
-
-
-
-
-
 
             <li>
                 <a class="nav-link waves-effect" href="{% url 'account_logout' %}"> Logout
