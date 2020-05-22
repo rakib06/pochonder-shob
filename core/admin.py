@@ -23,7 +23,7 @@ class OrderItemAdmin(admin.ModelAdmin):
 
         qs = super().get_queryset(request)
 
-        if not request.user.is_superuser:
+        if request.user.is_superuser:
 
             return qs
 
