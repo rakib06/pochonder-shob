@@ -19,6 +19,23 @@ class OrderItemAdmin(admin.ModelAdmin):
     ordering = ("ordered",)
     list_editable = ['ordered', 'quantity_available']
 
+    def get_queryset(self, request):
+
+        qs = super().get_queryset(request)
+
+        if not request.user.is_superuser:
+
+            return qs
+
+        qs1 = Shop.objects.get(user=request.user.id)
+        items = Item.objects.filter(shop=qs1.id)
+        qs2 = OrderItem.objects.filter(item__in=items)
+
+        # print('>>>>>>>>>>>>>>>>>>>>>>>>>>>>', qs1, items, qs2)
+        # return qs.filter(shop=request.shop.id)
+        return qs2
+        # return qs.filter(shop=qs1)
+
     def item_image(self, obj):
         return obj.item.image_test
 
@@ -57,6 +74,8 @@ class OrderAdmin(admin.ModelAdmin):
 
 
 '''
+
+
 class AddressAdmin(admin.ModelAdmin):
     list_display = [
         'user',
