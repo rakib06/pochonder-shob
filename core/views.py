@@ -466,6 +466,7 @@ def add_to_cart(request, slug):
         # check if the order item is in the order
         if order.items.filter(item__slug=item.slug).exists():
             order_item.quantity += 1
+            order_item.quantity_available += 1
             order_item.save()
             messages.info(request, "This item quantity was updated.")
             return redirect("core:order-summary")
@@ -528,6 +529,7 @@ def remove_single_item_from_cart(request, slug):
             )[0]
             if order_item.quantity > 1:
                 order_item.quantity -= 1
+                order_item.quantity_available -= 1
                 order_item.save()
             else:
                 order.items.remove(order_item)

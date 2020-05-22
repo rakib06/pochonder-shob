@@ -201,6 +201,12 @@ class Item(TimeStampMixin):
         else:
             return 'No Image Found'
     image_tag.short_description = 'Image'
+    @property
+    def image_test(self):
+        if self.image:
+            return mark_safe('<img src="%s" style="width: 45px; height:45px;" />' % self.image.url)
+        else:
+            return 'No Image Found'
 
     def _get_unique_slug(self):
         slug = slugify(self.title)
@@ -277,9 +283,11 @@ class Size(TimeStampMixin):
 class OrderItem(TimeStampMixin):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE)
-    ordered = models.BooleanField(default=False)
+    ordered = models.BooleanField(default=False, verbose_name="Confirm Order")
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
-    quantity = models.IntegerField(default=1)
+    quantity = models.IntegerField(default=1, verbose_name='ordered quantity')
+    quantity_available = models.IntegerField(
+        default=1, verbose_name='Available Quantity')
 
     def __str__(self):
         return f"{self.quantity} of {self.item.title}"

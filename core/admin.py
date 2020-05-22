@@ -1,5 +1,5 @@
 from django.contrib import admin
-
+from django.urls import reverse
 from .models import (Item, OrderItem, Order, Shop, Coupon,
                      Refund, Address, UserProfile, Category, Offer, ShopType, Area, Size)
 from django.contrib.contenttypes.admin import GenericTabularInline
@@ -13,8 +13,16 @@ make_refund_accepted.short_description = 'Update orders to refund granted'
 
 
 class OrderItemAdmin(admin.ModelAdmin):
-    list_display = ['user', 'ordered', 'item', 'get_total_item_price',
-                    'get_total_discount_item_price', 'get_final_price']
+    list_display = ['item_image',
+                    'item', 'quantity', 'quantity_available', 'ordered', 'get_final_price']
+    list_select_related = True
+    ordering = ("ordered",)
+    list_editable = ['ordered', 'quantity_available']
+
+    def item_image(self, obj):
+        return obj.item.image_test
+
+    list_display_links = ('item',)
 
 
 class OrderAdmin(admin.ModelAdmin):
@@ -146,7 +154,28 @@ class ShopAdmin(admin.ModelAdmin):
         return qs.filter(user=request.user.id)
 
 
-admin.site.register(Order, OrderAdmin)
+@admin.register(Order)
+class OrderAdmin(admin.ModelAdmin):
+    fields = ['items', 'comment', 'mobile_number', 'shipping_address',
+              'ordered', 'being_packed', 'being_delivered', 'received']
+
+    list_display = ['get_products', 'comment', 'mobile_number', 'shipping_address',
+                    'ordered', 'being_packed', 'being_delivered', 'received']
+    list_editable = ['being_packed', 'being_delivered', 'received']
+
+    def get_products(self, obj):
+        return ", ".join([str(p.item.title) + " = " + str(p.quantity) + " Shop ID = " + str(p.item.shop.id) for p in obj.items.all()])
+
+    def get_exclude(self, request, obj=None):
+        excluded = super().get_exclude(request, obj) or []  # get overall excluded fields
+
+        if not request.user.is_superuser:  # if user is not a superuser
+            return excluded + ['mobile_number']
+
+        return excluded
+
+
+# admin.site.register(Order, OrderAdmin)
 # admin.site.register(Payment)
 admin.site.register(Coupon)
 admin.site.register(Refund)
