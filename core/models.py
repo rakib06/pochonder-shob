@@ -84,7 +84,8 @@ class Shop(TimeStampMixin):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     photo = models.ImageField(upload_to='shops/')
     slug = models.SlugField(verbose_name="Shop URL")
-    shop_type = models.ManyToManyField(ShopType)
+    shop_type = models.ForeignKey(
+        ShopType, on_delete=models.SET_NULL, null=True, blank=True)
     area = models.ForeignKey(
         Area, null=True, blank=True, on_delete=models.CASCADE)
 

@@ -6,37 +6,72 @@
 <!-- Header Area End -->
 
 <!-- Product Catagories Area Start -->
-<div class="products-catagories-area clearfix">
 
 
 
 
 
 
-    <!-- Shops -->
 
-    <div class="amado-pro-catagory clearfix">
 
-        <!-- Single Catagory -->
-        {% for item in object_list %}
-        <div class="single-products-catagory clearfix">
-            <a href="{{ item.get_absolute_url }}">
-                <img src="{{ item.photo.url }}" alt="">
-                <!-- Hover Content -->
-                <div class="content">
-                    <div class="line"></div>
+<div class="amado_product_area section-padding-100">
+    <div class=" container-fluid">
+        <h1> Shops </h1>
+        <hr>
+        <div class="row">
+            <!-- Single Catagory -->
+            {% for item in object_list %}
+            <div class="col-12 col-sm-6 col-md-12 col-xl-4">
+                <div class="single-product-wrapper">
+                    <!-- Product Image -->
+                    <div class="product-img">
 
-                    <h4>{{ item.title }} </h4>
+                        <a href="{{ item.get_absolute_url }}">
+                            <img src="{{ item.photo.url }}" alt="">
+                            <!-- Hover Content -->
+                    </div>
+                    <div class="product-description d-flex align-items-center justify-content-between">
+                        <div class="product-meta-data">
+                            <div class="line"></div>
+                            <p>{{ item.title }} </p>
 
-                    <h6>{{ item.area}} </h6>
+                            <small> <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                {{ item.shop_type }} </small>
+
+                            <small>
+                                |
+                                <i class="fa fa-shopping-basket" aria-hidden="true"></i>
+                                {{ item.items_count }}
+                            </small>
+                        </div>
+                        <div class="ratings-cart text-right">
+                            <div class="ratings">
+                                <h1>
+                                    <i class="fa fa-heartbeat" aria-hidden="true"></i>
+
+
+
+                                    <i class="fa fa-cog fa-spin" aria-hidden="true"></i>
+
+                                </h1>
+
+
+
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                    </a>
                 </div>
-            </a>
+            </div>
+            {% endfor %}
+
         </div>
-        {% endfor %}
-
-
 
     </div>
 </div>
+
 <!-- Product Catagories Area End -->
 {% endblock %}
