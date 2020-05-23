@@ -13,18 +13,15 @@
 
 
 
-<!-- Shops -->
-{% if shops %}
-<h3> Shops </h3>
-{% endif %}
-<div class="amado_product_area section-padding-70">
-    <div class="container-fluid">
+
+<div class="amado_product_area section-padding-100">
+    <div class=" container-fluid">
         <h1> Markets </h1>
         <hr>
         <div class="row">
             <!-- Single Catagory -->
             {% for item in object_list %}
-            <div class="col-12 col-sm-6 col-md-12 col-xl-6">
+            <div class="col-12 col-sm-6 col-md-12 col-xl-4">
                 <div class="single-product-wrapper">
                     <!-- Product Image -->
                     <div class="product-img">
@@ -36,7 +33,7 @@
                     <div class="product-description d-flex align-items-center justify-content-between">
                         <div class="product-meta-data">
                             <div class="line"></div>
-                            <h4>{{ item.name }} </h4>
+                            <h6>{{ item.name }} </h6>
 
                             <p> {{ item.shops_count}} Shop(s) </p>
                         </div>
