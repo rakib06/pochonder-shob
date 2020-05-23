@@ -196,6 +196,11 @@ class Item(TimeStampMixin):
         dp = -((self.price - self.discount_price)/self.price) * 100
         return float("{:.2f}".format(dp))
 
+    @property
+    def offer(self):
+
+        return self.Offer
+
     def image_tag(self):
         if self.image:
             return mark_safe('<img src="%s" style="width: 45px; height:45px;" />' % self.image.url)

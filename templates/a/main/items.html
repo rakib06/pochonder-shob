@@ -3,42 +3,94 @@
 <!-- Header Area End -->
 
 {% block content %}
-<!-- Header Area End -->
 
-<!-- Product Catagories Area Start -->
-<div class="products-catagories-area clearfix">
+<div class="amado_product_area section-padding-100">
+    <div class=" container-fluid">
+        <h1> Products </h1>
+        <hr>
+        <div class="row">
+            <!-- Single Catagory -->
+            {% for item in items %}
+            <div class="col-12 col-sm-6 col-md-12 col-xl-4">
+                <div class="single-product-wrapper">
+                    <!-- Product Image -->
+                    <div class="product-img">
+
+                        <a href="{{ item.get_absolute_url }}">
+                            <img src="{{ item.photo.url }}" alt="">
+                            <!-- Hover Content -->
+                    </div>
+                    <div class="product-description d-flex align-items-center justify-content-between">
+                        <div class="product-meta-data">
+                            <div class="line"></div>
+                            <p style="color: teal;">{{ item.title }} </p>
+
+                            {% if item.in_stock %}
+
+                            <small> <i style="color: green;" class="fa fa-check-square-o" aria-hidden="true"></i>
+                                In Stock </small>
+                            {% else %}
+                            <small> <i style="color: red;" class="fa fa-refresh fa-spin" aria-hidden="true"> </i>
+                                Out of Stock </small>
+                            {% endif %}
+
+
+                            <br>
+                            <small>
+                                <strong>
+                                    {% if item.discount_price  %}
+                                    <span class="mr-1">
+                                        <del> {{item.price }} ‎৳</del>
+                                    </span>
+                                    <span class="mr-1" style="color: orangered;">
+                                        {{ item.discount_price }}‎৳
+
+                                    </span>
+                                    <br>
+                                    <i class="fa fa-grav" aria-hidden="true" style="color: purple;"> Saving
+                                        {{ item.discount }} %</i>
+
+
+                                    {% else %}
+                                    {{ item.price }}
+
+                                    {% endif %}
+                            </small>
+                            </strong>
 
 
 
 
 
+                        </div>
+                        <div class="ratings-cart text-right">
+                            <div class="ratings">
+                                <h1>
+                                    <i class="fa fa-heartbeat" aria-hidden="true"></i>
 
-    <!-- Shops -->
-    {% if shops %}
-    <h3> Shops </h3>
-    {% endif %}
-    <div class="amado-pro-catagory clearfix">
 
-        <!-- Single Catagory -->
-        {% for item in items %}
-        <div class="single-products-catagory clearfix">
-            <a href="{{ item.get_absolute_url }}">
-                <img src="{{ item.image.url }}" alt="">
-                <!-- Hover Content -->
-                <div class="content">
-                    <div class="line"></div>
 
-                    <h4>{{ item.title }} </h4>
+                                    <i class="fa fa-cog fa-spin" aria-hidden="true"></i>
 
-                    <h6>{{ item.price}} </h6>
+                                </h1>
+
+
+
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                    </a>
                 </div>
-            </a>
+            </div>
+            {% endfor %}
+
         </div>
-        {% endfor %}
-
-
 
     </div>
 </div>
+
 <!-- Product Catagories Area End -->
 {% endblock %}
