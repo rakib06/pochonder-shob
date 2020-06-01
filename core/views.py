@@ -314,7 +314,17 @@ class PaymentView(View):
 class MarketsView(ListView):
     model = Area
     paginate_by = 10
+
     template_name = "ogani/index.html"
+    '''
+    template_name = "ogani/blog-details.html"
+    template_name = "ogani/blog.html"
+    template_name = "ogani/checkout.html"
+    template_name = "ogani/contact.html"
+    template_name = "ogani/shop-details.html"
+    template_name = "ogani/shop-grid.html"
+    template_name = "ogani/shoping-cart.html"
+    '''
 
 
 class ShopsView(ListView):
