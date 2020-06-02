@@ -19,6 +19,7 @@ from .views import (
     AddCouponView,
     ShopCreate,
     MarketsView,
+    MarketsView1,
     ShopsView,
     ProductsView,
     get_items,
@@ -38,9 +39,11 @@ urlpatterns = [
     # path('', ShopsView.as_view(), name='shops'),
     # path('', home_view, name='home'),
     path('', MarketsView.as_view(), name='markets'),
-    path('markets/', MarketsView.as_view(), name='markets'),
+    # path('markets/', MarketsView.as_view(), name='markets'),
     path('shops/', ShopsView.as_view(), name='shops'),
     path('products/', ProductsView.as_view(), name='products'),
+
+    path('markets/', MarketsView1.as_view(), name='markets'),
 
     path('shop-items/<id>/', get_items, name='shop-items'),
     path('area/<id>/', get_shops, name='area-shops'),

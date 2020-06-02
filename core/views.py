@@ -311,6 +311,13 @@ class PaymentView(View):
 '''
 
 
+class MarketsView1(ListView):
+    model = Area
+    paginate_by = 10
+    template_name = "a/markets.html"
+    # template_name = "ogani/index.html"
+
+
 class MarketsView(ListView):
     model = Area
     paginate_by = 10
