@@ -1,5 +1,5 @@
 {
-  "python.pythonPath": "env\\Scripts\\python.exe",
+  "python.pythonPath": "/home/rockiblx/anaconda3/bin/python",
   "editor.formatOnSave": true,
   "python.linting.pycodestyleEnabled": true,
   "python.linting.pylintEnabled": true,
