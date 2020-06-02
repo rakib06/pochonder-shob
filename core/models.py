@@ -193,7 +193,7 @@ class Item(TimeStampMixin):
     in_stock = models.BooleanField(default=True)
     @property
     def discount(self):
-        dp = -((self.price - self.discount_price)/self.price) * 100
+        dp = -((self.price - self.discount_price) / self.price) * 100
         return float("{:.2f}".format(dp))
 
     @property

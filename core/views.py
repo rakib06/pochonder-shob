@@ -23,15 +23,16 @@ def home_view(request):
     global context
     markets = Area.objects.all()
     shops = Shop.objects.all()
-    print(shops)
+    # print(shops)
     items = Item.objects.all()
     cats = Category.objects.all()
-    con = {'items': items, 'shops': shops,
-           'markets': markets, 'cats': cats}
-    for key, value in con.items():
-        print('---------------------->>>>>>>>>>>>>......', key, value)
-        context[key] = value
-    return render(request, 'a/index.html', context)
+    context = {'items': items, 'shops': shops,
+               'markets': markets, 'cats': cats,
+               }
+    # for key, value in con.items():
+    #     print('---------------------->>>>>>>>>>>>>......', key, value)
+    #     context[key] = value
+    return render(request, 'ogani/home.html', context)
 
 
 def side_bar(request):
@@ -321,6 +322,7 @@ class MarketsView1(ListView):
 class MarketsView(ListView):
     model = Area
     paginate_by = 10
+
     # template_name = "a/markets.html"
     template_name = "ogani/index.html"
     '''
