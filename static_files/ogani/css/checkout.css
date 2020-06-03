@@ -1,0 +1,91 @@
+.Checkout_block{
+    padding: 40px;
+}
+.Checkout_block input {
+    background-color: honeydew;
+}
+.Checkout_block textarea {
+    background-color: honeydew;
+}
+#my_order{
+    margin: 20px auto;
+    box-shadow: 10px 10px 5px grey;
+    text-align: center;
+    background-color: honeydew;
+    padding: 30px;
+}
+.price span{
+    font-size: 15px; 
+}
+#plus-minus {
+    font-size: 20px;
+}
+@media(max-width: 770px){
+    .price span{
+        font-size: 12px;
+    }
+    #plus-minus{
+        font-size: 15px;
+    }
+}
+
+.product_img{
+    position: relative;
+}
+.product_img #img{
+    opacity: 1;
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: .5s ease;
+    backface-visibility: hidden;
+  }
+  
+.product_img .middle{
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  
+.product_img:hover #img{
+    opacity: 0.3;
+  }
+  
+.product_img:hover .middle{
+    opacity: 1;
+  }
+  
+.product_img .text{
+    background-color:darkgreen;
+    color: white;
+    font-size: 16px;
+    padding: 16px 32px;
+  }
+
+#product_box{
+    padding-bottom: 8px;
+    margin: 4px;
+    box-shadow: 10px 10px 5px grey;
+}
+ 
+#home-caro {
+    height: 70vh;
+}
+@media(max-width: 770px){
+    
+    #home-caro{
+        height: 50vh;
+    }
+}
+
+@media(max-width: 520px){
+    
+    #home-caro{
+        height: 35vh;
+    }
+}

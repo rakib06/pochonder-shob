@@ -1,0 +1,65 @@
+{% extends "ogani/base.html" %}
+{% load static %}
+{% block page_content %}
+<!-- Product Catagories Area Start -->
+<div class="products-catagories-area clearfix">
+
+
+    <div class="amado-pro-catagory clearfix container">
+        <div class="row">
+            {% for item in object_list %}
+            <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3 mb-3">
+                <div class="single-products-catagory clearfix" id="product_box">
+                    <a href="{{ item.get_absolute_url }}">
+                        <div class="product_img">
+                            <img id="img" src="{{ item.image.url }}" alt="">
+                            <div class="middle">
+                                {% if item.discount_price  %}
+                                <div class="text">{{ item.discount_price}}/-</div>
+                                {% else %}
+                                <div class="text">{{ item.price}}/-</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <!-- <img src="{{ item.image.url }}" alt=""> -->
+                        <!-- Hover Content -->
+                        <div class="content">
+                            <h4 style="font-weight: 600;">{{ item.title }} </h4>
+                            <small>
+                                <strong>
+                                    {% if item.discount_price  %}
+                                    <span class="mr-1" style="color: blue;">
+                                        <del> {{item.price }} ‎৳</del>
+                                    </span>
+                                    <span class="mr-1" style="color: orangered;">
+                                        {{ item.discount_price }}‎৳
+
+                                    </span>
+                                    <br>
+                                    <i class="fa fa-grav" aria-hidden="true" style="color: purple;font-weight: 600;">
+                                        Saving
+                                        {{ item.discount }} %</i>
+
+
+                                    {% else %}
+                                    {{ item.price }}
+
+                                    {% endif %}
+                            </small>
+                            </strong>
+                            <!-- <div class="line"></div>
+                            <h4>{{ item.title }} </h4>
+                            <h6>{{ item.price}} </h6> -->
+                        </div>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+
+
+</div>
+{% endblock %}

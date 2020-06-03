@@ -120,7 +120,8 @@ class CheckoutView(View):
                 context.update(
                     {'default_shipping_address': shipping_address_qs[0]})
 
-            return render(self.request, "a/checkout.html", context)
+            # return render(self.request, "a/checkout.html", context)
+            return render(self.request, "ogani/checkout.html", context)
         except ObjectDoesNotExist:
             messages.info(self.request, "You do not have an active order")
             return redirect("core:checkout")
@@ -315,8 +316,8 @@ class PaymentView(View):
 class MarketsView1(ListView):
     model = Area
     paginate_by = 10
-    template_name = "a/markets.html"
-    # template_name = "ogani/index.html"
+    # template_name = "a/markets.html"
+    template_name = "ogani/markets.html"
 
 
 class MarketsView(ListView):
@@ -339,13 +340,15 @@ class MarketsView(ListView):
 class ShopsView(ListView):
     model = Shop
     paginate_by = 10
-    template_name = "a/shops.html"
+    # template_name = "a/shops.html"
+    template_name = "ogani/shops.html"
 
 
 class ProductsView(ListView):
     model = Item
     paginate_by = 10
-    template_name = "a/products.html"
+    # template_name = "a/products.html"
+    template_name = "ogani/products.html"
 
 
 class OrderSummaryView(LoginRequiredMixin, View):
@@ -355,7 +358,8 @@ class OrderSummaryView(LoginRequiredMixin, View):
             context = {
                 'object': order
             }
-            return render(self.request, 'a/cart.html', context)
+            # return render(self.request, 'a/cart.html', context)
+            return render(self.request, 'ogani/cart.html', context)
         except ObjectDoesNotExist:
             messages.warning(self.request, "You do not have an active order")
             return redirect("/")
@@ -372,7 +376,8 @@ class CustomerOrderStatusView(LoginRequiredMixin, View):
 
             context = {'object': user_orders}
             print(user_orders)
-            return render(self.request, 'a/my_order.html', context)
+            # return render(self.request, 'a/my_order.html', context)
+            return render(self.request, 'ogani/my_order.html', context)
         except ObjectDoesNotExist:
             messages.info(
                 self.request, "Sorry! You have no order! ")
@@ -404,7 +409,8 @@ def get_items(request, id):
         context = {'items': items, 'category': category, 'offer': offer}
 
         print(items)
-        return render(request, 'a/main/items.html', context)
+        # return render(request, 'a/main/items.html', context)
+        return render(request, 'ogani/getItems.html', context)
     except ObjectDoesNotExist:
         messages.info(
             self.request, "Sorry! Hopefully they will update their products soon!")
@@ -421,7 +427,8 @@ def get_shops(request, id):
         # context = {'items': items, 'category': category, 'offer': offer}
         context = {'shops': shops}
         # print(items)
-        return render(request, 'a/main/shops.html', context)
+        # return render(request, 'a/main/shops.html', context)
+        return render(request, 'ogani/getshops.html', context)
     except ObjectDoesNotExist:
         messages.info(
             self.request, "Sorry! Hopefully they will update their products soon!")
@@ -468,7 +475,8 @@ def get_shopoffe(request, id):
 
 class ItemDetailView(DetailView):
     model = Item
-    template_name = "a/product-details.html"
+    # template_name = "a/product-details.html"
+    template_name = "ogani/product-details.html"
 
 
 @login_required
