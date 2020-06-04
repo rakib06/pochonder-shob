@@ -20,7 +20,10 @@
             <div class="product-description d-flex align-items-center justify-content-between">
               <div class="product-meta-data">
                 <div class="line"></div>
-                <p>{{ item.name }} </p>
+                <h5>
+                  <strong>{{ item.name }} </strong>
+                </h5>
+
 
                 <small> {{ item.shops_count}} <i class="fa fa-shopping-bag" aria-hidden="true"></i>
                 </small>
@@ -62,8 +65,8 @@
           <h2>Shops</h2>
         </div>
         <div class="featured__controls">
-          <h4>Categories</h4>
-          <hr>
+
+
           <ul>
             {% for item in cats %}
             <li>{{ item.name }}</li>
@@ -84,12 +87,12 @@
           <div class="featured__item__pic set-bg" data-setbg="{{ item.photo.url }}">
             <ul class="featured__item__pic__hover">
               <li style="background-color: antiquewhite;">
-                <h4>Market:{{item.area}}</h4>
+                <h4><span>{{item.area}}</span></h4>
               </li>
             </ul>
           </div>
-          <div class="featured__item__text">
-            <h4><a id="shop_name" href="{{ item.get_absolute_url }}">{{item.title}}</a></h4>
+          <div class="latest-product__item__text">
+            <h4><a id="shop_name" href="{{ item.get_absolute_url }}"><span>{{item.title}}</span></a></h4>
           </div>
         </div>
       </div>
