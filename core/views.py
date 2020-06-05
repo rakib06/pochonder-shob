@@ -405,9 +405,10 @@ def get_items(request, id):
         items = Item.objects.filter(shop=id)
         category = Category.objects.filter(for_shop=id)
         offer = Offer.objects.filter(for_shop=id)
+        shop = Shop.objects.get(pk=id)
         print('-------77777777777777777777777777777777777-----------------', category)
-        context = {'items': items, 'category': category, 'offer': offer}
-
+        context = {'items': items, 'category': category,
+                   'offer': offer, 'shop': shop}
         print(items)
         # return render(request, 'a/main/items.html', context)
         return render(request, 'ogani/getItems.html', context)

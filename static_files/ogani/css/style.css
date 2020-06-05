@@ -3182,7 +3182,11 @@ ol {
 
 /* Wide Mobile = 480px */
 
-@media only screen and (max-width: 767px) {
+
+
+
+
+@media only screen and (max-width: 760px) {
   .hero__categories {
     margin-bottom: 30px;
   }
@@ -3423,6 +3427,7 @@ ol {
   .humberger__menu__overlay.active {
     visibility: visible;
   }
+  /* dgfhjsdg */
   .header__top {
     display: none;
   }
