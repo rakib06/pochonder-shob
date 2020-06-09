@@ -44,7 +44,7 @@ urlpatterns = [
     # path('markets/', MarketsView.as_view(), name='markets'),
     path('shops/', ShopsView.as_view(), name='shops'),
     path('products/', ProductsView.as_view(), name='products'),
-    path('shop-manager/', shop_manager_view, name='shop-manager'),
+    # path('shop-manager/', shop_manager_view, name='shop-manager'),
     path('markets/', MarketsView1.as_view(), name='markets'),
 
     path('shop-items/<id>/', get_items, name='shop-items'),
