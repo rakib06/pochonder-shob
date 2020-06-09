@@ -98,9 +98,9 @@ class ShopType(admin.ModelAdmin):
 class ItemAdmin(admin.ModelAdmin):
 
     list_display = ['image_tag', 'title', 'in_stock',
-                    'price', 'discount_price', 'category', 'created_at', 'updated_at']
+                    'price', 'discount_price', 'category', 'description', 'created_at', 'updated_at']
 
-    list_editable = ['in_stock', 'title', 'category',
+    list_editable = ['in_stock', 'title', 'category', 'in_stock', 'description',
                      'price', 'discount_price', ]
 
     def changelist_view(self, request, extra_context=None):
