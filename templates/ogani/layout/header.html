@@ -38,7 +38,9 @@
     <nav class="humberger__menu__nav mobile-menu">
         <ul>
             <li><a href="{% url 'core:home' %}">Home</a></li>
-            <li><a href="{% url 'core:shops' %}">Shop</a></li>
+            {% if request.user.is_authenticated %}
+            <li><a href="{% url 'core:shops' %}">Shops</a></li>
+            {% endif %}
             <li><a href="{% url 'core:customer-order' %}">My Order</a></li>
             <li>
                 <a href="#">Pages</a>
@@ -118,7 +120,9 @@
                 <nav class="header__menu">
                     <ul>
                         <li><a href="{% url 'core:home' %}">Home</a></li>
-                        <li><a href="{% url 'core:shops' %}">Shop</a></li>
+                        {% if request.user.is_authenticated %}
+                        <li><a href="{% url 'core:shops' %}">Shops</a></li>
+                        {% endif %}
                         <li><a href="{% url 'core:customer-order' %}">My Order</a></li>
                         <li>
                             <a href="#">Pages</a>

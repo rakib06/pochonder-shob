@@ -62,59 +62,35 @@
                             <div class="product-description d-flex align-items-center justify-content-between">
                                 <div class="product-meta-data">
                                     <div class="line"></div>
-                                    <p style="color: teal;font-weight: 700;">{{ item.title }} </p>
-
+                                    <h4 style="color:black;font-weight: 700;margin-bottom: 5px;">{{ item.title }} <sub
+                                            style="font-weight: normal;">{{item.category}}</sub></h4>
                                     {% if item.in_stock %}
 
-                                    <small style="color: crimson;font-weight: bold;"> <i style="color: green;"
+                                    <small style="color: black;font-weight: bold;"> <i style="color: green;"
                                             class="fa fa-check-square-o" aria-hidden="true"></i>
                                         In Stock </small>
                                     {% else %}
-                                    <small style="color: crimson;font-weight: bold;"> <i style="color: red;"
+                                    <small style="color: black;font-weight: bold;"> <i style="color: red;"
                                             class="fa fa-refresh fa-spin" aria-hidden="true"> </i>
                                         Out of Stock </small>
                                     {% endif %}
-
-
                                     <br>
                                     <small>
                                         <strong>
                                             {% if item.discount_price  %}
-                                            <span class="mr-1" style="color: blue;">
+                                            <span class="mr-1" style="color: skyblue;">
                                                 <del> {{item.price }} ‎৳</del>
                                             </span>
                                             <span class="mr-1" style="color: orangered;">
                                                 {{ item.discount_price }}‎৳
-
                                             </span>
                                             <br>
-                                            <i class="fa fa-grav" aria-hidden="true"
-                                                style="color: purple;font-weight: 600;">
-                                                Saving
-                                                {{ item.discount }} %</i>
-
-
                                             {% else %}
-                                            {{ item.price }}
-
+                                            {{ item.price }} ‎৳
                                             {% endif %}
                                     </small>
                                     </strong>
                                 </div>
-                                <!-- <div class="ratings-cart text-right">
-                                    <div class="ratings">
-                                        <h1>
-                                            <i class="fa fa-heartbeat" aria-hidden="true"></i>
-        
-        
-        
-                                            <i class="fa fa-cog fa-spin" aria-hidden="true"></i>
-        
-                                        </h1>
-        
-                                    </div>
-        
-                                </div> -->
                             </div>
                             </a>
                         </div>

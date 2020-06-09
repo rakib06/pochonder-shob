@@ -8,11 +8,7 @@
             <div class="col-12 col-lg-8">
                 <div class="checkout_details_area mt-50 clearfix">
                     <h1> Order Status for {{ request.user}} </h1>
-
                     {% for item in object %}
-
-
-
                     <p> Pochondoo Orderd ID: 1602{{ item.id}}</p>
                     <p>
                         {% if item.ordered %}

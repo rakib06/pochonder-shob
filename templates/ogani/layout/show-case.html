@@ -48,18 +48,36 @@
                 <div id="demo" class="carousel slide" data-ride="carousel" data-interval="2000">
                     <!-- Indicators -->
                     <ul class="carousel-indicators">
-                        <li data-target="#demo" data-slide-to="0" class="active" style="background-color: maroon;"></li>
+                        <!-- <li data-target="#demo" data-slide-to="0" class="active" style="background-color: maroon;"></li>
                         <li data-target="#demo" data-slide-to="1" style="background-color: maroon;"></li>
                         <li data-target="#demo" data-slide-to="2" style="background-color: maroon;"></li>
                         <li data-target="#demo" data-slide-to="3" style="background-color: maroon;"></li>
                         <li data-target="#demo" data-slide-to="4" style="background-color: maroon;"></li>
                         <li data-target="#demo" data-slide-to="5" style="background-color: maroon;"></li>
-                        <li data-target="#demo" data-slide-to="6" style="background-color: maroon;"></li>
+                        <li data-target="#demo" data-slide-to="6" style="background-color: maroon;"></li> -->
                     </ul>
 
                     <!-- The slideshow -->
                     <div class="carousel-inner" id="home-caro" style="width: 100%;">
                         <div class="carousel-item active">
+                            <img src="{{slide1.image.url}}" width="100%" />
+                            <div class="carousel-caption d-sm-block d-md-block" style="top:40%">
+                                <h1 style="font-size: 5vw; color: antiquewhite;">
+                                    {{slide1.caption}}
+                                </h1>
+                            </div>
+                        </div>
+                        {% for item in slider %}
+                        <div class="carousel-item">
+                            <img src="{{item.image.url}}" width="100%" />
+                            <div class="carousel-caption d-sm-block d-md-block" style="top:40%">
+                                <h1 style="font-size: 5vw; color: antiquewhite;">
+                                    {{item.caption}}
+                                </h1>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <!-- <div class="carousel-item active">
                             <img src="{% static 'ogani/img/carrosol/gentlemans-fashion-flatlay.jpg' %}" width="100%" />
                             <div class="carousel-caption d-sm-block d-md-block" style="top:40%">
                                 <h1 style="font-size: 5vw; color: antiquewhite;">
@@ -100,8 +118,8 @@
                                     Your Favourite Product
                                 </h1>
                             </div>
-                        </div>
-                        <div class="carousel-item">
+                        </div> -->
+                        <!-- <div class="carousel-item">
                             <img src="{% static 'ogani/img/carrosol/photo-2-2-copy.jpg' %}" width="100%" />
                             <div class="carousel-caption d-sm-block d-md-block" style="top:40%">
                                 <h1 style="font-size: 5vw; color: antiquewhite;">
@@ -117,7 +135,7 @@
                                     Your Favourite Shop
                                 </h1>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
 
                     <!-- Left and right controls -->

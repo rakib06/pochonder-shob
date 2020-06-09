@@ -7,8 +7,8 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, View, CreateView
 from django.shortcuts import redirect
 from django.utils import timezone
-from .forms import ItemForm, ShopForm, CheckoutForm, CouponForm, RefundForm, PaymentForm
-from .models import Item, OrderItem, Order, Address, Refund, UserProfile, Shop, Category, Offer, Area
+from .forms import ItemForm, ShopForm, CheckoutForm, CouponForm, RefundForm, PaymentForm, CreateProductForm
+from .models import Item, OrderItem, Order, Address, Refund, UserProfile, Slider, Shop, Category, Offer, Area
 
 
 import random
@@ -23,11 +23,17 @@ def home_view(request):
     global context
     markets = Area.objects.all()
     shops = Shop.objects.all()
-    # print(shops)
     items = Item.objects.all()
+    top_rated = Item.objects.all().order_by('created_at')
+    review = Item.objects.all().order_by('updated_at')
     cats = Category.objects.all()
+    slide1 = Slider.objects.all().first()
+    slider = Slider.objects.exclude(id=slide1.id)
     context = {'items': items, 'shops': shops,
                'markets': markets, 'cats': cats,
+               'slider': slider, 'slide1': slide1,
+               'top_rated_products': top_rated,
+               'review_products': review,
                }
     # for key, value in con.items():
     #     print('---------------------->>>>>>>>>>>>>......', key, value)
@@ -474,10 +480,22 @@ def get_shopoffe(request, id):
         return redirect("core:checkout")
 
 
-class ItemDetailView(DetailView):
-    model = Item
-    # template_name = "a/product-details.html"
-    template_name = "ogani/product-details.html"
+def ItemDetailView(request, slug):
+    item = Item.objects.get(slug=slug)
+    market_id = item.shop.area.id
+    shop_id = item.shop.id
+    context = {
+        'item': item,
+        'market_id': market_id,
+        'shop_id': shop_id,
+    }
+    return render(request, "ogani/product-details.html", context)
+
+
+# class ItemDetailView(DetailView):
+#     model = Item
+#     # template_name = "a/product-details.html"
+#     template_name = "ogani/product-details.html"
 
 
 @login_required
@@ -595,6 +613,29 @@ class AddCouponView(View):
             except ObjectDoesNotExist:
                 messages.info(self.request, "You do not have an active order")
                 return redirect("core:checkout")
+
+
+@login_required
+def shop_manager_view(request):
+    forms = CreateProductForm()
+    if request.method == 'POST':
+        form = CreateProductForm(request.POST)
+        if form.is_valid():
+            item = Item(
+                shop=form.cleaned_data["shop"],
+                title=form.cleaned_data["title"],
+                price=form.cleaned_data["price"],
+                discount_price=form.cleaned_data["discount_price"],
+                category=form.cleaned_data["category"],
+                offer=form.cleaned_data["offer"],
+                description=form.cleaned_data["description"],
+                image=form.cleaned_data["image"],
+                in_stock=form.cleaned_data["in_stock"],
+            )
+            item.save()
+    items = Item.objects.all()
+    context = {'items': items, 'forms': forms}
+    return render(request, 'ogani/shop_manager.html', context)
 
 
 '''

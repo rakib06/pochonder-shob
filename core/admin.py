@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import reverse
 from .models import (Item, OrderItem, Order, Shop, Coupon,
-                     Refund, Address, UserProfile, Category, Offer, ShopType, Area, Size)
+                     Refund, Address, UserProfile, Category, Offer, ShopType, Area, Size, Slider)
 from django.contrib.contenttypes.admin import GenericTabularInline
 
 
@@ -100,7 +100,7 @@ class ItemAdmin(admin.ModelAdmin):
     list_display = ['image_tag', 'title', 'in_stock',
                     'price', 'discount_price', 'category', 'created_at', 'updated_at']
 
-    list_editable = ['in_stock',
+    list_editable = ['in_stock', 'title', 'category',
                      'price', 'discount_price', ]
 
     def changelist_view(self, request, extra_context=None):
@@ -192,6 +192,12 @@ class OrderAdmin(admin.ModelAdmin):
             return excluded + ['mobile_number']
 
         return excluded
+
+
+@admin.register(Slider)
+class SliderAdmin(admin.ModelAdmin):
+
+    list_display = ['image_tag', 'caption', 'created_at', 'updated_at']
 
 
 # admin.site.register(Order, OrderAdmin)

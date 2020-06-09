@@ -20,9 +20,9 @@
             <div class="product-description d-flex align-items-center justify-content-between">
               <div class="product-meta-data">
                 <div class="line"></div>
-                <p>{{ item.name }} </p>
-
-                <small> {{ item.shops_count}} <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+                <p style="font-weight: 600;margin-bottom: 5px;color: black;">{{ item.name }} </p>
+                <small style="color: darkgreen;"><i class="fa fa-shopping-bag" aria-hidden="true"></i>
+                  {{ item.shops_count}} Shops
                 </small>
               </div>
               <!-- <div class="ratings-cart text-right">
@@ -124,9 +124,38 @@
                 <div>
                   <img src="{{ item.image.url }}" alt="" />
                 </div>
-                <div class="latest-product__item__text">
-                  <h6>{{ item.title }}</h6>
-                  <span> BDT {{item.price}}</span>
+                <div class="product-description d-flex align-items-center justify-content-between">
+                  <div class="product-meta-data">
+                    <div class="line"></div>
+                    <h4 style="color:black;font-weight: 700;margin-bottom: 5px;">{{ item.title }} <sub
+                        style="font-weight: normal;">{{item.category}}</sub></h4>
+                    {% if item.in_stock %}
+
+                    <small style="color: black;font-weight: bold;"> <i style="color: green;"
+                        class="fa fa-check-square-o" aria-hidden="true"></i>
+                      In Stock </small>
+                    {% else %}
+                    <small style="color: black;font-weight: bold;"> <i style="color: red;" class="fa fa-refresh fa-spin"
+                        aria-hidden="true"> </i>
+                      Out of Stock </small>
+                    {% endif %}
+                    <br>
+                    <small>
+                      <strong>
+                        {% if item.discount_price  %}
+                        <span class="mr-1" style="color: skyblue;">
+                          <del> {{item.price }} ‎৳</del>
+                        </span>
+                        <span class="mr-1" style="color: orangered;">
+                          {{ item.discount_price }}‎৳
+                        </span>
+                        <br>
+                        {% else %}
+                        {{ item.price }} ‎৳
+                        {% endif %}
+                    </small>
+                    </strong>
+                  </div>
                 </div>
               </a>
             </div>
@@ -138,16 +167,74 @@
         <div class="latest-product__text">
           <h4>Top Rated Products</h4>
           <div class="latest-product__slider owl-carousel">
-            {% for item in items %}
+            {% for item in top_rated_products %}
             <div class="latest-prdouct__slider__item">
               <a href="{{ item.get_absolute_url }}" class="latest-product__item">
                 <div>
                   <img src="{{ item.image.url }}" alt="" />
                 </div>
-                <div class="latest-product__item__text">
-                  <h6>{{ item.title }}</h6>
-                  <span> BDT {{item.price}}</span>
+                <div class="product-description d-flex align-items-center justify-content-between">
+                  <div class="product-meta-data">
+                    <div class="line"></div>
+                    <h4 style="color:black;font-weight: 700;margin-bottom: 5px;">{{ item.title }} <sub
+                        style="font-weight: normal;">{{item.category}}</sub></h4>
+                    {% if item.in_stock %}
+
+                    <small style="color: black;font-weight: bold;"> <i style="color: green;"
+                        class="fa fa-check-square-o" aria-hidden="true"></i>
+                      In Stock </small>
+                    {% else %}
+                    <small style="color: black;font-weight: bold;"> <i style="color: red;" class="fa fa-refresh fa-spin"
+                        aria-hidden="true"> </i>
+                      Out of Stock </small>
+                    {% endif %}
+                    <br>
+                    <small>
+                      <strong>
+                        {% if item.discount_price  %}
+                        <span class="mr-1" style="color: skyblue;">
+                          <del> {{item.price }} ‎৳</del>
+                        </span>
+                        <span class="mr-1" style="color: orangered;">
+                          {{ item.discount_price }}‎৳
+                        </span>
+                        <br>
+                        {% else %}
+                        {{ item.price }}
+                        {% endif %}
+                    </small>
+                    </strong>
+                  </div>
                 </div>
+                <!-- <div class="latest-product__item__text ">
+                  <h4 style="font-weight: 800;margin-bottom: 5px;">{{ item.title }} <sub
+                      style="font-weight: normal;">{{item.category}}</sub></h4>
+                  {% if item.in_stock %}
+                  <small style="color:black;font-weight: bold;"> <i style="color: green;" class="fa fa-check-square-o"
+                      aria-hidden="true"></i>
+                    In Stock </small>
+                  {% else %}
+                  <small style="color:black;font-weight: bold;"> <i style="color: red;" class="fa fa-refresh fa-spin"
+                      aria-hidden="true"> </i>
+                    Out of Stock </small>
+                  {% endif %}
+                  <small>
+                    <strong>
+                      {% if item.discount_price  %}
+                      <div class="d-flex align-items-left justify-content-between">
+                        <span class="mr-1" style="color:skyblue;">
+                          <del> {{item.price }} ‎৳</del>
+                        </span>
+                        <span class="mr-1" style="color: orangered;">
+                          {{ item.discount_price }}‎৳
+                        </span>
+                      </div>
+                      {% else %}
+                      {{ item.price }}
+                      {% endif %}
+                    </strong>
+                  </small>
+                </div> -->
               </a>
             </div>
             {% endfor %}
@@ -158,15 +245,44 @@
         <div class="latest-product__text">
           <h4>Review Products</h4>
           <div class="latest-product__slider owl-carousel">
-            {% for item in items %}
+            {% for item in review_products %}
             <div class="latest-prdouct__slider__item">
               <a href="{{ item.get_absolute_url }}" class="latest-product__item">
                 <div>
                   <img src="{{ item.image.url }}" alt="" />
                 </div>
-                <div class="latest-product__item__text">
-                  <h6>{{ item.title }}</h6>
-                  <span> BDT {{item.price}}</span>
+                <div class="product-description d-flex align-items-center justify-content-between">
+                  <div class="product-meta-data">
+                    <div class="line"></div>
+                    <h4 style="color:black;font-weight: 700;margin-bottom: 5px;">{{ item.title }} <sub
+                        style="font-weight: normal;">{{item.category}}</sub></h4>
+                    {% if item.in_stock %}
+
+                    <small style="color: black;font-weight: bold;"> <i style="color: green;"
+                        class="fa fa-check-square-o" aria-hidden="true"></i>
+                      In Stock </small>
+                    {% else %}
+                    <small style="color: black;font-weight: bold;"> <i style="color: red;" class="fa fa-refresh fa-spin"
+                        aria-hidden="true"> </i>
+                      Out of Stock </small>
+                    {% endif %}
+                    <br>
+                    <small>
+                      <strong>
+                        {% if item.discount_price  %}
+                        <span class="mr-1" style="color: skyblue;">
+                          <del> {{item.price }} ‎৳</del>
+                        </span>
+                        <span class="mr-1" style="color: orangered;">
+                          {{ item.discount_price }}‎৳
+                        </span>
+                        <br>
+                        {% else %}
+                        {{ item.price }}
+                        {% endif %}
+                    </small>
+                    </strong>
+                  </div>
                 </div>
               </a>
             </div>

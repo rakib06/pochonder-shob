@@ -240,7 +240,6 @@ class Item(TimeStampMixin):
 
     @property
     def market_name(self):
-
         market = self.shop.area
         return market.name
 
@@ -434,3 +433,20 @@ def userprofile_receiver(sender, instance, created, *args, **kwargs):
 
 
 post_save.connect(userprofile_receiver, sender=settings.AUTH_USER_MODEL)
+
+
+class Slider(TimeStampMixin):
+    caption = models.CharField(max_length=100)
+    image = models.ImageField(
+        upload_to='slider', default='ps/5.png')
+    subtitle = models.CharField(max_length=100, null=True, blank=True)
+
+    def __str__(self):
+        return self.caption
+
+    def image_tag(self):
+        if self.image:
+            return mark_safe('<img src="%s" style="width: 45px; height:45px;" />' % self.image.url)
+        else:
+            return 'No Image Found'
+    image_tag.short_description = 'Image'
