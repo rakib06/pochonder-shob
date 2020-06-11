@@ -1,0 +1,15 @@
+#image_with_price{
+    position: relative;
+    overflow: hidden;
+}
+#price_tag{
+    position: absolute;
+    left: -30px;
+    top: 3px;
+    width: 150px;
+    background-color: gainsboro;
+    transform: rotate(-35deg);
+    padding: 5px 36px;
+    color: black;
+    font-weight: 700;
+}
