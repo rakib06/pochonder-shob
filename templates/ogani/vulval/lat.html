@@ -4,11 +4,11 @@
     <div class="latest-product__text">
         <h4>Best Seller</h4>
         <div class="latest-product__slider owl-carousel">
-            {% for item in latest %}
+            {% for item in shops %}
             <div class="latest-prdouct__slider__item">
                 <a href="{{ item.get_absolute_url }}" class="latest-product__item">
                     <div>
-                        <img id="product_slider_image" src="{{ item.image.url }}" alt="" />
+                        <img id="product_slider_image" src="{{ item.photo.url }}" alt="" />
                     </div>
                     <div class="product-description d-flex align-items-center justify-content-between">
                         <div class="product-meta-data">
@@ -16,17 +16,12 @@
                             <div class="latest-product__item__text">
                                 <h6>{{ item.title }}</h6>
 
-                                {% if item.discount_price  %}
+
 
                                 <span class=" mr-1" ">
-                                    {{ item.discount_price }}‎BDT
+                                    {{ item.area }}‎
                                 </span>
-                                <br>
-                                {% else %}
-                                <span class=" mr-1" ">
-                                    {{item.price }} ‎BDT
-                                </span>
-                                {% endif %}
+                             
 
                             </div>
 
