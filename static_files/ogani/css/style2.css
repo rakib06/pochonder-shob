@@ -3,11 +3,13 @@
     overflow: hidden;
 }
 #price_tag{
+    
     position: absolute;
     left: -30px;
-    top: 3px;
+    top: 7px;
     width: 150px;
-    background-color: gainsboro;
+    
+    background-image: linear-gradient(to right, rgba(233, 173, 34, 0.6), rgba(231, 228, 9, 0.76));
     transform: rotate(-35deg);
     padding: 5px 36px;
     color: black;
