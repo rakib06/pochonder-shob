@@ -4,35 +4,36 @@
 
 {% block page_content %}
 
-<div class="amado_product_area section-padding-100">
-    <div class=" container">
-        <h2> Shops </h2>
-        <hr>
-        <div class="row pb-3">
-            <!-- Single Catagory -->
-            {% for item in shops %}
-            <div class="col-12 col-sm-6 col-md-6 col-xl-3">
-                <div class="single-product-wrapper">
-                    <!-- Product Image -->
-                    <div class="product-img">
 
-                        <a href="{{ item.get_absolute_url }}">
-                            <img src="{{ item.photo.url }}" alt="">
-                            <!-- Hover Content -->
-                    </div>
-                    <div class="product-description d-flex align-items-center justify-content-between">
-                        <div class="product-meta-data">
-                            <div class="line"></div>
-                            <p>{{ item.title }} </p>
+<div class=" container">
+    <h2> Shops </h2>
+    <hr>
+    <div class="row pb-3">
+        <!-- Single Catagory -->
+        {% for item in shops %}
+        <div class="col-12 col-sm-6 col-md-6 col-xl-3">
+            <div class="single-product-wrapper">
+                <!-- Product Image -->
+                <div class="product-img">
 
-                            <small> <i class="fa fa-check-square-o" aria-hidden="true"></i>
-                                {{ item.shop_type }} </small>
+                    <a href="{{ item.get_absolute_url }}">
+                        <img src="{{ item.photo.url }}" class="img-circle" alt="Pochonder-Shob.com" width="60"
+                            height="150">
+                        <!-- Hover Content -->
+                </div>
+                <div class="product-description d-flex align-items-center justify-content-between"
+                    style="text-align: center;">
+                    <div class="latest-product__item__text">
+                        <h6 style="text-align: center;">{{ item.shop_type}}</h6>
 
-                            <small>
-                                |
-                                <i class="fa fa-shopping-basket" aria-hidden="true"></i>
-                                {{ item.items_count }}
-                            </small>
+
+
+                        <span style="text-align: center;" class=" mr-1" ">
+                                {{ item.title }}
+                                
+                            </span>
+                            
+
                         </div>
 
                     </div>
@@ -44,7 +45,7 @@
         </div>
 
     </div>
-</div>
+
 
 <!-- Product Catagories Area End -->
 {% endblock %}

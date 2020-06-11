@@ -18,12 +18,28 @@
                             <!-- Hover Content -->
                     </div>
                     <div class="product-description d-flex align-items-center justify-content-between">
-                        <div class="product-meta-data">
-                            <div class="line"></div>
-                            <p>{{ item.name }} </p>
+                        <div class="latest-product__item__text">
+                            <h6 style="text-align: center;">{{ item.shops_count}} Shops</h6>
 
-                            <small> {{ item.shops_count}} <i class="fa fa-shopping-bag" aria-hidden="true"></i> </small>
+
+
+                            <span style="text-align: center;" class=" mr-1" ">
+                                {{ item.name }}
+                                
+                            </span>
+                            
+
                         </div>
+                        <!--
+                        <div class=" product-meta-data">
+
+                                <div class="line"></div>
+                                <p>{{ item.name }} </p>
+
+                                <small> {{ item.shops_count}} <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+                                </small>
+                        </div>
+                        -->
                         <!-- <div class="ratings-cart text-right">
                             <div class="ratings">
                                 <h1>

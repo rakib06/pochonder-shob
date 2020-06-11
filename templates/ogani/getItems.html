@@ -2,111 +2,109 @@
 {% load static %}
 {% block page_content %}
 
-<div class="amado_product_area section-padding-100">
-    <!-- <section class="breadcrumb-section set-bg" data-setbg="{{shop.photo.url}}"> -->
-    <section class="breadcrumb-section" style="background-image: linear-gradient(to right,lightslategrey,black,grey);">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="breadcrumb__text">
-                        <h2>{{shop.title}}</h2>
-                    </div>
+
+<section class="breadcrumb-section set-bg" data-setbg="{{shop.photo.url}}">
+
+
+
+    <div class=" container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text"
+                    style="width:100%; background-image: linear-gradient(to right, rgba(0, 0, 255, 0.6), rgba(0,0,0,.7));"">
+                    <h2 >{{shop.title}}</h2>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- <div class="shop-cover" style="background-image: url({{shop.photo.url}}); ">
-        <h2>{{ shop.title }}</h2>
-    </div> -->
-    <div class="row">
-        <div class="col-12 col-sm-2 col-md-2 col-xl-2 p-3">
-            <div class="container" style="text-align: center;">
-                <div class="sidebar">
-                    <div class="sidebar__item">
-                        <h5 style="font-weight: 600;">Category</h5>
-                        <hr>
-                        <ul>
-                            {% for item in category %}
-                            <li style="font-weight: 600;"><a href="#">{{item.name}}</a></li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-sm-10 col-md-10 col-xl-10 p-3">
-            <div class=" container">
-                <h2 style="font-weight: 600;"> Products </h2>
-                <hr>
+    </div>
+</section>
+<!-- <div class=" shop-cover" style="background-image: url({{shop.photo.url}}); ">
+                    <h2>{{ shop.title }}</h2>
+                </div> -->
                 <div class="row">
-                    <!-- Single Catagory -->
-                    {% for item in items %}
-                    <div class="col-12 col-sm-6 col-md-6 col-xl-3 pb-4">
-                        <div class="single-product-wrapper" id="product_box">
-                            <!-- Product Image -->
-                            <div class="product-img">
+                    <div class="col-12 col-sm-2 col-md-2 col-xl-2 p-3">
+                        <div class="container" style="text-align: center;">
+                            <div class="sidebar">
 
-                                <a href="{{ item.get_absolute_url }}">
-                                    <!-- <img src="{{ item.image.url }}" alt=""> -->
-                                    <div class="product_img">
-                                        <img id="img" src="{{ item.image.url }}" alt="">
-                                        <div class="middle">
-                                            {% if item.discount_price  %}
-                                            <div class="text">{{ item.discount_price}}/-</div>
-                                            {% else %}
-                                            <div class="text">{{ item.price}}/-</div>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                    <!-- Hover Content -->
+                                <div class="sidebar__item">
+                                    <h5 style="text-align: left;">CATEGORY</h5>
+
+                                    <ul>
+
+                                        {% for item in category %}
+                                        <small>
+                                            <li><a style=" text-transform: uppercase; text-align:justify; padding-left: 10px;
+        font-size: 1em;" href="{% url 'core:category_view' item.id %}">{{item.name}}</a>
+                                            </li>
+                                        </small>
+                                        {% endfor %}
+                                    </ul>
+
+                                </div>
+
                             </div>
-                            <div class="product-description d-flex align-items-center justify-content-between">
-                                <div class="product-meta-data">
-                                    <div class="line"></div>
-                                    <h4 style="color:black;font-weight: 700;margin-bottom: 5px;">{{ item.title }} <sub
-                                            style="font-weight: normal;">{{item.category}}</sub></h4>
-                                    {% if item.in_stock %}
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-10 col-md-10 col-xl-10 p-3">
+                        <div class=" container" style="text-align: center;">
+                            <card>
+                                <h4>{{shop.title}}'s Products </h4>
+                            </card>
 
-                                    <small style="color: black;font-weight: bold;"> <i style="color: green;"
-                                            class="fa fa-check-square-o" aria-hidden="true"></i>
-                                        In Stock </small>
-                                    {% else %}
-                                    <small style="color: black;font-weight: bold;"> <i style="color: red;"
-                                            class="fa fa-refresh fa-spin" aria-hidden="true"> </i>
-                                        Out of Stock </small>
-                                    {% endif %}
-                                    <br>
-                                    <small>
-                                        <strong>
+                            <hr>
+                            <div class="row">
+                                <!-- Single Catagory -->
+                                {% for item in items %}
+                                <div class="col-12 col-sm-6 col-md-6 col-xl-3 pb-4">
+                                    <div class="single-product-wrapper" id="product_box">
+                                        <!-- Product Image -->
+                                        <div class="product-img">
+
+                                            <a href="{{ item.get_absolute_url }}">
+                                                <!-- <img src="{{ item.image.url }}" alt=""> -->
+                                                <div class="product_img">
+                                                    <img id="img" src="{{ item.image.url }}" alt="">
+                                                    <div class="middle">
+                                                        {% if item.discount_price  %}
+                                                        <div class="text">{{ item.discount_price}}/-</div>
+                                                        {% else %}
+                                                        <div class="text">{{ item.price}}/-</div>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                                <!-- Hover Content -->
+                                        </div>
+                                        <div class="latest-product__item__text">
+                                            <h6>{{ item.title }}</h6>
+
                                             {% if item.discount_price  %}
-                                            <span class="mr-1" style="color: skyblue;">
-                                                <del> {{item.price }} ‎BDT</del>
-                                            </span>
-                                            <span class="mr-1" style="color: orangered;">
+
+                                            <span class=" mr-1" ">
                                                 {{ item.discount_price }}‎BDT
                                             </span>
                                             <br>
                                             {% else %}
-                                            <span class="mr-1" style="color: skyblue;">
+                                            <span class=" mr-1" ">
                                                 {{item.price }} ‎BDT
                                             </span>
                                             {% endif %}
-                                    </small>
-                                    </strong>
+            
+                                        </div>
+                                       
+
+
+                                        </a>
+                                    </div>
                                 </div>
+                                {% endfor %}
+
                             </div>
-                            </a>
+
                         </div>
                     </div>
-                    {% endfor %}
-
                 </div>
 
             </div>
-        </div>
-    </div>
 
-</div>
-
-<!-- Product Catagories Area End -->
-{% endblock %}
+            <!-- Product Catagories Area End -->
+            {% endblock %}
