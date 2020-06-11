@@ -21,9 +21,9 @@ context = dict()
 
 def home_view(request):
     global context
-    markets = Area.objects.all()
-    shops = Shop.objects.all()
-    items = Item.objects.all()
+    markets = Area.objects.all()[:10]
+    shops = Shop.objects.all()[:10]
+    items = Item.objects.all()[:10]
     top = Item.objects.all().order_by('-created_at')[:10]
     new = Item.objects.all().order_by('updated_at')[:10]
     # temp
@@ -31,7 +31,7 @@ def home_view(request):
 
     cats = Category.objects.all()
 
-    cats_nav = Category.objects.all().order_by('updated_at')[:5]
+    cats_nav = Category.objects.all().order_by('-updated_at')[:5]
     cat_items = {}
     for cat in cats:
         content = Item.objects.filter(category=cat)
@@ -59,7 +59,7 @@ def home_view(request):
 
 
 def side_bar(request):
-    shops = Shop.objects.all()
+    shops = Shop.objects.all()[:10]
     context = {'shoping': shops}
     return render(request, 'layouts/sidebar.html', context)
 
