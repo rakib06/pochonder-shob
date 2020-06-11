@@ -39,7 +39,7 @@ def home_view(request):
             print("CAT NAME", cat.name)
             cat_items[str(cat.name)] = content
             print(content)
-    print(cat_items)
+    # print(cat_items)
     #print(cat_items['cloth'])
     # slide1 = Slider.objects.all().first()
     slider = Slider.objects.all()
@@ -695,8 +695,17 @@ class RequestRefundView(View):
 def category_view(request, id):
     items = Item.objects.filter(category=id)
     cat = Category.objects.get(id=id)
+    cats = Category.objects.all()
+    cat_items = {}
+    for ca in cats:
+        content = Item.objects.filter(category=ca)
+        if cat.name not in cat_items.keys():
+            print("CAT NAME", ca.name)
+            cat_items[str(ca.name)] = content
+            print(content)
     context = {
         'items': items,
         'cat': cat,
+        'cat_items':cat_items,
     }
     return render(request, "ogani/category_view.html", context)
