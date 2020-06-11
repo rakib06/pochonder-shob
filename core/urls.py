@@ -32,6 +32,7 @@ from .views import (
     get_shops,
     shop_manager_view,
     ItemDetailView,
+    category_view,
 
 )
 app_name = 'core'
@@ -46,7 +47,7 @@ urlpatterns = [
     path('products/', ProductsView.as_view(), name='products'),
     # path('shop-manager/', shop_manager_view, name='shop-manager'),
     path('markets/', MarketsView1.as_view(), name='markets'),
-
+    path('category/<id>/', category_view, name="category_view"),
     path('shop-items/<id>/', get_items, name='shop-items'),
     path('area/<id>/', get_shops, name='area-shops'),
     path('shops-cat/<id>', get_shop_cat_items,

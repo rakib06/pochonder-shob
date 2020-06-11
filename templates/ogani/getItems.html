@@ -3,7 +3,8 @@
 {% block page_content %}
 
 <div class="amado_product_area section-padding-100">
-    <section class="breadcrumb-section set-bg" data-setbg="{{shop.photo.url}}">
+    <!-- <section class="breadcrumb-section set-bg" data-setbg="{{shop.photo.url}}"> -->
+    <section class="breadcrumb-section" style="background-image: linear-gradient(to right,lightslategrey,black,grey);">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -18,11 +19,11 @@
         <h2>{{ shop.title }}</h2>
     </div> -->
     <div class="row">
-        <div class="col-12 col-sm-3 col-md-3 col-xl-3 p-3">
+        <div class="col-12 col-sm-2 col-md-2 col-xl-2 p-3">
             <div class="container" style="text-align: center;">
                 <div class="sidebar">
                     <div class="sidebar__item">
-                        <h2 style="font-weight: 600;">Categories</h2>
+                        <h5 style="font-weight: 600;">Category</h5>
                         <hr>
                         <ul>
                             {% for item in category %}
@@ -33,7 +34,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 col-sm-9 col-md-9 col-xl-9 p-3">
+        <div class="col-12 col-sm-10 col-md-10 col-xl-10 p-3">
             <div class=" container">
                 <h2 style="font-weight: 600;"> Products </h2>
                 <hr>
