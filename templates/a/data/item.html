@@ -32,10 +32,10 @@
                     <strong>
                         {% if item.discount_price  %}
                         <span class="mr-1">
-                            <del> {{item.price }} ‎৳</del>
+                            <del> {{item.price }} ‎BDT</del>
                         </span>
                         <span class="mr-1">
-                            {{ item.discount_price }}‎৳
+                            {{ item.discount_price }}‎BDT
                         </span>
 
                         {% else %}
@@ -45,9 +45,9 @@
                 </p>
 
                 <a href="{{ item.get_absolute_url }}"></a>
-                    {% if item.Offer != "NA" %}
-                    <h6>{{ item.Offer}} </h6>
-                    {% endif %}
+                {% if item.Offer != "NA" %}
+                <h6>{{ item.Offer}} </h6>
+                {% endif %}
                 </a>
                 {% if item.get_size != "" %}
                 <a href="{{ item.get_absolute_url }}">

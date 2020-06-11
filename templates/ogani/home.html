@@ -1,376 +1,44 @@
 {% extends "ogani/base.html" %}
 {% load static %}
+{% block logo %}
+<div id="preloder">
+  <div class="loader"></div>
+</div>
+
+<!-- Humberger Begin -->
+
+<div class="humberger__menu__overlay"></div>
+<br />
+</header>
+{% endblock logo %}
 {% block page_content %}
 {% include 'ogani/layout/show-case.html' %}
 <!-- Categories Section Begin -->
-<section class="categories">
-  <div class="container">
-    <div class="row">
-      <h2 style="margin: 5px auto; font-weight: bold;">Markets</h2>
-      <div class="categories__slider owl-carousel">
-        {% for item in markets %}
-        <div class="col-lg-3 mb-3">
-          <div class="single-product-wrapper" id="product_box">
-            <!-- Product Image -->
-            <div class="product-img">
-              <a href="{{ item.get_absolute_url }}">
-                <img src="{{ item.image.url }}" alt="">
-                <!-- Hover Content -->
-            </div>
-            <div class="product-description d-flex align-items-center justify-content-between">
-              <div class="product-meta-data">
-                <div class="line"></div>
-                <p style="font-weight: 600;margin-bottom: 5px;color: black;">{{ item.name }} </p>
-                <small style="color: darkgreen;"><i class="fa fa-shopping-bag" aria-hidden="true"></i>
-                  {{ item.shops_count}} Shops
-                </small>
-              </div>
-              <!-- <div class="ratings-cart text-right">
-                  <div class="ratings">
-                    <h1>
-                      <i class="fa fa-refresh fa-spin" aria-hidden="true"></i>
-                      <i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>
-                    </h1>
-                  </div>
 
-                </div> -->
-            </div>
-            </a>
-          </div>
-        </div>
-        {% endfor %}
-      </div>
-    </div>
-  </div>
-</section>
 <!-- Categories Section End -->
+{% include 'ogani/data/markets.html' %}
 
-<!-- Featured Section Begin -->
-<section class="featured spad">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="section-title">
-          <h2>Shops</h2>
-        </div>
-        <div class="featured__controls">
-          <h4>Categories</h4>
-          <hr>
-          <ul>
-            {% for item in cats %}
-            <li>{{ item.name }}</li>
-            {% endfor %}
-            <!-- <li class="active" data-filter="*">All</li>
-              <li data-filter=".oranges">Oranges</li>
-              <li data-filter=".fresh-meat">Fresh Meat</li>
-              <li data-filter=".vegetables">Vegetables</li>
-              <li data-filter=".fastfood">Fastfood</li> -->
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="row featured__filter">
-      {% for item in shops %}
-      <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
-        <div class="featured__item">
-          <a href="{{ item.get_absolute_url }}">
-            <div class="featured__item__pic set-bg" data-setbg="{{ item.photo.url }}">
-              <ul class="featured__item__pic__hover">
-                <li style="background-color: antiquewhite;">
-                  <h4>Market:{{item.area}}</h4>
-                </li>
-              </ul>
-            </div>
-          </a>
-          <div class="featured__item__text">
-            <h4><a id="shop_name" href="{{ item.get_absolute_url }}">{{item.title}}</a></h4>
-          </div>
-        </div>
-      </div>
-      {% endfor %}
-    </div>
-  </div>
-</section>
+{% include 'ogani/data/shops.html' %}
 <!-- Featured Section End -->
+{% include 'ogani/data/cat_items.html' %}
 
-<!-- Banner Begin -->
-<!-- <div class="banner">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-6">
-          <div class="banner__pic">
-            <img src="{% static 'ogani/img/banner/banner-1.jpg' %}" alt="" />
-          </div>
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-6">
-          <div class="banner__pic">
-            <img src="{% static 'ogani/img/banner/banner-2.jpg' %}" alt="" />
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> -->
-<!-- Banner End -->
+
 
 <!-- Latest Product Section Begin -->
 <section class="latest-product spad">
   <div class="container">
     <div class="row">
-      <div class="col-lg-4 col-md-6">
-        <div class="latest-product__text">
-          <h4>Latest Products</h4>
-          <div class="latest-product__slider owl-carousel">
-            {% for item in items %}
-            <div class="latest-prdouct__slider__item">
-              <a href="{{ item.get_absolute_url }}" class="latest-product__item">
-                <div>
-                  <img id="product_slider_image" src="{{ item.image.url }}" alt="" />
-                </div>
-                <div class="product-description d-flex align-items-center justify-content-between">
-                  <div class="product-meta-data">
-                    <div class="line"></div>
-                    <h4 style="color:black;font-weight: 700;margin-bottom: 5px;">{{ item.title }} <sub
-                        style="font-weight: normal;">{{item.category}}</sub></h4>
-                    {% if item.in_stock %}
 
-                    <small style="color: black;font-weight: bold;"> <i style="color: green;"
-                        class="fa fa-check-square-o" aria-hidden="true"></i>
-                      In Stock </small>
-                    {% else %}
-                    <small style="color: black;font-weight: bold;"> <i style="color: red;" class="fa fa-refresh fa-spin"
-                        aria-hidden="true"> </i>
-                      Out of Stock </small>
-                    {% endif %}
-                    <br>
-                    <small>
-                      <strong>
-                        {% if item.discount_price  %}
-                        <span class="mr-1" style="color: skyblue;">
-                          <del> {{item.price }} ‎৳</del>
-                        </span>
-                        <span class="mr-1" style="color: orangered;">
-                          {{ item.discount_price }}‎৳
-                        </span>
-                        <br>
-                        {% else %}
-                        <span class="mr-1" style="color: skyblue;">
-                          {{item.price }} ‎৳
-                        </span>
-                        {% endif %}
-                    </small>
-                    </strong>
-                  </div>
-                </div>
-              </a>
-            </div>
-            {% endfor %}
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6">
-        <div class="latest-product__text">
-          <h4>Top Rated Products</h4>
-          <div class="latest-product__slider owl-carousel">
-            {% for item in top_rated_products %}
-            <div class="latest-prdouct__slider__item">
-              <a href="{{ item.get_absolute_url }}" class="latest-product__item">
-                <div>
-                  <img id="product_slider_image" src="{{ item.image.url }}" alt="" />
-                </div>
-                <div class="product-description d-flex align-items-center justify-content-between">
-                  <div class="product-meta-data">
-                    <div class="line"></div>
-                    <h4 style="color:black;font-weight: 700;margin-bottom: 5px;">{{ item.title }} <sub
-                        style="font-weight: normal;">{{item.category}}</sub></h4>
-                    {% if item.in_stock %}
 
-                    <small style="color: black;font-weight: bold;"> <i style="color: green;"
-                        class="fa fa-check-square-o" aria-hidden="true"></i>
-                      In Stock </small>
-                    {% else %}
-                    <small style="color: black;font-weight: bold;"> <i style="color: red;" class="fa fa-refresh fa-spin"
-                        aria-hidden="true"> </i>
-                      Out of Stock </small>
-                    {% endif %}
-                    <br>
-                    <small>
-                      <strong>
-                        {% if item.discount_price  %}
-                        <span class="mr-1" style="color: skyblue;">
-                          <del> {{item.price }} ‎৳</del>
-                        </span>
-                        <span class="mr-1" style="color: orangered;">
-                          {{ item.discount_price }}‎৳
-                        </span>
-                        <br>
-                        {% else %}
-                        <span class="mr-1" style="color: skyblue;">
-                          {{item.price }} ‎৳
-                        </span>
-                        {% endif %}
-                    </small>
-                    </strong>
-                  </div>
-                </div>
-                <!-- <div class="latest-product__item__text ">
-                  <h4 style="font-weight: 800;margin-bottom: 5px;">{{ item.title }} <sub
-                      style="font-weight: normal;">{{item.category}}</sub></h4>
-                  {% if item.in_stock %}
-                  <small style="color:black;font-weight: bold;"> <i style="color: green;" class="fa fa-check-square-o"
-                      aria-hidden="true"></i>
-                    In Stock </small>
-                  {% else %}
-                  <small style="color:black;font-weight: bold;"> <i style="color: red;" class="fa fa-refresh fa-spin"
-                      aria-hidden="true"> </i>
-                    Out of Stock </small>
-                  {% endif %}
-                  <small>
-                    <strong>
-                      {% if item.discount_price  %}
-                      <div class="d-flex align-items-left justify-content-between">
-                        <span class="mr-1" style="color:skyblue;">
-                          <del> {{item.price }} ‎৳</del>
-                        </span>
-                        <span class="mr-1" style="color: orangered;">
-                          {{ item.discount_price }}‎৳
-                        </span>
-                      </div>
-                      {% else %}
-                      {{ item.price }}
-                      {% endif %}
-                    </strong>
-                  </small>
-                </div> -->
-              </a>
-            </div>
-            {% endfor %}
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6">
-        <div class="latest-product__text">
-          <h4>Review Products</h4>
-          <div class="latest-product__slider owl-carousel">
-            {% for item in review_products %}
-            <div class="latest-prdouct__slider__item">
-              <a href="{{ item.get_absolute_url }}" class="latest-product__item">
-                <div>
-                  <img id="product_slider_image" src="{{ item.image.url }}" alt="" />
-                </div>
-                <div class="product-description d-flex align-items-center justify-content-between">
-                  <div class="product-meta-data">
-                    <div class="line"></div>
-                    <h4 style="color:black;font-weight: 700;margin-bottom: 5px;">{{ item.title }} <sub
-                        style="font-weight: normal;">{{item.category}}</sub></h4>
-                    {% if item.in_stock %}
+      {% include 'ogani/vulval/top.html' %}
+      {% include 'ogani/vulval/new.html' %}
+      {% include 'ogani/vulval/lat.html' %}
 
-                    <small style="color: black;font-weight: bold;"> <i style="color: green;"
-                        class="fa fa-check-square-o" aria-hidden="true"></i>
-                      In Stock </small>
-                    {% else %}
-                    <small style="color: black;font-weight: bold;"> <i style="color: red;" class="fa fa-refresh fa-spin"
-                        aria-hidden="true"> </i>
-                      Out of Stock </small>
-                    {% endif %}
-                    <br>
-                    <small>
-                      <strong>
-                        {% if item.discount_price  %}
-                        <span class="mr-1" style="color: skyblue;">
-                          <del> {{item.price }} ‎৳</del>
-                        </span>
-                        <span class="mr-1" style="color: orangered;">
-                          {{ item.discount_price }}‎৳
-                        </span>
-                        <br>
-                        {% else %}
-                        <span class="mr-1" style="color: skyblue;">
-                          {{item.price }} ‎৳
-                        </span>
-                        {% endif %}
-                    </small>
-                    </strong>
-                  </div>
-                </div>
-              </a>
-            </div>
-            {% endfor %}
-          </div>
-        </div>
-      </div>
+
+
     </div>
   </div>
 </section>
-<!-- Latest Product Section End -->
 
-<!-- Blog Section Begin -->
-<!-- <section class="from-blog spad">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="section-title from-blog__title">
-            <h2>From The Blog</h2>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-4 col-md-4 col-sm-6">
-          <div class="blog__item">
-            <div class="blog__item__pic">
-              <img src="{% static 'ogani/img/blog/blog-1.jpg' %}" alt="" />
-            </div>
-            <div class="blog__item__text">
-              <ul>
-                <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                <li><i class="fa fa-comment-o"></i> 5</li>
-              </ul>
-              <h5><a href="#">Cooking tips make cooking simple</a></h5>
-              <p>
-                Sed quia non numquam modi tempora indunt ut labore et dolore
-                magnam aliquam quaerat
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-6">
-          <div class="blog__item">
-            <div class="blog__item__pic">
-              <img src="{% static 'ogani/img/blog/blog-2.jpg' %}" alt="" />
-            </div>
-            <div class="blog__item__text">
-              <ul>
-                <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                <li><i class="fa fa-comment-o"></i> 5</li>
-              </ul>
-              <h5><a href="#">6 ways to prepare breakfast for 30</a></h5>
-              <p>
-                Sed quia non numquam modi tempora indunt ut labore et dolore
-                magnam aliquam quaerat
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-6">
-          <div class="blog__item">
-            <div class="blog__item__pic">
-              <img src="{% static 'ogani/img/blog/blog-3.jpg' %}" alt="" />
-            </div>
-            <div class="blog__item__text">
-              <ul>
-                <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                <li><i class="fa fa-comment-o"></i> 5</li>
-              </ul>
-              <h5><a href="#">Visit the clean farm in the US</a></h5>
-              <p>
-                Sed quia non numquam modi tempora indunt ut labore et dolore
-                magnam aliquam quaerat
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section> -->
-<!-- Blog Section End -->
 
 {% endblock %}

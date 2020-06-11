@@ -45,7 +45,12 @@
 </head>
 
 <body>
-    {% include 'ogani/layout/header.html' %}
+
+    {% block logo %}
+    {% include 'ogani/layout/h.html' %}
+    {% endblock logo %}
+
+
 
     {% block page_content %}
     <!-- here will be the main content -->

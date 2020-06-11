@@ -1,0 +1,46 @@
+{% load static %}
+
+<section>
+    <div class="container">
+        <div class="row">
+
+            <div class="card w-100">
+                <div class="card-body">
+                    <h5 style="text-align: center;" class="card-title">SHOPS</h5>
+                    <div class="categories__slider owl-carousel">
+                        {% for item in shops %}
+                        <a href="{{ item.get_absolute_url }}">
+                            <div class=" col-lg-3">
+
+                                <img src="{{ item.photo.url }}" class="img-circle" alt="Pochonder-Shob.com" width="60"
+                                    height="150">
+
+                                <h5 style="color:white; text-align: center; background-image: linear-gradient(to right, rgba(255,0,0,0.6), rgba(0,0,0,1));
+                    ">
+                                    <b>
+                                        {{ item.title }}
+                                    </b>
+
+                                </h5>
+
+
+
+                            </div>
+
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row bg-primary "
+            style="border: black;  background-image: linear-gradient(to right, rgba(255,0,0,0.6), rgba(0,0,0,1));">
+
+            <a href="{% url 'core:shops' %}" style="color: white;" id="myBtn1" class="btn btn-lg btn-block"
+                title="See all shops">
+                <span>Find Best Sellers </span>
+            </a>
+        </div>
+    </div>
+</section>

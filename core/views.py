@@ -24,16 +24,32 @@ def home_view(request):
     markets = Area.objects.all()
     shops = Shop.objects.all()
     items = Item.objects.all()
-    top_rated = Item.objects.all().order_by('created_at')
-    review = Item.objects.all().order_by('updated_at')
+    top = Item.objects.all().order_by('-created_at')[:10]
+    new = Item.objects.all().order_by('updated_at')[:10]
+    # temp
+    latest = Item.objects.all().order_by('category')[:10]
+    
     cats = Category.objects.all()
-    slide1 = Slider.objects.all().first()
-    slider = Slider.objects.exclude(id=slide1.id)
+
+    cats_nav = Category.objects.all().order_by('updated_at')[:5]
+    cat_items = {}
+    for cat in cats:
+        content = Item.objects.filter(category=cat)
+        if cat.name not in cat_items.keys():
+            print("CAT NAME", cat.name)
+            cat_items[str(cat.name)] = content
+            print(content)
+    print(cat_items)
+    # slide1 = Slider.objects.all().first()
+    slider = Slider.objects.all()
     context = {'items': items, 'shops': shops,
-               'markets': markets, 'cats': cats,
-               'slider': slider, 'slide1': slide1,
-               'top_rated_products': top_rated,
-               'review_products': review,
+               'markets': markets, 'cats': cats, 'cats_nav':cats_nav,
+               'slider': slider, 
+               'cat_items':cat_items,
+               'top': top,
+               'new': new,
+               'latest':latest
+
                }
     # for key, value in con.items():
     #     print('---------------------->>>>>>>>>>>>>......', key, value)
@@ -450,7 +466,7 @@ def get_shop_cat_items(request, id):
         category = Category.objects.filter(for_shop=id)
         items = Item.objects.filter(category=id)
         offer = Offer.objects.filter(for_shop=id)
-        print('-------77777777777777777777777777777777777-----------------', category)
+        # print('-------77777777777777777777777777777777777-----------------', category)
         context = {'items': items, 'category': category, 'offer': offer}
 
         print(items)
@@ -464,15 +480,15 @@ def get_shop_cat_items(request, id):
 def get_shopoffe(request, id):
     try:
 
-        print('0000000000000000000000000', id)
+        # print('0000000000000000000000000', id)
         # print('...............................', type(slug))
         category = Category.objects.filter(for_shop=id)
         items = Item.objects.filter(Offer=id)
         offer = Offer.objects.filter(for_shop=id)
-        print('-------77777777777777777777777777777777777-----------------', category)
+        # print('-------77777777777777777777777777777777777-----------------', category)
         context = {'items': items, 'category': category, 'offer': offer}
 
-        print(items)
+        # print(items)
         return render(request, 'shop-items.html', context)
     except ObjectDoesNotExist:
         messages.info(
