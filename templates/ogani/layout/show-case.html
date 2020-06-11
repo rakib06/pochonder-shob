@@ -12,7 +12,7 @@
 
                     <ul>
                         {% for item in cats_nav %}
-                        <li><a href="#"><small> {{ item.name }}</small></a> </li>
+                        <li><a href="{% url 'core:category_view' item.id %}"><small> {{ item.name }}</small></a> </li>
                         {% endfor %}
 
 

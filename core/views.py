@@ -28,7 +28,7 @@ def home_view(request):
     new = Item.objects.all().order_by('updated_at')[:10]
     # temp
     latest = Item.objects.all().order_by('category')[:10]
-    
+
     cats = Category.objects.all()
 
     cats_nav = Category.objects.all().order_by('updated_at')[:5]
@@ -40,15 +40,16 @@ def home_view(request):
             cat_items[str(cat.name)] = content
             print(content)
     print(cat_items)
+    print(cat_items['cloth'])
     # slide1 = Slider.objects.all().first()
     slider = Slider.objects.all()
     context = {'items': items, 'shops': shops,
-               'markets': markets, 'cats': cats, 'cats_nav':cats_nav,
-               'slider': slider, 
-               'cat_items':cat_items,
+               'markets': markets, 'cats': cats, 'cats_nav': cats_nav,
+               'slider': slider,
+               'cat_items': cat_items,
                'top': top,
                'new': new,
-               'latest':latest
+               'latest': latest
 
                }
     # for key, value in con.items():
@@ -689,3 +690,13 @@ class RequestRefundView(View):
                 messages.info(self.request, "This order does not exist.")
                 return redirect("core:request-refund")
 '''
+
+
+def category_view(request, id):
+    items = Item.objects.filter(category=id)
+    cat = Category.objects.get(id=id)
+    context = {
+        'items': items,
+        'cat': cat,
+    }
+    return render(request, "ogani/category_view.html", context)

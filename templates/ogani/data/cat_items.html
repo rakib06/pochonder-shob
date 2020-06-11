@@ -9,7 +9,6 @@
                 <div class="card-body">
                     <h5 style="text-align: center;" class="card-title">{{ci.keys}}</h5>
                     <div class="categories__slider owl-carousel">
-
                         {% for item in ci %}
                         <a href="{{ item.get_absolute_url }}">
                             <div class=" col-lg-3">
@@ -24,11 +23,7 @@
                                     </b>
 
                                 </h5>
-
-
-
                             </div>
-
                         </a>
                         {% endfor %}
                     </div>
@@ -45,8 +40,8 @@
 
                 {% endif %}
 
-                <a href="{% url 'core:shops' %}" style="color: white;" id="myBtn1" class="btn btn-lg btn-block"
-                    title="See all {{key}}">
+                <a href="{% url 'core:category_view' ci.first.category.id %}" style="color: white;" id="myBtn1"
+                    class="btn btn-lg btn-block" title="See all {{key}}">
                     <span>Find All {{key}}</span>
                 </a>
             </div>
