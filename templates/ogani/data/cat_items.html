@@ -12,17 +12,28 @@
                         {% for item in ci %}
                         <a href="{{ item.get_absolute_url }}">
                             <div class=" col-lg-3">
+                                <div id="image_with_price">
+                                    <img src="{{ item.image.url }}" class="img-circle" alt="Pochonder-Shob.com"
+                                        width="60" height="150">
 
-                                <img src="{{ item.image.url }}" class="img-circle" alt="Pochonder-Shob.com" width="60"
-                                    height="150">
+                                    {% if item.discount_price  %}
+                                    <div style="text-size-adjust:inherit;" id="price_tag"><small>{{item.discount_price}}
+                                            BDT </small>
+                                    </div>
+                                    {% else %}
+                                    <div style="text-size-adjust:inherit;" id="price_tag"><small>{{item.price}}
+                                            BDT </small></div>
+                                    {% endif %}
 
-                                <h5 style="color:white; text-align: center; background-image: linear-gradient(to right, rgba(255,0,0,0.6), rgba(0,0,0,1));
+                                    <h5 style="color:white; text-align: center; background-image: linear-gradient(to right, rgba(255,0,0,0.6), rgba(0,0,0,1));
                     ">
-                                    <b>
-                                        {{ item.title }}
-                                    </b>
+                                        <b>
+                                            {{ item.title }}
+                                        </b>
 
-                                </h5>
+                                    </h5>
+                                </div>
+
                             </div>
                         </a>
                         {% endfor %}
@@ -46,5 +57,6 @@
                 </a>
             </div>
         </div>
+    </div>
 </section>
 {% endfor %}
