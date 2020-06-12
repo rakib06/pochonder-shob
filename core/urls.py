@@ -17,28 +17,37 @@ from .views import (
     remove_single_item_from_cart,
     # PaymentView,
     AddCouponView,
-    ShopCreate,
+    
     MarketsView,
     MarketsView1,
-    ShopsView,
+   
     ProductsView,
     get_items,
     # RequestRefundView,
     add_item, add_shop,
     CustomerOrderStatusView,
-    get_shop_cat_items,
+    
     home_view,
     side_bar,
-    get_shops,
+    
     shop_manager_view,
     ItemDetailView,
     category_view,
     conditions_of_use_view,
+    # Shop View
+    get_shops,
+    get_shop_cat_items,
+    ShopsView,
+    ShopCreate,
+    ShopDetailView,
+    get_items_slug
 
 )
 app_name = 'core'
 
 urlpatterns = [
+
+    path('<slug:slug>', ShopDetailView.as_view(), name='shop_detail'),
     # path('all', HomeView.as_view(), name='home'),
     # path('', ShopsView.as_view(), name='shops'),
     path('', home_view, name='home'),
@@ -49,7 +58,7 @@ urlpatterns = [
     # path('shop-manager/', shop_manager_view, name='shop-manager'),
     path('markets/', MarketsView1.as_view(), name='markets'),
     path('category/<id>/', category_view, name="category_view"),
-    path('shop-items/<id>/', get_items, name='shop-items'),
+    path('shop/<slug:slug>/', get_items_slug, name='shop-items'),
     path('area/<id>/', get_shops, name='area-shops'),
     path('shops-cat/<id>', get_shop_cat_items,
          name='shops-cat'),

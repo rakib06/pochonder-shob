@@ -422,23 +422,6 @@ def all_offer_cat(request):
 # can ciew market, shops, and products,
 
 
-def get_items(request, id):
-    try:
-        # print('...............................', type(slug))
-        items = Item.objects.filter(shop=id)
-        category = Category.objects.filter(for_shop=id)
-        offer = Offer.objects.filter(for_shop=id)
-        shop = Shop.objects.get(pk=id)
-        print('-------77777777777777777777777777777777777-----------------', category)
-        context = {'items': items, 'category': category,
-                   'offer': offer, 'shop': shop}
-        print(items)
-        # return render(request, 'a/main/items.html', context)
-        return render(request, 'ogani/getItems.html', context)
-    except ObjectDoesNotExist:
-        messages.info(
-            self.request, "Sorry! Hopefully they will update their products soon!")
-        return redirect("core:checkout")
 
 
 def get_shops(request, id):
@@ -713,3 +696,47 @@ def category_view(request, id):
 
 def conditions_of_use_view(request):
     return render(request, "ogani/footer/conditions_of_use.html", {})
+
+
+class ShopDetailView(DetailView):
+    model = Shop
+    template_name = 'ogani/shop/shop_detail.html'
+
+
+def get_items(request, id):
+    try:
+        # print('...............................', type(slug))
+        items = Item.objects.filter(shop=id)
+        category = Category.objects.filter(for_shop=id)
+        offer = Offer.objects.filter(for_shop=id)
+        shop = Shop.objects.get(pk=id)
+        print('-------77777777777777777777777777777777777-----------------', category)
+        context = {'items': items, 'category': category,
+                   'offer': offer, 'shop': shop}
+        print(items)
+        # return render(request, 'a/main/items.html', context)
+        return render(request, 'ogani/getItems.html', context)
+    except ObjectDoesNotExist:
+        messages.info(
+            self.request, "Sorry! Hopefully they will update their products soon!")
+        return redirect("core:checkout")
+
+def get_items_slug(request, slug):
+    try:
+        my_shop = get_object_or_404(Shop,slug=slug)
+        id = my_shop.id
+        print('...............................', type(slug))
+        items = Item.objects.filter(shop=id)
+        category = Category.objects.filter(for_shop=id)
+        offer = Offer.objects.filter(for_shop=id)
+        shop = Shop.objects.get(pk=id)
+        print('-------77777777777777777777777777777777777-----------------', category)
+        context = {'items': items, 'category': category,
+                   'offer': offer, 'shop': shop}
+        print(items)
+        # return render(request, 'a/main/items.html', context)
+        return render(request, 'ogani/getItems.html', context)
+    except ObjectDoesNotExist:
+        messages.info(
+            self.request, "Sorry! Hopefully they will update their products soon!")
+        return redirect("core:checkout")

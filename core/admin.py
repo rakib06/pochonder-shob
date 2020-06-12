@@ -151,7 +151,7 @@ class AreaAdmin(admin.ModelAdmin):
 class ShopAdmin(admin.ModelAdmin):
 
     list_display = ['image_tag', 'title', 'get_category']
-
+    prepopulated_fields = {"slug": ("title",)}
     def get_exclude(self, request, obj=None):
         excluded = super().get_exclude(request, obj) or []  # get overall excluded fields
 
