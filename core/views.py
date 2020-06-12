@@ -40,7 +40,7 @@ def home_view(request):
             cat_items[str(cat.name)] = content
             print(content)
     print(cat_items)
-    #print(cat_items['cloth'])
+    # print(cat_items['cloth'])
     # slide1 = Slider.objects.all().first()
     slider = Slider.objects.all()
     context = {'items': items, 'shops': shops,
@@ -700,3 +700,7 @@ def category_view(request, id):
         'cat': cat,
     }
     return render(request, "ogani/category_view.html", context)
+
+
+def conditions_of_use_view(request):
+    return render(request, "ogani/footer/conditions_of_use.html", {})
