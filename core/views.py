@@ -740,3 +740,29 @@ def get_items_slug(request, slug):
         messages.info(
             self.request, "Sorry! Hopefully they will update their products soon!")
         return redirect("core:checkout")
+from django.db.models import Q
+
+from django.views.generic import ListView
+
+class SearchResultsView(ListView):
+    model = Item
+    template_name = 'ogani/search/search_new.html'
+    def get_queryset(self): # new
+        query = self.request.GET.get('q')
+        
+        object_list = Item.objects.filter(title__icontains=query)
+        '''
+        object_list_shops = Shop.objects.filter(title__icontains=query)
+        # object_list_cat = Category.objects.filter(title__icontains=query)
+        object_list_markets = Area.objects.filter(name__icontains=query)
+        no_result = False
+        if len(object_list) == 0 and len(object_list_markets) ==0 and len(object_list_shops) ==0:
+            no_result = True
+        
+        return object_list, object_list_shops,  object_list_markets, no_result
+        '''
+        return object_list
+
+
+
+

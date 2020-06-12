@@ -40,7 +40,9 @@ from .views import (
     ShopsView,
     ShopCreate,
     ShopDetailView,
-    get_items_slug
+    get_items_slug,
+    # Product
+    SearchResultsView
 
 )
 app_name = 'core'
@@ -48,6 +50,7 @@ app_name = 'core'
 urlpatterns = [
 
     path('<slug:slug>', ShopDetailView.as_view(), name='shop_detail'),
+    path('search/', SearchResultsView.as_view(), name='search_results'),
     # path('all', HomeView.as_view(), name='home'),
     # path('', ShopsView.as_view(), name='shops'),
     path('', home_view, name='home'),

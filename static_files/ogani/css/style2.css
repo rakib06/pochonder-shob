@@ -14,6 +14,21 @@
     color: black;
     font-weight: 700;
 }
+
+#price_tag2{
+    
+    position: absolute;
+    left: -30px;
+    top: 40px;
+    width: 50%;
+    
+    background-image: linear-gradient(to right, rgba(216, 17, 66, 0.6), rgba(21, 21, 173, 0.76));
+    transform: rotate(-35deg);
+    padding: 5px 36px;
+    
+    color: rgb(241, 236, 236);
+    
+}
 #cond a:hover{
     color: black;
 }
