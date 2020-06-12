@@ -8,10 +8,15 @@
     left: -30px;
     top: 7px;
     width: 150px;
-    
     background-image: linear-gradient(to right, rgba(233, 173, 34, 0.6), rgba(231, 228, 9, 0.76));
     transform: rotate(-35deg);
     padding: 5px 36px;
     color: black;
     font-weight: 700;
+}
+#cond a:hover{
+    color: black;
+}
+#condition_header{
+    font-weight: 600;
 }

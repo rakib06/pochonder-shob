@@ -709,3 +709,7 @@ def category_view(request, id):
         'cat_items':cat_items,
     }
     return render(request, "ogani/category_view.html", context)
+
+
+def conditions_of_use_view(request):
+    return render(request, "ogani/footer/conditions_of_use.html", {})

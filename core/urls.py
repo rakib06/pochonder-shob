@@ -33,6 +33,7 @@ from .views import (
     shop_manager_view,
     ItemDetailView,
     category_view,
+    conditions_of_use_view,
 
 )
 app_name = 'core'
@@ -65,6 +66,7 @@ urlpatterns = [
          name='remove-single-item-from-cart'),
     path('shop/add/', ShopCreate.as_view(), name='add-shop'),
     path('order/', CustomerOrderStatusView.as_view(), name='customer-order'),
+    path('condition-of-use/', conditions_of_use_view, name='condition_of_use'),
 
     # path('payment/<payment_option>/', PaymentView.as_view(), name='payment'),
     # path('request-refund/', RequestRefundView.as_view(), name='request-refund'),
