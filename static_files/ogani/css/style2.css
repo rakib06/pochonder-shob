@@ -36,3 +36,10 @@
 #condition_header{
     font-weight: 600;
 }
+
+#footer_content li,h4{
+    color: white;
+}
+#footer_content a{
+    color: white;
+}

@@ -1,9 +1,7 @@
 {% extends "ogani/base.html" %}
 {% load i18n %}
-
+{% load account socialaccount %}
 {% load crispy_forms_tags %}
-
-
 
 {% block page_content%}
 <div class="cart-table-area section-padding-100">
@@ -11,15 +9,27 @@
         <div class="row">
             <div class="col-12 col-lg-8">
                 <div class="checkout_details_area mt-50 clearfix">
+                    {% get_providers as socialaccount_providers %}
+                    {% if socialaccount_providers %}
+                    <h3>You can login with Facebook by clicking the below Button</h3>
+                    <div class="socialaccount_ballot">
+                        <ul class="socialaccount_providers">
+                            <button
+                                style="font-size: 20px;border-radius: 5px;padding: 8px;margin: 8px;background-color: darkslategrey;">
+                                {% include "socialaccount/snippets/provider_list.html" with process="login" %}</button>
+                        </ul>
 
-                    <h1>{% trans "Log In" %}</h1>
+                        <div style="font-size: 30px;" class="login-or">{% trans 'or' %}</div>
 
+                    </div>
 
+                    {% include "socialaccount/snippets/login_extra.html" %}
 
-
-
-
-
+                    {% else %}
+                    <p>{% blocktrans %}If you have not created an account yet, then please
+                        <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
+                    {% endif %}
+                    <!-- <h1>{% trans "Log In" %}</h1> -->
                     <form class="login" method="POST" action="{% url 'account_login' %}">
                         {% csrf_token %}
                         {{ form|crispy }}

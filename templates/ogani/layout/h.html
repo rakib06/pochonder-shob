@@ -35,11 +35,11 @@
     <nav class="humberger__menu__nav mobile-menu">
         <ul>
             <li><a href="{% url 'core:home' %}">Home</a></li>
-            {% if request.user.is_authenticated %}
+            <!-- {% if request.user.is_authenticated %}
             <li><a href="{% url 'core:shops' %}">Shops</a></li>
-            {% endif %}
+            {% endif %} -->
             <li><a href="{% url 'core:customer-order' %}">My Order</a></li>
-            <li>
+            <!-- <li>
                 <a href="#">Pages</a>
                 <ul class="header__menu__dropdown">
                     <li><a href="{% url 'core:products' %}">All Products</a></li>
@@ -47,9 +47,14 @@
                     <li><a href="#">Check Out</a></li>
                     <li><a href="#">Blog Details</a></li>
                 </ul>
-            </li>
+            </li> -->
             <!-- <li><a href="./blog.html">Blog</a></li> -->
-            <li><a href="#">Contact</a></li>
+            <li><a href="#footer_content">Contact</a></li>
+            {% if request.user.is_authenticated %}
+            <li><a href="\accounts\logout\">Logout</a></li>
+            {% else %}
+            <li><a href="\accounts\login\">Login</a></li>
+            {% endif %}
         </ul>
     </nav>
     <div id="mobile-menu-wrap"></div>
@@ -86,13 +91,13 @@
                 <nav class="header__menu">
                     <ul>
                         <li><a href="{% url 'core:home' %}">Home</a></li>
-                        {% if request.user.is_authenticated %}
-                        <li><a href="{% url 'core:shops' %}">Shops</a></li>
-                        {% endif %}
                         <li><a href="{% url 'core:customer-order' %}">My Order</a></li>
-
-                        <!-- <li><a href="./blog.html">Blog</a></li> -->
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="#footer_content">Contact</a></li>
+                        {% if request.user.is_authenticated %}
+                        <li><a href="\accounts\logout\">Logout</a></li>
+                        {% else %}
+                        <li><a href="\accounts\login\">Login</a></li>
+                        {% endif %}
                     </ul>
                 </nav>
             </div>

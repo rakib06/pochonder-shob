@@ -22,12 +22,14 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
     'crispy_forms',
     'django_countries',
 
     # aws
     'storages',
 ]
+SITE_ID = 1
 
 
 # CRISPY FORMS
