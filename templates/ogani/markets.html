@@ -1,29 +1,53 @@
 {% extends "ogani/base.html" %}
 {% load static %}
 {% block page_content %}
-<div class="amado_product_area section-padding-100">
+
+<section class="breadcrumb-section set-bg">
+
+
+
     <div class=" container">
-        <h2> Markets </h2>
-        <hr>
-        <div class="row pb-3">
-            <!-- Single Catagory -->
-            {% for item in object_list %}
-            <div class="col-12 col-sm-6 col-md-6 col-xl-3">
-                <div class="single-product-wrapper">
-                    <!-- Product Image -->
-                    <div class="product-img">
+        <div class="row">
+            <div class="col-lg-6 text-center">
+                <div class="breadcrumb__text"
+                    style="width:100%; background-image: linear-gradient(to right, rgba(0, 0, 255, 0.6), rgba(0,0,0,.7));">
+                    <h2>
+                        Markets</h2>
+                </div>
 
-                        <a href="{{ item.get_absolute_url }}">
-                            <img src="{{ item.image.url }}" alt="">
-                            <!-- Hover Content -->
-                    </div>
-                    <div class="product-description d-flex align-items-center justify-content-between">
-                        <div class="latest-product__item__text">
-                            <h6 style="text-align: center;">{{ item.shops_count}} Shops</h6>
+            </div>
+            <div class="col-lg-6 ">
+                {% include 'ogani/layout/search1.html' %}
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="amado_product_area section-padding-100">
+        <div class=" container">
+
+            <div class="row pb-3">
+                <!-- Single Catagory -->
+                {% for item in object_list %}
+                <div class="col-12 col-sm-6 col-md-6 col-xl-3">
+                    <div class="single-product-wrapper">
+                        <!-- Product Image -->
+                        <div class="product-img">
+
+                            <a href="{{ item.get_absolute_url }}">
+                                <img src="{{ item.image.url }}" alt="">
+                                <!-- Hover Content -->
+                        </div>
+                        <div class="product-description d-flex align-items-center justify-content-between">
+                            <div class="latest-product__item__text">
+                                <!--
+ <h6 style="text-align: center;">{{ item.shops_count}} Shops</h6>
+
+                                -->
 
 
 
-                            <span style="text-align: center;" class=" mr-1" ">
+                                <span style="text-align: center;" class=" mr-1" ">
                                 {{ item.name }}
                                 
                             </span>
@@ -33,14 +57,14 @@
                         <!--
                         <div class=" product-meta-data">
 
-                                <div class="line"></div>
-                                <p>{{ item.name }} </p>
+                                    <div class="line"></div>
+                                    <p>{{ item.name }} </p>
 
-                                <small> {{ item.shops_count}} <i class="fa fa-shopping-bag" aria-hidden="true"></i>
-                                </small>
-                        </div>
-                        -->
-                        <!-- <div class="ratings-cart text-right">
+                                    <small> {{ item.shops_count}} <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+                                    </small>
+                            </div>
+                            -->
+                            <!-- <div class="ratings-cart text-right">
                             <div class="ratings">
                                 <h1>
                                     <i class="fa fa-refresh fa-spin" aria-hidden="true"></i>
@@ -49,16 +73,16 @@
                             </div>
 
                         </div> -->
+                        </div>
+                        </a>
                     </div>
-                    </a>
                 </div>
+                {% endfor %}
+
             </div>
-            {% endfor %}
 
         </div>
-
     </div>
-</div>
-
+</section>
 <!-- Product Catagories Area End -->
 {% endblock %}

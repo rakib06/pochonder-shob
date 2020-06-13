@@ -1,24 +1,47 @@
 {% extends "ogani/base.html" %}
 {% load static %}
 {% block page_content %}
-<div class="amado_product_area section-padding-100">
-    <div class=" container">
-        <h2> Shops </h2>
-        <hr>
-        <div class="row">
-            <!-- Single Catagory -->
-            {% for item in object_list %}
-            <div class="col-12 col-sm-6 col-md-12 col-xl-4">
-                <div class="single-product-wrapper">
-                    <!-- Product Image -->
-                    <div class="product-img">
 
-                        <a href="{{ item.get_absolute_url }}">
-                            <img id="shop_image" src="{{ item.photo.url }}" alt="">
-                            <!-- Hover Content -->
-                    </div>
-                    <div class="product-description d-flex align-items-center justify-content-between">
-                        <!---
+<section class="breadcrumb-section set-bg">
+
+
+
+    <div class=" container">
+        <div class="row">
+            <div class="col-lg-6 text-center">
+                <div class="breadcrumb__text"
+                    style="width:100%; background-image: linear-gradient(to right, rgba(0, 0, 255, 0.6), rgba(0,0,0,.7));">
+                    <h2>
+                        Shops</h2>
+                </div>
+
+            </div>
+            <div class="col-lg-6 ">
+                {% include 'ogani/layout/search1.html' %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="amado_product_area section-padding-100">
+        <div class=" container">
+            <h2> Shops </h2>
+            <hr>
+            <div class="row">
+                <!-- Single Catagory -->
+                {% for item in object_list %}
+                <div class="col-12 col-sm-6 col-md-12 col-xl-4">
+                    <div class="single-product-wrapper">
+                        <!-- Product Image -->
+                        <div class="product-img">
+
+                            <a href="{{ item.get_absolute_url }}">
+                                <img id="shop_image" src="{{ item.photo.url }}" alt="">
+                                <!-- Hover Content -->
+                        </div>
+                        <div class="product-description d-flex align-items-center justify-content-between">
+                            <!---
                         <div class="product-meta-data">
                             <div class="line"></div>
                             <p>{{ item.title }} </p>
@@ -29,12 +52,12 @@
 
                         </div>
                         -->
-                        <div class="latest-product__item__text">
-                            <h6 style="text-align: center;">{{ item.shop_type}}</h6>
+                            <div class="latest-product__item__text">
+                                <h6 style="text-align: center;">{{ item.shop_type}}</h6>
 
 
 
-                            <span style="text-align: center;" class=" mr-1" ">
+                                <span style="text-align: center;" class=" mr-1" ">
                                 {{ item.title }}
                                 
                             </span>
@@ -42,23 +65,23 @@
 
                         </div>
                         <!-- <div class=" ratings-cart text-right">
-                                <div class="ratings">
-                                    <h1>
-                                        <i class="fa fa-heartbeat" aria-hidden="true"></i>
-                                        <i class="fa fa-cog fa-spin" aria-hidden="true"></i>
-                                    </h1>
-                                </div>
+                                    <div class="ratings">
+                                        <h1>
+                                            <i class="fa fa-heartbeat" aria-hidden="true"></i>
+                                            <i class="fa fa-cog fa-spin" aria-hidden="true"></i>
+                                        </h1>
+                                    </div>
 
-                        </div> -->
+                            </div> -->
+                        </div>
+                        </a>
                     </div>
-                    </a>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
+
         </div>
-
     </div>
-</div>
-
+</section>
 <!-- Product Catagories Area End -->
 {% endblock %}

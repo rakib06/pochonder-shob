@@ -1,38 +1,69 @@
 {% extends "ogani/base.html" %}
 {% load static %}
 {% block page_content %}
-<div class=" container">
 
 
-    <div class="row">
+<section class="breadcrumb-section set-bg">
 
 
-        {% for item in items %}
-        <div class="col-12 col-sm-6 col-md-6 col-xl-3 pb-4">
-            <div class="single-product-wrapper" id="product_box">
-                <!-- Product Image -->
-                <div class="product-img">
 
-                    <a href="{{ item.get_absolute_url }}">
-                        <!-- <img src="{{ item.image.url }}" alt=""> -->
-                        <div class="product_img">
-                            <img id="img" src="{{ item.image.url }}" alt="">
-                            <div class="middle">
-                                {% if item.discount_price  %}
-                                <div class="text">{{ item.discount_price}}/-</div>
-                                {% else %}
-                                <div class="text">{{ item.price}}/-</div>
-                                {% endif %}
-                            </div>
-                        </div>
-                        <!-- Hover Content -->
+    <div class=" container">
+        <div class="row">
+            <div class="col-lg-6 text-center">
+                <div class="breadcrumb__text"
+                    style="width:100%; background-image: linear-gradient(to right, rgba(48, 204, 224, 0.6), rgba(0,0,0,.7));">
+
+
+                    <h2>
+
+                        <sup style="size: 1px;">Category-wise Shoping </sup></h2>
+
                 </div>
-                <div class="latest-product__item__text">
-                    <h6>{{ item.title }}</h6>
 
-                    {% if item.discount_price  %}
+            </div>
+            <div class="col-lg-6 ">
+                {% include 'ogani/layout/search1.html' %}
+            </div>
+        </div>
+    </div>
 
-                    <span class=" mr-1" ">
+</section>
+
+<section>
+
+
+    <div class=" container">
+
+
+        <div class="row">
+
+
+            {% for item in items %}
+            <div class="col-12 col-sm-6 col-md-6 col-xl-3 pb-4">
+                <div class="single-product-wrapper" id="product_box">
+                    <!-- Product Image -->
+                    <div class="product-img">
+
+                        <a href="{{ item.get_absolute_url }}">
+                            <!-- <img src="{{ item.image.url }}" alt=""> -->
+                            <div class="product_img">
+                                <img id="img" src="{{ item.image.url }}" alt="">
+                                <div class="middle">
+                                    {% if item.discount_price  %}
+                                    <div class="text">{{ item.discount_price}}/-</div>
+                                    {% else %}
+                                    <div class="text">{{ item.price}}/-</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <!-- Hover Content -->
+                    </div>
+                    <div class="latest-product__item__text">
+                        <h6>{{ item.title }}</h6>
+
+                        {% if item.discount_price  %}
+
+                        <span class=" mr-1" ">
                             {{ item.discount_price }}‎ BDT
                         </span>
                         <br>
@@ -59,17 +90,19 @@
         <div class=" row bg-dark "
             style=" background-image: linear-gradient(to right, rgba(27, 25, 25, 0.6), rgb(39, 20, 121, .9));">
 
-                        {% else %}
-                        <div class="row bg-dark "
-                            style="border: black;  background-image: linear-gradient(to right, rgba(211, 30, 135, 0.6), rgba(121, 77, 20, 0.9));">
-                            {% endif %}
-                            <a href="{% url 'core:category_view' ci.first.category.id %}" style="color: white;"
-                                id="myBtn1" class="btn btn-lg btn-block" title="See all {{key}}">
-                                <small>See {{key}}</small>
-                            </a>
-                        </div>
+                            {% else %}
+                            <div class="row bg-dark "
+                                style="border: black;  background-image: linear-gradient(to right, rgba(211, 30, 135, 0.6), rgba(121, 77, 20, 0.9));">
+                                {% endif %}
+                                <a href="{% url 'core:category_view' ci.first.category.id %}" style="color: white;"
+                                    id="myBtn1" class="btn btn-lg btn-block" title="See all {{key}}">
+                                    <small>See {{key}}</small>
+                                </a>
+                            </div>
+                    </div>
+                    {%endfor%}
+                    <br>
                 </div>
-                {%endfor%}
-                <br>
-            </div>
-            {% endblock %}
+                {% endblock %}
+
+</section>
