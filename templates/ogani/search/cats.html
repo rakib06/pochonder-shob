@@ -1,13 +1,13 @@
-{% if object_list %}
+{% if cats %}
 
 <section>
-    <h5 style="text-align: center;" class="card-title">Product</h5>
+    <h5 style="text-align: center;" class="card-title">Related Category </h5>
 
     <div class="container">
         <div class="row">
 
 
-            {% for item in object_list %}
+            {% for item in cats %}
             <div class="col-10 col-sm-6 col-md-6 col-xl-3 pb-4">
                 <a href="{{ item.get_absolute_url }}">
 

@@ -26,9 +26,11 @@
 
     <div class="col-12 col-sm-12 col-md-12 col-xl-12 p-3">
         <div class=" container" style="text-align: center;">
+            {% if object_list %}
             <card>
-                <h4>{{shop.title}}'s Products </h4>
+                <h4>Products </h4>
             </card>
+            {% endif%}
 
             <hr>
             <div class="row">

@@ -1,0 +1,48 @@
+{% if object_list_markets %}
+<section>
+    <div class="container">
+        <div class="row">
+
+            <div class="card w-100">
+                <div class="card-body">
+
+                    <h5 style="text-align: center;" class="card-title">Market</h5>
+
+                    <div class="product_img">
+                        {% for item in object_list_markets %}
+                        <a href="{{ item.get_absolute_url }}">
+                            <div class=" col-lg-3">
+                                <div id="image_with_price">
+                                    <img src="{{ item.image.url }}" class="img-circle" alt="Pochonder-Shob.com">
+
+                                    {% if item.discount_price  %}
+                                    <div style=" text-size-adjust:inherit;" id="price_tag"><small>{{ item.shops_count}}
+                                        </small>
+                                    </div>
+
+                                    {% endif %}
+
+                                    <h5 style="color:white; text-align: center; background-image: linear-gradient(to right, rgba(255,0,0,0.6), rgba(0,0,0,1));
+                    ">
+                                        <b>
+                                            {{ item.name }}
+                                        </b>
+                                        <br>
+                                        <span class=" mr-1" ">
+                                            {{ item.area }}‎
+                                        </span>
+
+                                    </h5>
+                                </div>
+
+                            </div>
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+{% endif %}

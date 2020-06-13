@@ -748,6 +748,7 @@ class SearchResultsView(ListView):
     model = Item
     template_name = 'ogani/search/search_new.html'
     def get_queryset(self): # new
+
         query = self.request.GET.get('q')
         
         object_list = Item.objects.filter(title__icontains=query)
@@ -762,6 +763,44 @@ class SearchResultsView(ListView):
         return object_list, object_list_shops,  object_list_markets, no_result
         '''
         return object_list
+import random
+def search_all(request):
+    
+    # template_name = 'ogani/search/search_new.html'
+    # def get_queryset(self): # new
+    query = request.GET.get('q')
+    
+    object_list = Item.objects.filter(title__icontains=query)
+    
+    object_list_shops = Shop.objects.filter(title__icontains=query)
+    # object_list_cat = Category.objects.filter(title__icontains=query)
+    object_list_markets = Area.objects.filter(name__icontains=query)
+    
+    cats = Item.objects.filter(category__name__icontains=query)
+    print(cats,".................................dufhsdurih")
+    no_result = False
+    if len(object_list) == 0 and len(object_list_markets) ==0 and len(object_list_shops) ==0 and len(cats)==0:
+        no_result = True
+   
+    suggestion = None
+    if no_result:
+        
+        items = Item.objects.all()
+        suggestion = random.sample(list(items), 3)
+    
+    
+
+    context = {'object_list': object_list,
+    'object_list_shops':object_list_shops,
+    'object_list_markets': object_list_markets,
+    'no_result':no_result,
+    'suggestion': suggestion,
+    'cats':cats,
+    }
+    
+    # return render(request, 'a/main/items.html', context)
+    return render(request, 'ogani/search/search_all.html', context)
+   
 
 
 
