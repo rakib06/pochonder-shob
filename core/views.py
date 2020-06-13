@@ -786,7 +786,7 @@ def search_all(request):
     if no_result:
         
         items = Item.objects.all()
-        suggestion = random.sample(list(items), 15)
+        suggestion = random.sample(list(items), 3)
     
     
 
