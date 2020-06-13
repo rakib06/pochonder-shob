@@ -156,13 +156,19 @@ class Shop(TimeStampMixin):
 class Category(TimeStampMixin):
     name = models.CharField(max_length=100)
     for_shop = models.ManyToManyField(Shop)
-
+    slug = models.SlugField(verbose_name="Cat URL",null=False, unique=True)
     def __str__(self):
         return self.name
 
     class Meta:
         verbose_name = 'Category'
         verbose_name_plural = 'Categories'
+    
+    def get_absolute_url(self):
+        return reverse("core:category-view", kwargs={
+            # ei khane sudu oi shop er jinish jeno dekhay sei babostha korte hobe
+            'slug': self.slug
+        })
 
 
 class Offer(TimeStampMixin):
