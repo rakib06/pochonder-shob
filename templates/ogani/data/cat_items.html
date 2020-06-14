@@ -3,18 +3,16 @@
 {% for key,ci in cat_items.items %}
 <section>
     <div class="container">
-        <div class="neons col-12">
-            <h1>
-                <a>
-                    <small> {{key}}</small>
-                </a>
-            </h1>
-        </div>
+
         <div class="row">
 
             <div class="card w-100">
                 <div class="card-body">
-                    <h5 style="text-align: center;" class="card-title">{{ci.keys}}</h5>
+                    <div class="neons" style="text-align: center; padding-top: 0%;">
+                        <span>{{key}}</span>
+
+                    </div>
+                    <br>
                     <div class="categories__slider owl-carousel">
                         {% for item in ci %}
                         <a href="{{ item.get_absolute_url }}">
