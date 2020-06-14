@@ -175,11 +175,11 @@ class ShopAdmin(admin.ModelAdmin):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    fields = ['items', 'comment', 'mobile_number', 'shipping_address',
-              'ordered', 'being_packed', 'being_delivered', 'received']
+    fields = ['items', 'customer_name', 'comment', 'mobile_number', 'shipping_address',
+              'user', 'ordered', 'being_packed', 'being_delivered', 'received', 'created_at', 'updated_at']
 
-    list_display = ['get_products', 'comment', 'mobile_number', 'shipping_address',
-                    'ordered', 'being_packed', 'being_delivered', 'received']
+    list_display = ['get_products', 'customer_name', 'comment', 'mobile_number', 'shipping_address',
+                    'ordered', 'being_packed', 'being_delivered', 'received',  'user']
     list_editable = ['being_packed', 'being_delivered', 'received']
 
     def get_products(self, obj):
@@ -212,5 +212,17 @@ admin.site.register(Refund)
 admin.site.register(UserProfile)
 #admin.site.register(Category)
 admin.site.register(Offer)
-admin.site.register(OrderItem, OrderItemAdmin)
+# admin.site.register(OrderItem, OrderItemAdmin)
 admin.site.register(Size)
+
+
+
+@admin.register(OrderItem)
+class OrderItemAdmin(admin.ModelAdmin):
+    fields = ['user', 'item', 'ordered',
+                'created_at', 'updated_at', 'quantity_available']
+
+    list_display = ['image_tag', 'user', 'item', 'ordered',
+                'created_at', 'updated_at', 'quantity_available' ]
+  
+   

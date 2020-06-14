@@ -307,9 +307,12 @@ class OrderItem(TimeStampMixin):
     def __str__(self):
         return f"{self.quantity} of {self.item.title}"
 
-    @property
-    def get_image(self):
-        return self.item.image
+    def image_tag(self):
+        if self.item.image:
+            return mark_safe('<img src="%s" style="width: 45px; height:45px;" />' % self.item.image.url)
+        else:
+            return 'No Image Found'
+    image_tag.short_description = 'Image'
 
     def get_total_item_price(self):
         return self.quantity * self.item.price
