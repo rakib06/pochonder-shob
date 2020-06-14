@@ -9,7 +9,7 @@
 
     .column {
         float: left;
-        width: 25%;
+        width: 33.33%;
         padding: 5px;
 
 
@@ -44,7 +44,7 @@
 </style>
 
 <section>
-    <div class="deskContent">
+    <div class="phoneContent">
 
         <div class="container">
 
@@ -57,31 +57,33 @@
 
                         </div>
                         <br>
-                        <div class="categories__slider owl-carousel">
+                        <div class="slider">
                             {% for item in ci %}
                             <a href="{{ item.get_absolute_url }}">
-                                <div class=" col-lg-3">
+
+                                <div class="column">
                                     <div id="image_with_price">
-                                        <img src="{{ item.image.url }}" class="img-circle" alt="Pochonder-Shob.com"
-                                            width="60">
-
-                                        {% if item.discount_price  %}
-                                        <div style="text-size-adjust:inherit;" id="price_tag">
-                                            <small>{{item.discount_price}}
-                                                BDT </small>
-                                        </div>
-                                        {% else %}
-                                        <div style="text-size-adjust:inherit;" id="price_tag"><small>{{item.price}}
-                                                BDT </small></div>
-                                        {% endif %}
-
+                                        <img src="{{ item.image.url }}" class="img-circle" alt="Pochonder-Shob.com">
                                         <h5 style="color:white; text-align: center; background-image: linear-gradient(to right, rgba(255, 255, 255, 0.6), rgb(255, 255, 255));
-                    ">
-                                            <b style="color: black;">
+                                            ">
+                                            <p style="color: black;">
                                                 {{ item.title }}
-                                            </b>
+                                            </p>
+                                            {% if item.discount_price  %}
+                                            <div style="text-size-adjust:inherit; padding: center;">
+                                                <b style="color: black;">{{item.discount_price}}
+                                                    BDT </b>
+                                            </div>
+                                            {% else %}
+                                            <div style="text-size-adjust:inherit; padding: center;"><b
+                                                    style="color: black;">{{item.price}}
+                                                    BDT </b></div>
+                                            {% endif %}
 
                                         </h5>
+
+
+
                                     </div>
 
                                 </div>
@@ -94,17 +96,15 @@
 
 
 
-
-
-
         </div>
+
+
     </div>
 
 
 
 
+
 </section>
+
 {% endfor %}
-
-
-{% include 'ogani/data/mobile/cat_items.html' %}
