@@ -8,9 +8,10 @@
 <div class="cart-table-area section-padding-100">
     <div class="container">
         <div class="row">
-            <div class="col-12 col-lg-8">
+            <div class="col-12  col-lg-2"></div>
+            <div class="col-12  col-lg-8 p-4" style="background-color: lavender;">
                 <div class="checkout_details_area mt-50 clearfix">
-                    <h1>{% trans "Sign Up" %}</h1>
+                    <h2 style="text-align: center;">{% trans "Sign Up" %}</h2>
 
                     <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
                         {% csrf_token %}
@@ -22,7 +23,7 @@
                     </form>
                     <p>{% blocktrans %}Already have an account? Then please
                         <br>
-                        <a class="btn amado-btn w-0" href="{{ login_url }}">
+                        <a class="btn btn-success btn-lg w-0" href="{{ login_url }}">
                             Log In</a>.{% endblocktrans %}</p>
                 </div>
             </div>
