@@ -14,7 +14,7 @@
                         <li class="breadcrumb-item"><a href="{% url 'core:home' %}">Home</a></li>
                         <li class="breadcrumb-item"><a href="/area/{{market_id}}/">{{item.market_name}}</a>
                         </li>
-                        <li class="breadcrumb-item"><a href="/shop-items/{{shop_id}}">{{item.shop}} </a></li>
+                        <li class="breadcrumb-item"><a href="{{ item.shop.get_absolute_url }}">{{item.shop}} </a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{item.category}}</li>
                     </ol>
                 </nav>

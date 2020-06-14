@@ -26,14 +26,18 @@ def home_view(request):
     markets = Area.objects.all().order_by('-updated_at')[:10]
     shops = Shop.objects.all().order_by('-updated_at')[:10]
     items = Item.objects.all().order_by('-updated_at')[:10]
-    top = Item.objects.all().order_by('-updated_at').order_by('-created_at')[:10]
-    new = Item.objects.all().order_by('-updated_at').order_by('updated_at')[:10]
+    top = Item.objects.all().order_by(
+        '-updated_at').order_by('-created_at')[:10]
+    new = Item.objects.all().order_by(
+        '-updated_at').order_by('updated_at')[:10]
     # temp
-    latest = Item.objects.all().order_by('-updated_at').order_by('category')[:10]
+    latest = Item.objects.all().order_by(
+        '-updated_at').order_by('category')[:10]
 
     cats = Category.objects.all().order_by('-updated_at')
 
-    cats_nav = Category.objects.all().order_by('-updated_at').order_by('-updated_at')[:5]
+    cats_nav = Category.objects.all().order_by(
+        '-updated_at').order_by('-updated_at')[:5]
     cat_items = {}
     for cat in cats:
         content = Item.objects.filter(category=cat)
@@ -41,7 +45,7 @@ def home_view(request):
             print("CAT NAME", cat.name)
             cat_items[str(cat.name)] = content
             print(content)
-    # print(cat_items)
+    # print(request.user.shop)
     # print(cat_items['cloth'])
     # slide1 = Slider.objects.all().order_by('-updated_at').first()
     slider = Slider.objects.all().order_by('-updated_at')
@@ -424,7 +428,6 @@ def all_offer_cat(request):
 # can ciew market, shops, and products,
 
 
-
 def get_shops(request, id):
     try:
         print('............................... get shop ##########')
@@ -773,7 +776,8 @@ def search_all(request):
     # def get_queryset(self): # new
     query = request.GET.get('q')
 
-    object_list = Item.objects.filter(title__icontains=query).order_by('-updated_at')
+    object_list = Item.objects.filter(
+        title__icontains=query).order_by('-updated_at')
 
     object_list_shops = Shop.objects.filter(title__icontains=query)
     # object_list_cat = Category.objects.filter(title__icontains=query)
@@ -801,4 +805,3 @@ def search_all(request):
 
     # return render(request, 'a/main/items.html', context)
     return render(request, 'ogani/search/search_all.html', context)
-
