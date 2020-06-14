@@ -1,5 +1,5 @@
 '''Use this for production'''
-from .local import *
+# from .local import *
 import django_heroku
 from .base import *
 import dj_database_url

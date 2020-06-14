@@ -200,13 +200,17 @@ class SliderAdmin(admin.ModelAdmin):
     list_display = ['image_tag', 'caption', 'created_at', 'updated_at']
 
 
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"slug": ("name",)}
+
 # admin.site.register(Order, OrderAdmin)
 # admin.site.register(Payment)
 admin.site.register(Coupon)
 admin.site.register(Refund)
 # admin.site.register(Address, AddressAdmin)
 admin.site.register(UserProfile)
-admin.site.register(Category)
+#admin.site.register(Category)
 admin.site.register(Offer)
 admin.site.register(OrderItem, OrderItemAdmin)
 admin.site.register(Size)

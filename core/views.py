@@ -23,17 +23,21 @@ context = dict()
 
 def home_view(request):
     global context
-    markets = Area.objects.all()[:10]
-    shops = Shop.objects.all()[:10]
-    items = Item.objects.all()[:10]
-    top = Item.objects.all().order_by('-created_at')[:10]
-    new = Item.objects.all().order_by('updated_at')[:10]
+    markets = Area.objects.all().order_by('-updated_at')[:10]
+    shops = Shop.objects.all().order_by('-updated_at')[:10]
+    items = Item.objects.all().order_by('-updated_at')[:10]
+    top = Item.objects.all().order_by(
+        '-updated_at').order_by('-created_at')[:10]
+    new = Item.objects.all().order_by(
+        '-updated_at').order_by('updated_at')[:10]
     # temp
-    latest = Item.objects.all().order_by('category')[:10]
+    latest = Item.objects.all().order_by(
+        '-updated_at').order_by('category')[:10]
 
-    cats = Category.objects.all()
+    cats = Category.objects.all().order_by('-updated_at')
 
-    cats_nav = Category.objects.all().order_by('-updated_at')[:5]
+    cats_nav = Category.objects.all().order_by(
+        '-updated_at').order_by('-updated_at')[:5]
     cat_items = {}
     for cat in cats:
         content = Item.objects.filter(category=cat)
@@ -43,8 +47,8 @@ def home_view(request):
             print(content)
     # print(request.user.shop)
     # print(cat_items['cloth'])
-    # slide1 = Slider.objects.all().first()
-    slider = Slider.objects.all()
+    # slide1 = Slider.objects.all().order_by('-updated_at').first()
+    slider = Slider.objects.all().order_by('-updated_at')
     context = {'items': items, 'shops': shops,
                'markets': markets, 'cats': cats, 'cats_nav': cats_nav,
                'slider': slider,
@@ -61,7 +65,7 @@ def home_view(request):
 
 
 def side_bar(request):
-    shops = Shop.objects.all()[:10]
+    shops = Shop.objects.all().order_by('-updated_at')[:10]
     context = {'shoping': shops}
     return render(request, 'layouts/sidebar.html', context)
 
@@ -110,7 +114,7 @@ def create_ref_code():
 '''
 def products(request):
     context = {
-        'items': Item.objects.all()
+        'items': Item.objects.all().order_by('-updated_at')
     }
     return render(request, "products.html", context)
 '''
@@ -278,7 +282,7 @@ class PaymentView(View):
 
                 # assign the payment to the order
 
-                order_items = order.items.all()
+                order_items = order.items.all().order_by('-updated_at')
                 order_items.update(ordered=True)
                 for item in order_items:
                     item.save()
@@ -411,8 +415,8 @@ class CustomerOrderStatusView(LoginRequiredMixin, View):
 
 def all_offer_cat(request):
     try:
-        category = Category.objects.all()
-        offer = Offer.objects.all()
+        category = Category.objects.all().order_by('-updated_at')
+        offer = Offer.objects.all().order_by('-updated_at')
         context = {'category': category, 'offer': offer}
     # print(items)
         return render(request, 'home.html', context)
@@ -617,11 +621,25 @@ class AddCouponView(View):
 
 @login_required
 def shop_manager_view(request):
-    # orders = Order.objects.filter(item.shop.id=request.user.shop.id)
-    # shop=Order.objects.filter(us)
-    # orders = Order.objects.filter(for_shop=1)
-    print(orders)
-    return render(request, 'ogani/shop_manager/shop_manager.html', {})
+    forms = CreateProductForm()
+    if request.method == 'POST':
+        form = CreateProductForm(request.POST)
+        if form.is_valid():
+            item = Item(
+                shop=form.cleaned_data["shop"],
+                title=form.cleaned_data["title"],
+                price=form.cleaned_data["price"],
+                discount_price=form.cleaned_data["discount_price"],
+                category=form.cleaned_data["category"],
+                offer=form.cleaned_data["offer"],
+                description=form.cleaned_data["description"],
+                image=form.cleaned_data["image"],
+                in_stock=form.cleaned_data["in_stock"],
+            )
+            item.save()
+    items = Item.objects.all().order_by('-updated_at')
+    context = {'items': items, 'forms': forms}
+    return render(request, 'ogani/shop_manager.html', context)
 
 
 '''
@@ -661,10 +679,12 @@ class RequestRefundView(View):
 '''
 
 
-def category_view(request, id):
+def category_view(request, slug):
+    cat = get_object_or_404(Category, slug=slug)
+    id = cat.id
     items = Item.objects.filter(category=id)
     cat = Category.objects.get(id=id)
-    cats = Category.objects.all()
+    cats = Category.objects.all().order_by('-updated_at')
     cat_items = {}
     for ca in cats:
         content = Item.objects.filter(category=ca)
@@ -756,7 +776,8 @@ def search_all(request):
     # def get_queryset(self): # new
     query = request.GET.get('q')
 
-    object_list = Item.objects.filter(title__icontains=query)
+    object_list = Item.objects.filter(
+        title__icontains=query).order_by('-updated_at')
 
     object_list_shops = Shop.objects.filter(title__icontains=query)
     # object_list_cat = Category.objects.filter(title__icontains=query)
@@ -771,7 +792,7 @@ def search_all(request):
     suggestion = None
     if no_result:
 
-        items = Item.objects.all()
+        items = Item.objects.all().order_by('-updated_at')
         suggestion = random.sample(list(items), 30)
 
     context = {'object_list': object_list,
