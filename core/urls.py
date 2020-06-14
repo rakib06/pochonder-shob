@@ -17,19 +17,19 @@ from .views import (
     remove_single_item_from_cart,
     # PaymentView,
     AddCouponView,
-    
+
     MarketsView,
     MarketsView1,
-   
+
     ProductsView,
     get_items,
     # RequestRefundView,
     add_item, add_shop,
     CustomerOrderStatusView,
-    
+
     home_view,
     side_bar,
-    
+
     shop_manager_view,
     ItemDetailView,
     category_view,

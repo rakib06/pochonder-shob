@@ -41,7 +41,7 @@ def home_view(request):
             print("CAT NAME", cat.name)
             cat_items[str(cat.name)] = content
             print(content)
-    # print(cat_items)
+    # print(request.user.shop)
     # print(cat_items['cloth'])
     # slide1 = Slider.objects.all().first()
     slider = Slider.objects.all()
@@ -424,7 +424,6 @@ def all_offer_cat(request):
 # can ciew market, shops, and products,
 
 
-
 def get_shops(request, id):
     try:
         print('............................... get shop ##########')
@@ -618,25 +617,11 @@ class AddCouponView(View):
 
 @login_required
 def shop_manager_view(request):
-    forms = CreateProductForm()
-    if request.method == 'POST':
-        form = CreateProductForm(request.POST)
-        if form.is_valid():
-            item = Item(
-                shop=form.cleaned_data["shop"],
-                title=form.cleaned_data["title"],
-                price=form.cleaned_data["price"],
-                discount_price=form.cleaned_data["discount_price"],
-                category=form.cleaned_data["category"],
-                offer=form.cleaned_data["offer"],
-                description=form.cleaned_data["description"],
-                image=form.cleaned_data["image"],
-                in_stock=form.cleaned_data["in_stock"],
-            )
-            item.save()
-    items = Item.objects.all()
-    context = {'items': items, 'forms': forms}
-    return render(request, 'ogani/shop_manager.html', context)
+    # orders = Order.objects.filter(item.shop.id=request.user.shop.id)
+    # shop=Order.objects.filter(us)
+    # orders = Order.objects.filter(for_shop=1)
+    print(orders)
+    return render(request, 'ogani/shop_manager/shop_manager.html', {})
 
 
 '''
@@ -799,4 +784,3 @@ def search_all(request):
 
     # return render(request, 'a/main/items.html', context)
     return render(request, 'ogani/search/search_all.html', context)
-
