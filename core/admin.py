@@ -203,8 +203,9 @@ class SliderAdmin(admin.ModelAdmin):
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
-    list_display = ['name', 'slug']
-
+    list_display = ['id','name', 'slug']
+    list_editable = ['name', 'slug']
+    list_display_links = ('id',)
 # admin.site.register(Order, OrderAdmin)
 # admin.site.register(Payment)
 admin.site.register(Coupon)
