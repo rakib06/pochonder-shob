@@ -18,6 +18,34 @@
         animation: glow 2s ease-in-out infinite alternate;
     }
 
+    .neons h1 {
+
+        font-size: 2rem;
+        text-align: center;
+        font-weight: bold;
+        -webkit-animation: glow 2s ease-in-out infinite alternate;
+        -moz-animation: glow 2s ease-in-out infinite alternate;
+        animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    .neons span {
+
+    
+        text-align: center;
+        font-weight: bold;
+        -webkit-animation: glow 2s ease-in-out infinite alternate;
+        -moz-animation: glow 2s ease-in-out infinite alternate;
+        animation: glow 2s ease-in-out infinite alternate;
+    }
+    .neons h2 {
+
+        font-size: 2rem;
+        text-align: center;
+        font-weight: bold;
+        -webkit-animation: glow 2s ease-in-out infinite alternate;
+        -moz-animation: glow 2s ease-in-out infinite alternate;
+        animation: glow 2s ease-in-out infinite alternate;
+    }
     @-webkit-keyframes glow {
         from {
             color: rgb(7, 6, 6);
