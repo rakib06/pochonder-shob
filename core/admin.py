@@ -179,7 +179,7 @@ class OrderAdmin(admin.ModelAdmin):
               'user', 'ordered', 'being_packed', 'being_delivered', 'received', 'created_at', 'updated_at']
 
     list_display = ['get_products', 'customer_name', 'comment', 'mobile_number', 'shipping_address',
-                    'ordered', 'being_packed', 'being_delivered', 'received',  'user']
+                    'ordered', 'being_packed', 'being_delivered', 'received',  'user', 'created_at', 'updated_at']
     list_editable = ['being_packed', 'being_delivered', 'received']
 
     def get_products(self, obj):
