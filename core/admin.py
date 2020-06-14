@@ -203,6 +203,7 @@ class SliderAdmin(admin.ModelAdmin):
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
+    list_display = ['name', 'slug']
 
 # admin.site.register(Order, OrderAdmin)
 # admin.site.register(Payment)
