@@ -6,7 +6,7 @@
     float: left;
     
     width: 50%;
-    padding-bottom:25%;
+    padding-bottom:initial;
     
 
 
@@ -17,7 +17,8 @@
     content: "";
     clear: both;
     display: table;
-    padding-bottom:25%;
+    padding-bottom:initial;
+    
    
 }
 
@@ -28,6 +29,7 @@
 
     .phoneContent {
         display: none;
+        
     }
 }
 
