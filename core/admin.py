@@ -104,7 +104,7 @@ class ItemAdmin(admin.ModelAdmin):
                      'price', 'discount_price', ]
 
     search_fields = [
-        'title','category',]
+        'title','category__name',]
 
 
 

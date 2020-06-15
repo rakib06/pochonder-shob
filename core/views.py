@@ -156,13 +156,15 @@ def is_valid_form(values):
 class CheckoutView(View):
     def get(self, *args, **kwargs):
         try:
+            cats_all = Category.objects.all().order_by('-updated_at')
             order = Order.objects.get(user=self.request.user, ordered=False)
             form = CheckoutForm()
             context = {
                 'form': form,
                 'couponform': CouponForm(),
                 'order': order,
-                'DISPLAY_COUPON_FORM': True
+                'DISPLAY_COUPON_FORM': True,
+                'cats_all': cats_all
             }
 
             shipping_address_qs = Address.objects.filter(
@@ -406,12 +408,14 @@ class ProductsView(ListView):
 
 
 class OrderSummaryView(LoginRequiredMixin, View):
+    
     def get(self, *args, **kwargs):
         try:
+            cats_all = Category.objects.all().order_by('-updated_at')
             order = Order.objects.get(user=self.request.user, ordered=False)
             context = {
-                'object': order
-            }
+                'object': order,
+                'cats_all': cats_all,}
             # return render(self.request, 'a/cart.html', context)
             return render(self.request, 'ogani/cart.html', context)
         except ObjectDoesNotExist:
@@ -423,12 +427,13 @@ class CustomerOrderStatusView(LoginRequiredMixin, View):
 
     def get(self, *args, **kwargs):
         try:
-
+            cats_all = Category.objects.all()
             user_orders = Order.objects.filter(
                 user=self.request.user, ordered=True)
             print('...............................', user_orders)
 
-            context = {'object': user_orders}
+            context = {'object': user_orders,
+            'cats_all': cats_all}
             print(user_orders)
             # return render(self.request, 'a/my_order.html', context)
             return render(self.request, 'ogani/my_order.html', context)
@@ -513,10 +518,12 @@ def ItemDetailView(request, slug):
     item = Item.objects.get(slug=slug)
     market_id = item.shop.area.id
     shop_id = item.shop.id
+    cats_all = Category.objects.all()
     context = {
         'item': item,
         'market_id': market_id,
         'shop_id': shop_id,
+        'cats_all': cats_all,
     }
     return render(request, "ogani/product-details.html", context)
 
@@ -715,6 +722,7 @@ def category_view(request, slug):
     cat = Category.objects.get(id=id)
     cats = Category.objects.all().order_by('-updated_at')
     cat_items = {}
+    cats_all = Category.objects.all().order_by('-updated_at')
     for ca in cats:
 
         content = Item.objects.filter(category=ca)
@@ -727,6 +735,7 @@ def category_view(request, slug):
         'items': items,
         'cat': cat,
         'cat_items': cat_items,
+        'cats_all': cats_all,
     }
     return render(request, "ogani/category_view.html", context)
 
@@ -747,9 +756,11 @@ def get_items(request, id):
         category = Category.objects.filter(for_shop=id)
         offer = Offer.objects.filter(for_shop=id)
         shop = Shop.objects.get(pk=id)
+        cats_all = Category.objects.all()
         print('-------77777777777777777777777777777777777-----------------', category)
         context = {'items': items, 'category': category,
-                   'offer': offer, 'shop': shop}
+                   'offer': offer, 'shop': shop,
+                   'cats_all': cats_all}
         print(items)
         # return render(request, 'a/main/items.html', context)
         return render(request, 'ogani/getItems.html', context)
@@ -768,9 +779,12 @@ def get_items_slug(request, slug):
         category = Category.objects.filter(for_shop=id)
         offer = Offer.objects.filter(for_shop=id)
         shop = Shop.objects.get(pk=id)
-        print('-------77777777777777777777777777777777777-----------------', category)
+        cats_all = Category.objects.filter(for_shop=shop).order_by('-updated_at') 
+    
+   
         context = {'items': items, 'category': category,
-                   'offer': offer, 'shop': shop}
+                   'offer': offer, 'shop': shop,
+                   'cats_all': cats_all,}
         print(items)
         # return render(request, 'a/main/items.html', context)
         return render(request, 'ogani/getItems.html', context)
@@ -837,14 +851,3 @@ def search_all(request):
     # return render(request, 'a/main/items.html', context)
     return render(request, 'ogani/search/search_all.html', context)
 
-def search_all(request):
-
-    # template_name = 'ogani/search/search_new.html'
-    # def get_queryset(self): # new
-    cats_all = Category.objects.all().order_by('-updated_at') 
-    
-    context = {
-               'cats_all': cats_all,
-               }
-    # return render(request, 'a/main/items.html', context)
-    return render(request, 'ogani/layout/h.html', context)
