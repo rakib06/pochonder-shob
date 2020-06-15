@@ -20,6 +20,8 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 
 context = dict()
 
+from django.core.files.images import get_image_dimensions
+
 
 def home_view(request):
     global context
@@ -42,6 +44,8 @@ def home_view(request):
         content1 = Item.objects.filter(category=cat)
         for item in content1:
             print (len(item.title))
+            
+        content = sorted(content1, key=lambda x: x.height, reverse=True)
         content = sorted(content1, key=lambda x: len(x.title), reverse=True)
         for item in content:
             print (len(item.title))

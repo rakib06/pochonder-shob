@@ -5,7 +5,9 @@ from django.db.models import Sum
 from django.shortcuts import reverse
 from django_countries.fields import CountryField
 from django.contrib.auth.models import User
-
+ 
+   
+from django.core.files.images import get_image_dimensions
 # discount/new/ Eid Offer
 from django.utils.safestring import mark_safe
 import uuid
@@ -274,18 +276,10 @@ class Item(TimeStampMixin):
             'slug': self.slug
         })
 
-    '''
-    def save(self):
-        super().save()  # saving image first
-
-        img = Image.open(self.image.path)  # Open image using self
-
-        if img.height > 300 or img.width > 300:
-            new_img = (300, 300)
-            img.thumbnail(new_img)
-            img.save(self.image.path)
-    '''
-
+    @property
+    def height(self):
+        width, height = get_image_dimensions(self.image.file)
+        return height
 
 class Size(TimeStampMixin):
     name = models.CharField(max_length=100)
