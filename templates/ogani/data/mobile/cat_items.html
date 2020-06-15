@@ -27,63 +27,58 @@
                         <br>
                         <div class="container">
                             {% for item in ci %}
-                            {% if forloop.counter|divisibleby:2 %}
-                            <div>
 
-                                {% else %}
-                                <div class="card w-100" style="border: transparent;"></div>
-                                {% endif %}
+                            <div class="column" ;>
+
+
                                 <a href="{{ item.get_absolute_url }}">
 
-                                    {% if forloop.counter|divisibleby:2%}
-                                    <div class="column">
-                                        {% else %}
-                                        <div class="column" ;>
-                                            {% endif %}
 
-                                            <sup style="color: rgb(31, 3, 3); size: 1px;">
-                                                {{ item.shop }}'s
-                                            </sup>
-                                            <img src="{{ item.image.url }}" class="img-circle" alt="Pochonder-Shob.com">
-                                            <h5 style="color:white; text-align: center; background-image: linear-gradient(to right, rgba(255, 255, 255, 0.6), rgb(255, 255, 255));
+                                    <div class="card w-50" style="border: transparent;"></div>
+
+
+                                    <sup style="color: rgb(31, 3, 3); size: 1px;">
+                                        {{ item.shop }}'s
+                                    </sup>
+                                    <img src="{{ item.image.url }}" class="img-circle" alt="Pochonder-Shob.com">
+                                    <h5 style="color:white; text-align: center; background-image: linear-gradient(to right, rgba(255, 255, 255, 0.6), rgb(255, 255, 255));
                                             ">
 
-                                                <span style="color: black; size: 2px;">
-                                                    <small>{{ item.title }} </small>
-                                                </span>
+                                        <span style="color: black; size: 2px;">
+                                            <small>{{ item.title }} </small>
+                                        </span>
 
-                                                {% if item.discount_price  %}
-                                                <div style=" padding: center;">
-                                                    <b style="color: black; size: 5px;">{{item.discount_price}}
-                                                        BDT </b>
-                                                </div>
-                                                {% else %}
-                                                <div style="padding: center;"><b
-                                                        style="color: black; size: 5px;">{{item.price}}
-                                                        BDT </b>
-                                                </div>
-                                                {% endif %}
-
-                                            </h5>
-
-
-
-
-
-
+                                        {% if item.discount_price  %}
+                                        <div style=" padding: center;">
+                                            <b style="color: black; size: 5px;">{{item.discount_price}}
+                                                BDT </b>
                                         </div>
-                                </a>
-                            </div>
-                            {% endfor %}
-                        </div>
+                                        {% else %}
+                                        <div style="padding: center;"><b style="color: black; size: 5px;">{{item.price}}
+                                                BDT </b>
+                                        </div>
+                                        {% endif %}
 
+                                    </h5>
+
+
+
+
+
+
+                            </div>
+                            </a>
+                        </div>
+                        {% endfor %}
                     </div>
+
                 </div>
             </div>
-
-
-
         </div>
+
+
+
+    </div>
 
 
     </div>
