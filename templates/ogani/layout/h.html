@@ -39,15 +39,18 @@
             <li><a href="{% url 'core:shops' %}">Shops</a></li>
             {% endif %} -->
             <li><a href="{% url 'core:customer-order' %}">My Order</a></li>
-            <!-- <li>
-                <a href="#">Pages</a>
+            <li>
+                <a href="#">Categories</a>
                 <ul class="header__menu__dropdown">
-                    <li><a href="{% url 'core:products' %}">All Products</a></li>
+                    {% for item in cats %}
+                    <li><a href="{% url 'core:category-view' item.slug %}">{{ item.name }}</a> </li>
+                    {% endfor %}
+                    <!-- <li><a href="{% url 'core:products' %}">All Products</a></li>
                     <li><a href="{% url 'core:order-summary' %}">Shoping Cart</a></li>
                     <li><a href="#">Check Out</a></li>
-                    <li><a href="#">Blog Details</a></li>
+                    <li><a href="#">Blog Details</a></li> -->
                 </ul>
-            </li> -->
+            </li>
             <!-- <li><a href="./blog.html">Blog</a></li> -->
             <li><a href="#footer_content">Contact</a></li>
             {% if request.user.is_authenticated %}
@@ -73,15 +76,12 @@
         </ul> -->
     </div>
 </div>
+<div class="extra" style="height: 1px;background-color: white;"></div>
 <!-- Humberger End -->
 
 <!-- Header Section Begin -->
-<header class="header">
 
-
-
-
-
+<header class="header" style="z-index: 2;" id="sticky_nav1">
     <div class="container">
         <div class="row">
             <div class="col-lg-3">
@@ -89,10 +89,18 @@
                     <a href="{% url 'core:home' %}"><img src="{% static 'ogani/img/logo.png' %}" alt="" /></a>
                 </div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-8">
                 <nav class="header__menu">
                     <ul>
                         <li><a href="{% url 'core:home' %}">Home</a></li>
+                        <li>
+                            <a href="#">Categories</a>
+                            <ul class="header__menu__dropdown" style="width: 300px;left: -100px;">
+                                {% for item in cats %}
+                                <li><a href="{% url 'core:category-view' item.slug %}">{{ item.name }}</a> </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
                         <li><a href="{% url 'core:customer-order' %}">My Order</a></li>
                         <li><a href="#footer_content">Contact</a></li>
                         {% if request.user.is_authenticated %}
@@ -103,26 +111,16 @@
                     </ul>
                 </nav>
             </div>
-
-            <!--
-            <div class="col-lg-3">
-                <div class="header__cart">
-                    <ul>
-                        <li>
-                            <a href="#"><i class="fa fa-heart"></i> <span>1</span></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a>
-                        </li>
-                    </ul>
-
-                </div>
-            </div>
--->
         </div>
         <div class="humberger__open">
             <i class="fa fa-bars"></i>
         </div>
     </div>
 </header>
+<div class="sticky_form" id="sticky_nav">
+    <form action="{% url 'core:search_results' %}" method="get">
+        <input name="q" type="text" placeholder="What do yo u need?" />
+        <button type="submit" class="site-btn">SEARCH</button>
+    </form>
+</div>
 <!-- Header Section End -->
