@@ -34,7 +34,7 @@ def home_view(request):
     latest = Item.objects.all().order_by('category')[:10]
 
     cats = Category.objects.all().order_by('-updated_at')[:10]
-    
+    cats_all = Category.objects.all().order_by('-updated_at') 
     cats = random.sample(list(cats), len(cats))
     cats_nav = cats[:5]
     cat_items = {}
@@ -79,7 +79,8 @@ def home_view(request):
                'cat_items': cat_items,
                'top': top,
                'new': new,
-               'latest': latest
+               'latest': latest,
+               'cats_all': cats_all
 
                }
     # for key, value in con.items():
@@ -835,3 +836,15 @@ def search_all(request):
 
     # return render(request, 'a/main/items.html', context)
     return render(request, 'ogani/search/search_all.html', context)
+
+def search_all(request):
+
+    # template_name = 'ogani/search/search_new.html'
+    # def get_queryset(self): # new
+    cats_all = Category.objects.all().order_by('-updated_at') 
+    
+    context = {
+               'cats_all': cats_all,
+               }
+    # return render(request, 'a/main/items.html', context)
+    return render(request, 'ogani/layout/h.html', context)

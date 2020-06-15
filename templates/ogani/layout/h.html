@@ -96,7 +96,7 @@
                         <li>
                             <a href="#">Categories</a>
                             <ul class="header__menu__dropdown" style="width: 300px;left: -100px;">
-                                {% for item in cats %}
+                                {% for item in cats_all %}
                                 <li><a href="{% url 'core:category-view' item.slug %}">{{ item.name }}</a> </li>
                                 {% endfor %}
                             </ul>
