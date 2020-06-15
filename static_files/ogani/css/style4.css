@@ -4,8 +4,10 @@
 
 .column {
     float: left;
-    width: 25%;
-    padding:0!important;
+    
+    width: 33.33%;
+    padding-bottom: inherit;
+    
 
 
 }
