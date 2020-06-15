@@ -687,7 +687,11 @@ class RequestRefundView(View):
 
 
 def category_view(request, slug):
-    cat = get_object_or_404(Category, slug=slug)
+    try:
+        cat = get_object_or_404(Category, name=slug)
+    except:
+        
+        cat = get_object_or_404(Category, slug=slug)
     id = cat.id
     items = Item.objects.filter(category=id)
     cat = Category.objects.get(id=id)

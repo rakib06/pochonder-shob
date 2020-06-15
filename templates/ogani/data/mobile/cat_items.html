@@ -10,7 +10,7 @@
     .column {
         float: left;
         width: 33.33%;
-        padding: 5px;
+
 
 
     }
@@ -52,22 +52,24 @@
 
                 <div class="card w-100">
                     <div class="card-body">
-                        <div class="neons" style="text-align: center; padding-top: 0%;">
-                            <span>{{key}}</span>
+                        <div class=" neons col-12" style="text-align: center; padding-top: 0%;">
+                            <a style=" text-transform: uppercase; text-align:justify; padding-left: 10px;
+    font-size: 1em;" href="{% url 'core:category-view' name=key %}"><span>{{key}}</span></a>
+
 
                         </div>
                         <br>
-                        <div class="slider">
+                        <div class="container">
                             {% for item in ci %}
                             <a href="{{ item.get_absolute_url }}">
 
-                                <div class="column">
+                                <div class="column" style="width: 33.33%;">
                                     <div class=" col-lg-3">
                                         <div id="image_with_price">
                                             <img src="{{ item.image.url }}" class="img-circle" alt="Pochonder-Shob.com">
                                             <h5 style="color:white; text-align: center; background-image: linear-gradient(to right, rgba(255, 255, 255, 0.6), rgb(255, 255, 255));
                                             ">
-                                                <p style="color: black;">
+                                                <p style="color: black; size: 10em;">
                                                     {{ item.title }}
                                                 </p>
                                                 {% if item.discount_price  %}
