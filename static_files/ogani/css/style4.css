@@ -6,7 +6,7 @@
     float: left;
     
     width: 33.33%;
-    padding-bottom:5em;
+    
     
 
 
@@ -17,6 +17,7 @@
     content: "";
     clear: both;
     display: table;
+    padding-bottom:5em;
 }
 
 @media all and (min-width: 480px) {
