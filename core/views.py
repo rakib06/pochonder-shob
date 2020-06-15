@@ -40,18 +40,26 @@ def home_view(request):
     for cat in cats:
         
         content1 = Item.objects.filter(category=cat)
-    
+        for item in content1:
+            print (len(item.title))
         content = sorted(content1, key=lambda x: len(x.title), reverse=True)
-
-        print(content)
+        for item in content:
+            print (len(item.title))
+        print(content1)
+        print('hi',content)
         try:
             x = random.randint(6,len(content))
             content = random.sample(list(content), 6)
+            content = sorted(content, key=lambda x: len(x.title), reverse=False)
         except:
             if (len(content)<6):
                 content = random.sample(list(content), len(content))
+                content = sorted(content, key=lambda x: len(x.title), reverse=False)
+                
+
             else:
                 content = random.sample(list(content), len(content))
+                content = sorted(content, key=lambda x: len(x.title), reverse=False)
         if cat.name not in cat_items.keys():
             
             if len(content)>0 :
