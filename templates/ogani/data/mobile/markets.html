@@ -1,0 +1,51 @@
+{% load static %}
+
+<section>
+    <div class="container" style="border: transparent;">
+        <div class="row">
+
+            <div class="card w-100" style="border: transparent;">
+                <div class="card-body" style="border: transparent;">
+                    <h5 style="text-align: center;" class="card-title"></h5>
+                    <div class="categories__slider owl-carousel">
+                        {% for item in markets %}
+                        <a href="{{ item.get_absolute_url }}">
+                            <div class=" col-lg-3">
+
+                                <img src="{{ item.image.url }}" class="img-circle" alt="Pochonder-Shob.com" width="60">
+
+                                <h5 style="color:white; text-align: center; background-image: linear-gradient(to right, rgba(255,255,255,0.6), rgb(255, 253, 249));
+                    ">
+                                    <div class="neons ">
+                                        <p style="color: black;">
+                                            <b>
+                                                {{ item.name }}
+                                            </b>
+                                        </p>
+
+                                    </div>
+                                </h5>
+
+
+
+                            </div>
+
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row"
+            style=" position:-webkit-sticky; background-image: linear-gradient(to right, rgba(255,255,255,0.6), rgb(5, 205, 223, .4));">
+
+            <a href="{% url 'core:shops' %}" style="color: black;" id="myBtn1" class="btn btn-lg btn-block"
+                title="See all shops">
+                <div class="neons">
+                    <span>Find Your Most Wished Markets </span>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
