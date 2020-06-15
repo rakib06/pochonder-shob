@@ -17,7 +17,7 @@
     content: "";
     clear: both;
     display: table;
-    padding-bottom:8em;
+    padding-bottom:10em;
 }
 
 @media all and (min-width: 480px) {
