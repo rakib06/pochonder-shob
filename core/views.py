@@ -45,7 +45,7 @@ def home_view(request):
         for item in content1:
             print (len(item.title))
             
-        content = sorted(content1, key=lambda x: x.height, reverse=True)
+       
         content = sorted(content1, key=lambda x: len(x.title), reverse=True)
         for item in content:
             print (len(item.title))
