@@ -83,7 +83,7 @@ class Shop(TimeStampMixin):
     title = models.CharField(max_length=100)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     photo = models.ImageField(upload_to='shops/')
-    slug = models.SlugField(verbose_name="Shop URL",null=False, unique=True)
+    slug = models.SlugField(verbose_name="Shop URL", null=False, unique=True)
     shop_type = models.ForeignKey(
         ShopType, on_delete=models.SET_NULL, null=True, blank=True)
     area = models.ForeignKey(
@@ -97,7 +97,6 @@ class Shop(TimeStampMixin):
         x = Item.objects.filter(shop=self.id).count()
         print('*********************8888', x)
         return x
-    
 
     '''
     def get_absolute_url_1(self):
@@ -109,7 +108,7 @@ class Shop(TimeStampMixin):
 
     '''
     # shop category
-    
+
     def get_category(self):
 
         cats = Category.objects.filter(for_shop=self.id)
@@ -156,14 +155,15 @@ class Shop(TimeStampMixin):
 class Category(TimeStampMixin):
     name = models.CharField(max_length=100)
     for_shop = models.ManyToManyField(Shop)
-    slug = models.SlugField(verbose_name="Cat URL",null=False, unique=True)
+    slug = models.SlugField(verbose_name="Cat URL", null=False, unique=True)
+
     def __str__(self):
         return self.name
 
     class Meta:
         verbose_name = 'Category'
         verbose_name_plural = 'Categories'
-    
+
     def get_absolute_url(self):
         return reverse("core:category-view", kwargs={
             # ei khane sudu oi shop er jinish jeno dekhay sei babostha korte hobe
