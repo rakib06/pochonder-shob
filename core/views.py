@@ -33,9 +33,10 @@ def home_view(request):
     # temp
     latest = Item.objects.all().order_by('category')[:10]
 
-    cats = Category.objects.all().order_by('-updated_at')[:10]
+    
     cats_all = Category.objects.all().order_by('-updated_at') 
-    cats = random.sample(list(cats), len(cats))
+    cats = Category.objects.all()
+    cats = random.sample(list(cats), 5)
     cats_nav = cats[:5]
     cat_items = {}
    
@@ -46,14 +47,12 @@ def home_view(request):
             print (len(item.title))
             
        
-        content = sorted(content1, key=lambda x: len(x.title), reverse=True)
-        for item in content:
-            print (len(item.title))
-        print(content1)
-        print('hi',content)
+        content = sorted(content1, key=lambda x: len(x.title), reverse=False)
+     
+        
         try:
-            x = random.randint(6,len(content))
-            content = random.sample(list(content), 6)
+            
+            content = random.sample(list(content), 4)
             content = sorted(content, key=lambda x: len(x.title), reverse=False)
         except:
             if (len(content)<6):
