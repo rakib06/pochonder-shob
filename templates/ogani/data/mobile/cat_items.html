@@ -62,28 +62,30 @@
                             <a href="{{ item.get_absolute_url }}">
 
                                 <div class="column">
-                                    <div id="image_with_price">
-                                        <img src="{{ item.image.url }}" class="img-circle" alt="Pochonder-Shob.com">
-                                        <h5 style="color:white; text-align: center; background-image: linear-gradient(to right, rgba(255, 255, 255, 0.6), rgb(255, 255, 255));
+                                    <div class=" col-lg-3">
+                                        <div id="image_with_price">
+                                            <img src="{{ item.image.url }}" class="img-circle" alt="Pochonder-Shob.com">
+                                            <h5 style="color:white; text-align: center; background-image: linear-gradient(to right, rgba(255, 255, 255, 0.6), rgb(255, 255, 255));
                                             ">
-                                            <p style="color: black;">
-                                                {{ item.title }}
-                                            </p>
-                                            {% if item.discount_price  %}
-                                            <div style="text-size-adjust:inherit; padding: center;">
-                                                <b style="color: black;">{{item.discount_price}}
-                                                    BDT </b>
-                                            </div>
-                                            {% else %}
-                                            <div style="text-size-adjust:inherit; padding: center;"><b
-                                                    style="color: black;">{{item.price}}
-                                                    BDT </b></div>
-                                            {% endif %}
+                                                <p style="color: black;">
+                                                    {{ item.title }}
+                                                </p>
+                                                {% if item.discount_price  %}
+                                                <div style="text-size-adjust:inherit; padding: center;">
+                                                    <b style="color: black;">{{item.discount_price}}
+                                                        BDT </b>
+                                                </div>
+                                                {% else %}
+                                                <div style="text-size-adjust:inherit; padding: center;"><b
+                                                        style="color: black;">{{item.price}}
+                                                        BDT </b></div>
+                                                {% endif %}
 
-                                        </h5>
+                                            </h5>
 
 
 
+                                        </div>
                                     </div>
 
                                 </div>
