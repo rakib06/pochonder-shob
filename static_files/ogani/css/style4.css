@@ -6,7 +6,7 @@
     float: left;
     
     width: 50%;
-    
+    padding-bottom:inherit;
     
 
 
@@ -17,7 +17,9 @@
     content: "";
     clear: both;
     display: table;
-    padding-bottom:5em;
+    padding-bottom:initial;
+    
+   
 }
 
 @media all and (min-width: 480px) {
@@ -27,6 +29,7 @@
 
     .phoneContent {
         display: none;
+        
     }
 }
 

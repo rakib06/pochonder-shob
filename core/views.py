@@ -20,6 +20,8 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 
 context = dict()
 
+from django.core.files.images import get_image_dimensions
+
 
 def home_view(request):
     global context
@@ -31,22 +33,37 @@ def home_view(request):
     # temp
     latest = Item.objects.all().order_by('category')[:10]
 
-    cats = Category.objects.all().order_by('-updated_at')
+    cats = Category.objects.all().order_by('-updated_at')[:10]
     
     cats = random.sample(list(cats), len(cats))
     cats_nav = cats[:5]
     cat_items = {}
    
     for cat in cats:
-        content = Item.objects.filter(category=cat)
+        
+        content1 = Item.objects.filter(category=cat)
+        for item in content1:
+            print (len(item.title))
+            
+       
+        content = sorted(content1, key=lambda x: len(x.title), reverse=True)
+        for item in content:
+            print (len(item.title))
+        print(content1)
+        print('hi',content)
         try:
             x = random.randint(6,len(content))
             content = random.sample(list(content), 6)
+            content = sorted(content, key=lambda x: len(x.title), reverse=False)
         except:
             if (len(content)<6):
                 content = random.sample(list(content), len(content))
+                content = sorted(content, key=lambda x: len(x.title), reverse=False)
+                
+
             else:
                 content = random.sample(list(content), len(content))
+                content = sorted(content, key=lambda x: len(x.title), reverse=False)
         if cat.name not in cat_items.keys():
             
             if len(content)>0 :
