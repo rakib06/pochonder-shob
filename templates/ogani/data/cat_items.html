@@ -1,66 +1,85 @@
 {% load static %}
 
 {% for key,ci in cat_items.items %}
+
+
+
 <section>
-    <div class="container">
-        <div class="row">
+    <div class="deskContent">
 
-            <div class="card w-100">
-                <div class="card-body">
-                    <h5 style="text-align: center;" class="card-title">{{ci.keys}}</h5>
-                    <div class="categories__slider owl-carousel">
-                        {% for item in ci %}
-                        <a href="{{ item.get_absolute_url }}">
-                            <div class=" col-lg-3">
-                                <div id="image_with_price">
-                                    <img src="{{ item.image.url }}" class="img-circle" alt="Pochonder-Shob.com"
-                                        width="60" height="150">
+        <div class="container">
 
-                                    {% if item.discount_price  %}
-                                    <div style="text-size-adjust:inherit;" id="price_tag"><small>{{item.discount_price}}
-                                            BDT </small>
-                                    </div>
-                                    {% else %}
-                                    <div style="text-size-adjust:inherit;" id="price_tag"><small>{{item.price}}
-                                            BDT </small></div>
-                                    {% endif %}
+            <div class="row">
 
-                                    <h5 style="color:white; text-align: center; background-image: linear-gradient(to right, rgba(255,0,0,0.6), rgba(0,0,0,1));
-                    ">
-                                        <b>
-                                            {{ item.title }}
-                                        </b>
+                <div class="card w-100">
+                    <div class="card-body">
+                        <div class=" row ">
 
-                                    </h5>
-                                </div>
+
+
+                            <div class=" neons col-12" style="text-align: center; padding-top: 0%;">
+                                <a style=" text-transform: uppercase; text-align:justify; padding-left: 10px;
+        font-size: 1em;" href="{% url 'core:category-view' name=key %}"><span>{{key}}</span></a>
+                                <sup style="color: black; size: 5px;"> Click here to see
+                                    all</sup>
 
                             </div>
-                        </a>
-                        {% endfor %}
+
+                        </div>
+                        <br>
+                        <div class="categories__slider owl-carousel">
+                            {% for item in ci %}
+                            <a href="{{ item.get_absolute_url }}">
+                                <div class=" col-lg-3">
+                                    <div id="image_with_price">
+                                        <img src="{{ item.image.url }}" class="img-circle" alt="Pochonder-Shob.com"
+                                            width="60">
+
+                                        {% if item.discount_price  %}
+                                        <div style="text-size-adjust:inherit;" id="price_tag">
+                                            <small>{{item.discount_price}}
+                                                BDT </small>
+                                        </div>
+                                        {% else %}
+                                        <div style="text-size-adjust:inherit;" id="price_tag"><small>{{item.price}}
+                                                BDT </small></div>
+                                        {% endif %}
+
+                                        <h5 style="color:white; text-align: center; background-image: linear-gradient(to right, rgba(255, 255, 255, 0.6), rgb(255, 255, 255));
+                    ">
+                                            <b style="color: black;">
+                                                {{ item.title }}
+                                            </b> <sup style="color: black; size: 5px;"> from {{ item.shop }}
+                                            </sup>
+
+                                        </h5>
+                                    </div>
+
+                                </div>
+                            </a>
+
+                            {% endfor %}
+
+
+
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        {% if forloop.counter|divisibleby:2 %}
-        <div class="row bg-dark "
-            style="border: black;  background-image: linear-gradient(to right, rgba(27, 25, 25, 0.6), rgb(39, 20, 121, .9));">
-
-            {% else %}
-            <div class="row bg-dark "
-                style="border: black;  background-image: linear-gradient(to right, rgba(211, 30, 135, 0.6), rgba(121, 77, 20, 0.9));">
-
-
-                {% endif %}
 
 
 
 
-                <a href="{% url 'core:category-view' ci.first.category.slug %}" style="color: white;" id="myBtn1"
-                    class="btn btn-lg btn-block" title="See all {{key}}">
-                    <span>Find All {{key}}</span>
-                </a>
-            </div>
+
+
         </div>
     </div>
+
+
+
+
 </section>
 {% endfor %}
+
+
+{% include 'ogani/data/mobile/cat_items.html' %}

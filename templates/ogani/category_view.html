@@ -86,23 +86,25 @@
 <br>
         {% for key,ci in cat_items.items %}
         
-        {% if forloop.counter|divisibleby:2 %}
-        <div class=" row bg-dark "
-            style=" background-image: linear-gradient(to right, rgba(27, 25, 25, 0.6), rgb(39, 20, 121, .9));">
+      
+        <div class=" row ">
 
-                            {% else %}
-                            <div class="row bg-dark "
-                                style="border: black;  background-image: linear-gradient(to right, rgba(211, 30, 135, 0.6), rgba(121, 77, 20, 0.9));">
-                                {% endif %}
-                                <a href="{% url 'core:category-view' ci.first.category.id %}" style="color: white;"
-                                    id="myBtn1" class="btn btn-lg btn-block" title="See all {{key}}">
-                                    <small>See {{key}}</small>
-                                </a>
-                            </div>
+
+
+                            <div class=" neons col-12" style="text-align: center; padding-top: 0%;">
+                            <a style=" text-transform: uppercase; text-align:justify; padding-left: 10px;
+        font-size: 1em;" href="{% url 'core:category-view' ci.first.category.slug %}"><span>{{key}}</span></a>
+
+
                     </div>
-                    {%endfor%}
-                    <br>
+
                 </div>
-                {% endblock %}
+
+                {%endfor%}
+                <br>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
 
 </section>

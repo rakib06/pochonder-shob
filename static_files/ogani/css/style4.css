@@ -1,0 +1,41 @@
+* {
+    box-sizing: border-box;
+}
+
+.column {
+    float: left;
+    
+    width: 50%;
+    
+    
+
+
+}
+
+/* Clearfix (clear floats) */
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+    padding-bottom:5em;
+}
+
+@media all and (min-width: 480px) {
+    .deskContent {
+        display: block;
+    }
+
+    .phoneContent {
+        display: none;
+    }
+}
+
+@media all and (max-width: 479px) {
+    .deskContent {
+        display: none;
+    }
+
+    .phoneContent {
+        display: block;
+    }
+}

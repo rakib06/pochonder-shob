@@ -25,31 +25,38 @@ def home_view(request):
     global context
     markets = Area.objects.all().order_by('-updated_at')[:10]
     shops = Shop.objects.all().order_by('-updated_at')[:10]
-    items = Item.objects.all().order_by('-updated_at')[:10]
-    top = Item.objects.all().order_by(
-        '-updated_at').order_by('-created_at')[:10]
-    new = Item.objects.all().order_by(
-        '-updated_at').order_by('updated_at')[:10]
+    # items = Item.objects.all().order_by('-updated_at')[:10]
+    top = Item.objects.all().order_by('-created_at')[:10]
+    new = Item.objects.all().order_by('updated_at')[:10]
     # temp
-    latest = Item.objects.all().order_by(
-        '-updated_at').order_by('category')[:10]
+    latest = Item.objects.all().order_by('category')[:10]
 
     cats = Category.objects.all().order_by('-updated_at')
-
-    cats_nav = Category.objects.all().order_by(
-        '-updated_at').order_by('-updated_at')[:5]
+    
+    cats = random.sample(list(cats), len(cats))
+    cats_nav = cats[:5]
     cat_items = {}
+   
     for cat in cats:
         content = Item.objects.filter(category=cat)
+        try:
+            x = random.randint(6,len(content))
+            content = random.sample(list(content), 6)
+        except:
+            if (len(content)<6):
+                content = random.sample(list(content), len(content))
+            else:
+                content = random.sample(list(content), len(content))
         if cat.name not in cat_items.keys():
-            print("CAT NAME", cat.name)
-            cat_items[str(cat.name)] = content
-            print(content)
+            
+            if len(content)>0 :
+                cat_items[str(cat.name)] = content
+                
     # print(request.user.shop)
     # print(cat_items['cloth'])
     # slide1 = Slider.objects.all().order_by('-updated_at').first()
-    slider = Slider.objects.all().order_by('-updated_at')
-    context = {'items': items, 'shops': shops,
+    slider = Slider.objects.all().order_by('-updated_at')[:5]
+    context = { 'shops': shops,
                'markets': markets, 'cats': cats, 'cats_nav': cats_nav,
                'slider': slider,
                'cat_items': cat_items,
@@ -680,17 +687,23 @@ class RequestRefundView(View):
 
 
 def category_view(request, slug):
-    cat = get_object_or_404(Category, slug=slug)
+    try:
+        cat = get_object_or_404(Category, name=slug)
+    except:
+        
+        cat = get_object_or_404(Category, slug=slug)
     id = cat.id
     items = Item.objects.filter(category=id)
     cat = Category.objects.get(id=id)
     cats = Category.objects.all().order_by('-updated_at')
     cat_items = {}
     for ca in cats:
+
         content = Item.objects.filter(category=ca)
         if cat.name not in cat_items.keys():
             print("CAT NAME", ca.name)
-            cat_items[str(ca.name)] = content
+            if len(content) > 0:
+                cat_items[str(ca.name)] = content
             print(content)
     context = {
         'items': items,

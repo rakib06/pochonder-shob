@@ -62,6 +62,8 @@ urlpatterns = [
     # path('shop-manager/', shop_manager_view, name='shop-manager'),
     path('markets/', MarketsView1.as_view(), name='markets'),
     path('category/<slug>/', category_view, name="category-view"),
+    path('category/<name>/', category_view, name="category-view"),
+    # path('category/<name:name>/', category_view, name="category-view"),
     path('shop/<slug:slug>/', get_items_slug, name='shop-items'),
     path('area/<id>/', get_shops, name='area-shops'),
     path('shops-cat/<id>', get_shop_cat_items,
