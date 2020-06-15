@@ -1,5 +1,6 @@
 {% load static %}
 
+
 {% for key,ci in cat_items.items %}
 
 
@@ -25,8 +26,8 @@
                             {% for item in ci %}
                             <a href="{{ item.get_absolute_url }}">
 
-                                <div class="column" style="width: 33.33%;">
-                                    <div class=" col-sm-3">
+                                <div class="column">
+                                    <div class=" col-sm-6">
                                         <div id="image_with_price">
                                             <sup style="color: rgb(31, 3, 3); size: 1px;">
                                                 {{ item.shop }}'s
@@ -62,6 +63,7 @@
                             </a>
                             {% endfor %}
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -78,5 +80,11 @@
 
 
 </section>
+
+{% if  forloop.counter == 1 %}
+<p>
+
+</p>
+{% endif %}
 
 {% endfor %}
