@@ -103,6 +103,11 @@ class ItemAdmin(admin.ModelAdmin):
     list_editable = ['in_stock', 'title', 'category', 'in_stock', 'description',
                      'price', 'discount_price', ]
 
+    search_fields = [
+        'title','category',]
+
+
+
     def changelist_view(self, request, extra_context=None):
         if not request.user.is_superuser:
             self.list_display = ('image_tag', 'title', 'price',
