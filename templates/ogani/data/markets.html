@@ -14,11 +14,13 @@
 
                                 <img src="{{ item.image.url }}" class="img-circle" alt="Pochonder-Shob.com" width="60">
 
-                                <h5 style="color:white; text-align: center; background-image: linear-gradient(to right, rgba(255,255,255,0.6), rgb(230, 143, 13));
+                                <h5 style="color:white; text-align: center; background-image: linear-gradient(to right, rgba(255,255,255,0.6), rgb(255, 253, 249));
                     ">
                                     <div class="neons ">
                                         <p style="color: black;">
-                                            {{ item.name }}
+                                            <b>
+                                                {{ item.name }}
+                                            </b>
                                         </p>
 
                                     </div>
@@ -35,13 +37,13 @@
             </div>
         </div>
 
-        <div class="row  "
+        <div class="row"
             style=" position:-webkit-sticky; background-image: linear-gradient(to right, rgba(255,255,255,0.6), rgb(5, 205, 223, .4));">
 
-            <a href="{% url 'core:markets' %}" style="color: black;" id="myBtn1" class="btn btn-lg btn-block"
-                title="See all markets">
+            <a href="{% url 'core:shops' %}" style="color: black;" id="myBtn1" class="btn btn-lg btn-block"
+                title="See all shops">
                 <div class="neons">
-                    <span>Find your most wished Markets</span>
+                    <span>Find Your Most Wished Markets </span>
                 </div>
             </a>
         </div>
