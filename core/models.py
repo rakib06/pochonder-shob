@@ -21,6 +21,36 @@ class TimeStampMixin(models.Model):
 
 
 # class area for jolil tower, shopping complex, nixon market etc
+class RootCat(TimeStampMixin):
+    title = models.CharField(max_length=100)
+    image = models.ImageField(
+        upload_to='rootcat', default='ps/5.png', blank=True, null=True)
+
+    @property
+    def category(self):
+        x = Category.objects.filter(tags__icontains=self.title)
+        return x
+
+    def __str__(self):
+        return self.title
+
+    def image_tag(self):
+        if self.image:
+            return mark_safe('<img src="%s" style="width: 45px; height:45px;" />' % self.image.url)
+        else:
+            return 'No Image Found'
+    
+    image_tag.short_description = 'Image'
+    
+    def get_absolute_url(self):
+
+        return reverse("core:area-shops", kwargs={
+            # ei khane sudu oi shop er jinish jeno dekhay sei babostha korte hobe
+            'id': self.id
+        })
+    # shop category
+
+# class area for jolil tower, shopping complex, nixon market etc
 class Area(TimeStampMixin):
     name = models.CharField(max_length=100)
     image = models.ImageField(
@@ -156,7 +186,7 @@ class Category(TimeStampMixin):
     name = models.CharField(max_length=100)
     for_shop = models.ManyToManyField(Shop)
     slug = models.SlugField(verbose_name="Cat URL", null=False, unique=True)
-
+    tags = models.CharField(max_length=500)
     def __str__(self):
         return self.name
 

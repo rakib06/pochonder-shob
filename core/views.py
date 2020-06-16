@@ -10,7 +10,7 @@ from django.views.generic import ListView, DetailView, View, CreateView
 from django.shortcuts import redirect
 from django.utils import timezone
 from .forms import ItemForm, ShopForm, CheckoutForm, CouponForm, RefundForm, PaymentForm, CreateProductForm
-from .models import Item, OrderItem, Order, Address, Refund, UserProfile, Slider, Shop, Category, Offer, Area
+from .models import Item, RootCat, OrderItem, Order, Address, Refund, UserProfile, Slider, Shop, Category, Offer, Area
 
 
 import random
@@ -36,8 +36,9 @@ def home_view(request):
     
     cats_all = Category.objects.all().order_by('-updated_at') 
     cats = Category.objects.all()
-    cats = random.sample(list(cats), 5)
+    cats = random.sample(list(cats), len(cats))
     cats_nav = cats[:5]
+    root_cat = RootCat.objects.all()
     cat_items = {}
    
     for cat in cats:
@@ -79,7 +80,8 @@ def home_view(request):
                'top': top,
                'new': new,
                'latest': latest,
-               'cats_all': cats_all
+               'cats_all': cats_all,
+               'root_cat': root_cat,
 
                }
     # for key, value in con.items():

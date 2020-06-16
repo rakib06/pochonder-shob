@@ -17,9 +17,20 @@
             <li>
                 <a>Categories</a>
                 <ul class="header__menu__dropdown">
-                    {% for item in cats %}
-                    <li><a href="{% url 'core:category-view' item.slug %}">{{ item.name }}</a> </li>
+
+                    {% for item in root_cat %}
+                    <a> <b>{{ item.title }} </b> </a>
+                    <ul class="header__menu__dropdown">
+
+                        {% for ccat in item.category %}
+
+                        <li><a style="color: black; padding-left: 10px; "
+                                href="{% url 'core:category-view' ccat.slug %}">{{ ccat.name }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
                     {% endfor %}
+
                     <!-- <li><a href="{% url 'core:products' %}">All Products</a></li>
                     <li><a href="{% url 'core:order-summary' %}">Shoping Cart</a></li>
                     <li><a href="#">Check Out</a></li>
@@ -70,13 +81,28 @@
                         <li><a href="{% url 'core:home' %}">Home</a></li>
                         <li>
                             <a href="#">Categories</a>
-                            <ul class="header__menu__dropdown" style="width: 300px;left: -100px;">
-                                {% for item in cats_all %}
-                                <li><a href="{% url 'core:category-view' item.slug %}">{{ item.name }}</a> </li>
-                                {% endfor %}
+                            <ul class="header__menu__dropdown"
+                                style="background-color:rgb(251, 244, 244) ; width: 900px; height: 100%;  ">
+
+
+
+                                <div class="row" style="background-color:rgb(255, 255, 255)">
+                                    {% for item in root_cat %}
+                                    <div style="size: 50%; float: left; width: 33.33%; padding: 2px;">
+                                        <li><a style="color: black;"><b>{{ item.title }} </b> </li>
+                                        {% for ccat in item.category %}
+
+                                        <li><a style="color: black; padding-right: 5px;"
+                                                href="{% url 'core:category-view' ccat.slug %}">{{ ccat.name }}</a>
+                                        </li>
+                                        {% endfor %}
+                                    </div>
+                                    {% endfor %}
+                                </div>
                             </ul>
+
                         </li>
-                        <li><a href="{% url 'core:customer-order' %}">My Order</a></li>
+                        <li><a href=" {% url 'core:customer-order' %}">My Order</a></li>
                         <li><a href="#footer_content">Contact</a></li>
                         {% if request.user.is_authenticated %}
                         <li><a href="\accounts\logout\">Logout</a></li>

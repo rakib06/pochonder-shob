@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import reverse
 from .models import (Item, OrderItem, Order, Shop, Coupon,
-                     Refund, Address, UserProfile, Category, Offer, ShopType, Area, Size, Slider)
+                     Refund, Address, UserProfile, Category, Offer, ShopType, Area, RootCat, Size, Slider)
 from django.contrib.contenttypes.admin import GenericTabularInline
 
 
@@ -208,8 +208,15 @@ class SliderAdmin(admin.ModelAdmin):
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
-    list_display = ['id','name', 'slug']
-    list_editable = ['name', 'slug']
+    list_display = ['id','name', 'slug', 'tags']
+    list_editable = ['name', 'slug', 'tags']
+    list_display_links = ('id',)
+
+@admin.register(RootCat)
+class RootCatAdmin(admin.ModelAdmin):
+    # prepopulated_fields = {"slug": ("name",)}
+    list_display = ['id','title', ]
+    list_editable = [ 'title']
     list_display_links = ('id',)
 # admin.site.register(Order, OrderAdmin)
 # admin.site.register(Payment)
