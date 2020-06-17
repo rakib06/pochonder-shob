@@ -92,7 +92,9 @@ def home_view(request):
 
 def side_bar(request):
     shops = Shop.objects.all().order_by('-updated_at')[:10]
-    context = {'shoping': shops}
+    root_cat = RootCat.objects.all()
+    context = {'shoping': shops,
+    'root_cat': root_cat }
     return render(request, 'layouts/sidebar.html', context)
 
 
@@ -486,7 +488,8 @@ def get_shop_cat_items(request, id):
         items = Item.objects.filter(category=id)
         offer = Offer.objects.filter(for_shop=id)
         # print('-------77777777777777777777777777777777777-----------------', category)
-        context = {'items': items, 'category': category, 'offer': offer}
+        context = {'items': items, 'category': category, 'offer': offer,
+        'root_cat': RootCat.objects.all()}
 
         print(items)
         return render(request, 'shop-items.html', context)
@@ -505,7 +508,8 @@ def get_shopoffe(request, id):
         items = Item.objects.filter(Offer=id)
         offer = Offer.objects.filter(for_shop=id)
         # print('-------77777777777777777777777777777777777-----------------', category)
-        context = {'items': items, 'category': category, 'offer': offer}
+        context = {'items': items, 'category': category, 'offer': offer,'root_cat': RootCat.objects.all() 
+        }
 
         # print(items)
         return render(request, 'shop-items.html', context)
@@ -737,6 +741,7 @@ def category_view(request, slug):
         'cat': cat,
         'cat_items': cat_items,
         'cats_all': cats_all,
+        'root_cat': RootCat.objects.all()
     }
     return render(request, "ogani/category_view.html", context)
 
@@ -761,7 +766,8 @@ def get_items(request, id):
         print('-------77777777777777777777777777777777777-----------------', category)
         context = {'items': items, 'category': category,
                    'offer': offer, 'shop': shop,
-                   'cats_all': cats_all}
+                   'cats_all': cats_all,
+                   'root_cat': RootCat.objects.all()}
         print(items)
         # return render(request, 'a/main/items.html', context)
         return render(request, 'ogani/getItems.html', context)
@@ -784,7 +790,7 @@ def get_items_slug(request, slug):
     
    
         context = {'items': items, 'category': category,
-                   'offer': offer, 'shop': shop,
+                   'offer': offer, 'shop': shop,'root_cat' : RootCat.objects.all(),
                    'cats_all': cats_all,}
         print(items)
         # return render(request, 'a/main/items.html', context)
@@ -847,6 +853,7 @@ def search_all(request):
                'no_result': no_result,
                'suggestion': suggestion,
                'cats': cats,
+               'root_cat': RootCat.objects.all()
                }
 
     # return render(request, 'a/main/items.html', context)
