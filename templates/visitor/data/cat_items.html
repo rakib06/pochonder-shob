@@ -86,6 +86,16 @@
 
 
 </section>
+
+{% if  forloop.counter == 5 %}
+{% include 'visitor/data/markets.html' %}
+{% endif %}
+
+
+{% if  forloop.counter == 2 %}
+{% include 'visitor/data/shops.html' %}
+{% endif %}
+
 {% endfor %}
 
 
