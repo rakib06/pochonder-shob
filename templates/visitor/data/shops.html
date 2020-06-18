@@ -1,49 +1,90 @@
 {% load static %}
-
 <section>
-    <div class="container" style="border: transparent;">
-        <div class="row">
+    <div class="deskContent">
 
-            <div class="card w-100" style="border: transparent;">
-                <div class="card-body" style="border: transparent;">
-                    <h5 style="text-align: center;" class="card-title"></h5>
-                    <div class="categories__slider owl-carousel">
-                        {% for item in shops %}
-                        <a href="{{ item.get_absolute_url }}">
-                            <div class=" col-lg-3">
+        <div class="container">
 
-                                <img src="{{ item.photo.url }}" class="img-circle" alt="Pochonder-Shob.com" width="60">
+            <div class="row">
 
-                                <h5 style="color:white; text-align: center; background-image: linear-gradient(to right, rgba(255,255,255,0.6), rgb(136, 135, 133));
-                    ">
-                                    <div class="neons ">
-                                        <p style="color: black;">
-                                            {{ item.title }}
-                                        </p>
+                <div class="card w-100">
+                    <div class="card-body">
+                        <div class=" row ">
 
-                                    </div>
-                                </h5>
+
+
+                            <div class=" col-12" style="text-align: left; padding-top: 0%; ">
+                                <a style=" text-transform: uppercase; text-align:justify; padding-left: 10px;
+        font-size: 1em;" href="{% url 'core:category-view' name=key %}"><span style="color: black;">
+                                        <b>Finding your
+                                            favourite Market?</b></span></a>
+
+
+                            </div>
+                            <hr>
+                        </div>
+                        <hr style="color: black; background-color: black;">
+                        <div class="categories__slider owl-carousel">
+                            {% for item in shops %}
+
+
+                            <div class="column" style="  overflow: hidden; float: left; margin:0 auto; padding:20px 0;">
+
+                                <!-- Product Image -->
+
+
+                                <a href="{{ item.get_absolute_url }}">
+
+
+
+
+
+                                    <img src="{{ item.photo.url }}" class="img-circle" alt="Pochonder-Shob.com">
+                                    <h5 style="color:white; text-align: center; background-image: linear-gradient(to right, rgba(255, 255, 255, 0.6), rgb(255, 255, 255));
+                                            ">
+
+
+                                        {% if item.items_count > 10 %}
+                                        <span style="color: black; size: 2px;">
+                                            <small> {{ item.items_count }} Items </small>
+                                        </span>
+                                        {% endif %}
+
+                                        <div style=" padding: center;">
+                                            <b style="color: black; size: 5px;">{{item.title}}
+                                            </b>
+                                        </div>
+
+
+
+                                    </h5>
+
+
+
+
+                                </a>
+
 
 
 
                             </div>
+                            {% endfor %}
 
-                        </a>
-                        {% endfor %}
+
+
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="row"
-            style=" position:-webkit-sticky; background-image: linear-gradient(to right, rgba(255,255,255,0.6), rgb(5, 205, 223, .4));">
 
-            <a href="{% url 'core:shops' %}" style="color: black;" id="myBtn1" class="btn btn-lg btn-block"
-                title="See all shops">
-                <div class="neons">
-                    <span>Find Best Sellers </span>
-                </div>
-            </a>
+
+
+
+
         </div>
     </div>
+
+
+
+
 </section>
