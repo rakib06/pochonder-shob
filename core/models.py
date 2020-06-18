@@ -72,12 +72,12 @@ class Area(TimeStampMixin):
         return x
     @property
     def items_count(self):
-        shops = Shop.objects.filter(area=self.id).count()
+        shops = Shop.objects.filter(area=self.id)
         n = 0
         for item in shops:
-            n = Item.objects.filter(shop=item.id).count()
+            n = Item.objects.filter(shop=item).count()
             n += n
-        print('*********************8888', x)
+        print('*********************8888= n ', n)
         return n
     
     '''
