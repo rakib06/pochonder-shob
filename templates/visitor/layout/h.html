@@ -3,12 +3,13 @@
 
 
 <div class="humberger__menu__wrapper">
-    <div class="humberger__menu__logo">
-        <a href="/"><img src="{% static 'visitor/img/logo.png' %}" width="100%" height="3em" alt="" /></a>
-    </div>
+
 
     <nav class="humberger__menu__nav mobile-menu" style="background-color: white;">
-        <ul style="background-color: rgb(252, 245, 245);">
+        <ul style="background-color: white;">
+            <a href="/"><img src="{% static 'visitor/img/logo.png' %}" width="100%" alt="" /></a>
+        </ul>
+        <ul style="background-color: white;">
             <li><a href="{% url 'core:home' %}">Home</a></li>
             <!-- {% if request.user.is_authenticated %}
             <li><a href="{% url 'core:shops' %}">Shops</a></li>
@@ -61,7 +62,7 @@
             </li>
             <li>
                 <a href="#">Markets</a>
-                <ul class="header__menu__dropdown" style="background-color:rgb(251, 244, 244) ;height: 100%;  ">
+                <ul class="header__menu__dropdown" style="background-color:white ;height: 100%;  ">
 
 
 
@@ -151,19 +152,19 @@
 
 
                                 <br>
-                                <div class="row" style="background-color:rgb(255, 255, 255)">
-                                    {% for item in shops %}
+
+                                {% for item in shops %}
 
 
 
 
-                                    <li><a style="color: black; padding-right: 5px;"
-                                            href="{{ item.get_absolute_url }}"><b> {{ item.title }}</b></a>
-                                    </li>
+                                <li><a style="color: black; padding-right: 5px;" href="{{ item.get_absolute_url }}"><b>
+                                            {{ item.title }}</b></a>
+                                </li>
 
 
-                                    {% endfor %}
-                                </div>
+                                {% endfor %}
+
                             </ul>
 
                         </li>
@@ -174,19 +175,19 @@
 
 
                                 <br>
-                                <div class="row" style="background-color:rgb(255, 255, 255)">
-                                    {% for item in markets %}
+
+                                {% for item in markets %}
 
 
 
 
-                                    <li><a style="color: black; padding-right: 5px;"
-                                            href="{{ item.get_absolute_url }}"><b> {{ item.name }}</b> </a>
-                                    </li>
+                                <li><a style="color: black; padding-right: 5px;" href="{{ item.get_absolute_url }}"><b>
+                                            {{ item.name }}</b> </a>
+                                </li>
 
 
-                                    {% endfor %}
-                                </div>
+                                {% endfor %}
+
                             </ul>
 
                         </li>
