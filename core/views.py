@@ -87,7 +87,7 @@ def home_view(request):
     # for key, value in con.items():
     #     print('---------------------->>>>>>>>>>>>>......', key, value)
     #     context[key] = value
-    return render(request, 'ogani/home.html', context)
+    return render(request, 'visitor/home.html', context)
 
 
 def side_bar(request):
@@ -180,7 +180,7 @@ class CheckoutView(View):
                     {'default_shipping_address': shipping_address_qs[0]})
 
             # return render(self.request, "a/checkout.html", context)
-            return render(self.request, "ogani/checkout.html", context)
+            return render(self.request, "visitor/checkout.html", context)
         except ObjectDoesNotExist:
             messages.info(self.request, "You do not have an active order")
             return redirect("core:checkout")
@@ -376,7 +376,7 @@ class MarketsView1(ListView):
     model = Area
     paginate_by = 10
     # template_name = "a/markets.html"
-    template_name = "ogani/markets.html"
+    template_name = "visitor/markets.html"
 
 
 class MarketsView(ListView):
@@ -384,15 +384,15 @@ class MarketsView(ListView):
     paginate_by = 10
 
     # template_name = "a/markets.html"
-    template_name = "ogani/index.html"
+    template_name = "visitor/index.html"
     '''
-    template_name = "ogani/blog-details.html"
-    template_name = "ogani/blog.html"
-    template_name = "ogani/checkout.html"
-    template_name = "ogani/contact.html"
-    template_name = "ogani/shop-details.html"
-    template_name = "ogani/shop-grid.html"
-    template_name = "ogani/shoping-cart.html"
+    template_name = "visitor/blog-details.html"
+    template_name = "visitor/blog.html"
+    template_name = "visitor/checkout.html"
+    template_name = "visitor/contact.html"
+    template_name = "visitor/shop-details.html"
+    template_name = "visitor/shop-grid.html"
+    template_name = "visitor/shoping-cart.html"
     '''
 
 
@@ -400,14 +400,14 @@ class ShopsView(ListView):
     model = Shop
     paginate_by = 10
     # template_name = "a/shops.html"
-    template_name = "ogani/shops.html"
+    template_name = "visitor/shops.html"
 
 
 class ProductsView(ListView):
     model = Item
     paginate_by = 10
     # template_name = "a/products.html"
-    template_name = "ogani/products.html"
+    template_name = "visitor/products.html"
 
 
 class OrderSummaryView(LoginRequiredMixin, View):
@@ -420,7 +420,7 @@ class OrderSummaryView(LoginRequiredMixin, View):
                 'object': order,
                 'cats_all': cats_all,}
             # return render(self.request, 'a/cart.html', context)
-            return render(self.request, 'ogani/cart.html', context)
+            return render(self.request, 'visitor/cart.html', context)
         except ObjectDoesNotExist:
             messages.warning(self.request, "You do not have an active order")
             return redirect("/")
@@ -439,7 +439,7 @@ class CustomerOrderStatusView(LoginRequiredMixin, View):
             'cats_all': cats_all}
             print(user_orders)
             # return render(self.request, 'a/my_order.html', context)
-            return render(self.request, 'ogani/my_order.html', context)
+            return render(self.request, 'visitor/my_order.html', context)
         except ObjectDoesNotExist:
             messages.info(
                 self.request, "Sorry! You have no order! ")
@@ -472,7 +472,7 @@ def get_shops(request, id):
         context = {'shops': shops}
         # print(items)
         # return render(request, 'a/main/shops.html', context)
-        return render(request, 'ogani/getshops.html', context)
+        return render(request, 'visitor/getshops.html', context)
     except ObjectDoesNotExist:
         messages.info(
             self.request, "Sorry! Hopefully they will update their products soon!")
@@ -530,13 +530,13 @@ def ItemDetailView(request, slug):
         'shop_id': shop_id,
         'cats_all': cats_all,
     }
-    return render(request, "ogani/product-details.html", context)
+    return render(request, "visitor/product-details.html", context)
 
 
 # class ItemDetailView(DetailView):
 #     model = Item
 #     # template_name = "a/product-details.html"
-#     template_name = "ogani/product-details.html"
+#     template_name = "visitor/product-details.html"
 
 
 @login_required
@@ -676,7 +676,7 @@ def shop_manager_view(request):
             item.save()
     items = Item.objects.all().order_by('-updated_at')
     context = {'items': items, 'forms': forms}
-    return render(request, 'ogani/shop_manager.html', context)
+    return render(request, 'visitor/shop_manager.html', context)
 
 
 '''
@@ -743,16 +743,16 @@ def category_view(request, slug):
         'cats_all': cats_all,
         'root_cat': RootCat.objects.all()
     }
-    return render(request, "ogani/category_view.html", context)
+    return render(request, "visitor/category_view.html", context)
 
 
 def conditions_of_use_view(request):
-    return render(request, "ogani/footer/conditions_of_use.html", {})
+    return render(request, "visitor/footer/conditions_of_use.html", {})
 
 
 class ShopDetailView(DetailView):
     model = Shop
-    template_name = 'ogani/shop/shop_detail.html'
+    template_name = 'visitor/shop/shop_detail.html'
 
 
 def get_items(request, id):
@@ -770,7 +770,7 @@ def get_items(request, id):
                    'root_cat': RootCat.objects.all()}
         print(items)
         # return render(request, 'a/main/items.html', context)
-        return render(request, 'ogani/getItems.html', context)
+        return render(request, 'visitor/getItems.html', context)
     except ObjectDoesNotExist:
         messages.info(
             self.request, "Sorry! Hopefully they will update their products soon!")
@@ -794,7 +794,7 @@ def get_items_slug(request, slug):
                    'cats_all': cats_all,}
         print(items)
         # return render(request, 'a/main/items.html', context)
-        return render(request, 'ogani/getItems.html', context)
+        return render(request, 'visitor/getItems.html', context)
     except ObjectDoesNotExist:
         messages.info(
             self.request, "Sorry! Hopefully they will update their products soon!")
@@ -803,7 +803,7 @@ def get_items_slug(request, slug):
 
 class SearchResultsView(ListView):
     model = Item
-    template_name = 'ogani/search/search_new.html'
+    template_name = 'visitor/search/search_new.html'
     def get_queryset(self):  # new
 
         query = self.request.GET.get('q')
@@ -824,7 +824,7 @@ class SearchResultsView(ListView):
 
 def search_all(request):
 
-    # template_name = 'ogani/search/search_new.html'
+    # template_name = 'visitor/search/search_new.html'
     # def get_queryset(self): # new
     query = request.GET.get('q')
 
@@ -857,5 +857,5 @@ def search_all(request):
                }
 
     # return render(request, 'a/main/items.html', context)
-    return render(request, 'ogani/search/search_all.html', context)
+    return render(request, 'visitor/search/search_all.html', context)
 

@@ -1,0 +1,97 @@
+{% extends "visitor/base.html" %}
+{% load static %}
+{% block page_content %}
+
+
+<section class="breadcrumb-section set-bg">
+
+
+
+    <div class=" container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text"
+                    style="width:100%; background-image: linear-gradient(to right, rgba(0, 0, 255, 0.6), rgba(0,0,0,.7));">
+                    <h2>
+                        Search Results</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- <div class=" shop-cover" style="background-image: url({{shop.photo.url}}); ">
+                    <h2>{{ shop.title }}</h2>
+                </div> -->
+<div class="row">
+
+    <div class="col-12 col-sm-12 col-md-12 col-xl-12 p-3">
+        <div class=" container" style="text-align: center;">
+            {% if object_list %}
+            <card>
+                <h4>Products </h4>
+            </card>
+            {% endif%}
+
+            <hr>
+            <div class="row">
+                <!-- Single Catagory -->
+                {% for item in object_list %}
+                <div class="col-12 col-sm-6 col-md-6 col-xl-3 pb-4">
+                    <div class="single-product-wrapper" id="product_box">
+                        <!-- Product Image -->
+
+
+                        <a href="{{ item.get_absolute_url }}">
+                            <!-- <img src="{{ item.image.url }}" alt=""> -->
+                            <div class="product_img">
+                                <img id="img" src="{{ item.image.url }}" alt="">
+                                <div class="middle">
+                                    {% if item.discount_price  %}
+                                    <div class="text">{{ item.discount_price}}/-</div>
+                                    {% else %}
+                                    <div class="text">{{ item.price}}/-</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <!-- Hover Content -->
+
+                            <div class="latest-product__item__text">
+                                <h6>{{ item.title }}</h6>
+
+
+                                {% if item.discount_price  %}
+                                <div style="text-size-adjust:inherit;" id="price_tag2"><small>{{item.discount_price}}
+                                        BDT </small>
+                                </div>
+                                {% else %}
+                                <div style="text-size-adjust:inherit;" id="price_tag2"><small>{{item.price}}
+                                        BDT </small></div>
+                                {% endif %}
+
+
+                                <span class=" mr-1" ">
+                                                {{ item.shop }}‎
+                                            </span>
+                                            <br>
+                                        
+                                          
+            
+                                        </div>
+                                       
+
+
+                                        </a>
+                                    </div>
+                                </div>
+                                {% endfor %}
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Product Catagories Area End -->
+            {% endblock %}

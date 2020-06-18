@@ -1,0 +1,63 @@
+{% extends "visitor/base.html" %}
+{% load static %}
+{% block page_content %}
+<!-- Header Area End -->
+
+<div class="cart-table-area section-padding-100">
+    <div class="container Checkout_block ">
+        <div class="row">
+            <div class="col-12 col-lg-8">
+                <div class="checkout_details_area mt-50 clearfix">
+
+                    <div class="cart-title">
+                        <h2>Checkout</h2>
+                    </div>
+
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="row">
+
+                            <div class="col-12 mb-3">
+                                <input type="text" required class="form-control" id="customer_name" name="customer_name"
+                                    placeholder="Your Name" value="">
+                            </div>
+
+                            <div class="col-12 mb-3">
+                                <input required type="text" class="form-control mb-3" id='shipping_address'
+                                    name='shipping_address' placeholder="Address">
+                            </div>
+
+
+                            <div class="col-md-6 mb-3">
+                                <input required type="text" class="form-control" id='mobile_number' name='mobile_number'
+                                    placeholder="Phone No">
+                            </div>
+
+                            <div class="col-12 mb-3">
+                                <textarea name="comment" id="comment" class="form-control w-100" cols="30" rows="10"
+                                    placeholder="Leave a comment about your order (Size/Color etc..) "></textarea>
+                            </div>
+
+                            <p>Payment option</p>
+                            <br>
+                            <div class="d-block my-3">
+                                <br>
+                                {% for value, name in form.fields.payment_option.choices %}
+                                <div class="custom-control custom-radio">
+                                    <input id="{{ name }}" name="payment_option" value="{{ value }}" type="radio"
+                                        class="custom-control-input" required>
+                                    <label class="custom-control-label" for="{{ name }}">{{ name }}</label>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <button class="btn btn-success btn-lg btn-block" type="submit">Place Order</button>
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<!-- ##### Main Content Wrapper End ##### -->
+{% endblock %}

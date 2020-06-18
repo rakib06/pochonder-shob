@@ -1,0 +1,71 @@
+{% extends "visitor/base.html" %}
+{% load static %}
+<!-- Header Area End -->
+
+{% block page_content %}
+
+<section class="breadcrumb-section set-bg">
+
+
+
+    <div class=" container">
+        <div class="row">
+            <div class="col-lg-6 text-center">
+                <div class="breadcrumb__text"
+                    style="width:100%; background-image: linear-gradient(to right, rgba(0, 0, 255, 0.6), rgba(0,0,0,.7));">
+                    <h2>
+                        Shops</h2>
+                </div>
+
+            </div>
+            <div class="col-lg-6 ">
+                {% include 'visitor/layout/search1.html' %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+
+    <div class="container">
+        <div class="row">
+
+
+
+            {% for item in shops %}
+            <div class="col-10 col-sm-6 col-md-6 col-xl-3 pb-4">
+                <a href="{{ item.get_absolute_url }}" title="Tap to See all products">
+
+                    <div id="image_with_price">
+                        <img src="{{ item.photo.url }}" class="img-circle" alt="Pochonder-Shob.com">
+
+
+                        <div style=" text-size-adjust:inherit;" id="price_tag"><small>New</small>
+                        </div>
+
+
+                        <h5 style="color:white; text-align: center; background-image: linear-gradient(to right, rgba(255,0,0,0.6), rgba(0,0,0,1));
+                ">
+                            <b>
+                                {{ item.title }}
+                            </b>
+                            <br>
+                            <span class=" mr-1">
+                                {{ item.area }}‎
+                            </span>
+
+                        </h5>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+
+        {% endfor %}
+    </div>
+    </div>
+
+</section>
+
+<!-- Product Catagories Area End -->
+{% endblock %}

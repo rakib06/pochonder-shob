@@ -1,0 +1,54 @@
+{% extends "visitor/base.html" %}
+{% load static %}
+
+{% block page_content %}
+{% include 'visitor/layout/show-case.html' %}
+<!-- Categories Section Begin -->
+
+<!-- Categories Section End -->
+
+
+
+
+
+<div class="deskContent">
+  <div class="container">
+    <div class="row">
+      <div class=" col-md-6">
+
+
+        {% include 'visitor/data/markets.html' %}
+
+      </div>
+      <div class=" col-md-6">
+
+        {% include 'visitor/data/shops.html' %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Featured Section End -->
+{% include 'visitor/data/cat_items.html' %}
+
+
+
+</div>
+<!-- Latest Product Section Begin -->
+<section class=" latest-product spad">
+  <div class="container">
+    <div class="row">
+
+
+      {% include 'visitor/vulval/top.html' %}
+      {% include 'visitor/vulval/new.html' %}
+      {% include 'visitor/vulval/lat.html' %}
+
+
+
+    </div>
+  </div>
+</section>
+
+
+{% endblock %}

@@ -1,0 +1,97 @@
+{% extends "visitor/base.html" %}
+{% load static %}
+{% block page_content %}
+<!-- Product Catagories Area Start -->
+<div class="products-catagories-area clearfix">
+
+
+    <div class="amado-pro-catagory clearfix container">
+        <div class="row">
+            {% for item in object_list %}
+            <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3 mb-3">
+                <div class="single-products-catagory clearfix" id="product_box">
+                    <a href="{{ item.get_absolute_url }}">
+                        <div class="product_img">
+                            <img id="img" src="{{ item.image.url }}" alt="">
+                            <div class="middle">
+                                {% if item.discount_price  %}
+                                <div class="text">{{ item.discount_price}}/-</div>
+                                {% else %}
+                                <div class="text">{{ item.price}}/-</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="product-description d-flex align-items-center justify-content-between">
+                            <div class="product-meta-data">
+                                <div class="line"></div>
+                                <h4 style="color:black;font-weight: 700;margin-bottom: 5px;">{{ item.title }} <sub
+                                        style="font-weight: normal;">{{item.category}}</sub></h4>
+                                {% if item.in_stock %}
+
+                                <small style="color: black;font-weight: bold;"> <i style="color: green;"
+                                        class="fa fa-check-square-o" aria-hidden="true"></i>
+                                    In Stock </small>
+                                {% else %}
+                                <small style="color: black;font-weight: bold;"> <i style="color: red;"
+                                        class="fa fa-refresh fa-spin" aria-hidden="true"> </i>
+                                    Out of Stock </small>
+                                {% endif %}
+                                <br>
+                                <small>
+                                    <strong>
+                                        {% if item.discount_price  %}
+                                        <span class="mr-1" style="color: skyblue;">
+                                            <del> {{item.price }} ‎BDT</del>
+                                        </span>
+                                        <span class="mr-1" style="color: orangered;">
+                                            {{ item.discount_price }}‎BDT
+                                        </span>
+                                        <br>
+                                        {% else %}
+                                        <span class="mr-1" style="color: skyblue;">
+                                            {{item.price }} ‎BDT
+                                        </span>
+                                        {% endif %}
+                                </small>
+                                </strong>
+                            </div>
+                        </div>
+                        <!-- <img src="{{ item.image.url }}" alt=""> -->
+                        <!-- Hover Content -->
+                        <!-- <div class="content">
+                            <h4 style="font-weight: 600;">{{ item.title }} </h4>
+                            <small>
+                                <strong>
+                                    {% if item.discount_price  %}
+                                    <span class="mr-1" style="color: blue;">
+                                        <del> {{item.price }} ‎BDT</del>
+                                    </span>
+                                    <span class="mr-1" style="color: orangered;">
+                                        {{ item.discount_price }}‎BDT
+
+                                    </span>
+                                    <br>
+                                    <i class="fa fa-grav" aria-hidden="true" style="color: purple;font-weight: 600;">
+                                        Saving
+                                        {{ item.discount }} %</i>
+
+
+                                    {% else %}
+                                    {{ item.price }}
+
+                                    {% endif %}
+                            </small>
+                            </strong>
+                        </div> -->
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+
+
+</div>
+{% endblock %}
