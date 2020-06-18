@@ -17,12 +17,11 @@
 
 
 
-                            <div class=" col-12" style="text-align: center; padding-top: 0%; ">
+                            <div class=" col-12" style="text-align: left; padding-top: 0%; ">
                                 <a style=" text-transform: uppercase; text-align:justify; padding-left: 10px;
         font-size: 1em;" href="{% url 'core:category-view' name=key %}"><span style="color: black;">
                                         <b>{{key}}</b></span></a>
-                                <sup style="color: black; size: 5px;"> Click here to see
-                                    all</sup>
+
 
                             </div>
 
@@ -41,13 +40,17 @@
                                             width="60">
 
                                         {% if item.discount_price  %}
-                                        <div style="text-size-adjust:inherit;" id="price_tag">
-                                            <small>{{item.discount_price}}
-                                                BDT </small>
+                                        <div style="text-size-adjust:inherit;  background-image: linear-gradient(to right, rgba(15, 15, 15, 0.6),purple);"
+                                            id="price_tag">
+
+
+                                            <small style="color: white;"> <b>{{item.discount_price}}
+                                                    BDT </b></small>
                                         </div>
                                         {% else %}
-                                        <div style="text-size-adjust:inherit;" id="price_tag"><small>{{item.price}}
-                                                BDT </small></div>
+                                        <div style="text-size-adjust:inherit; background-image: linear-gradient(to right, rgba(3, 3, 3, 0.6),purple);"
+                                            id="price_tag"><small> <b style="color: white;">{{item.price}}
+                                                    BDT </b> </small></div>
                                         {% endif %}
 
                                         <h5 style="color:white; text-align: center; background-image: linear-gradient(to right, rgba(255, 255, 255, 0.6), rgb(255, 255, 255));
