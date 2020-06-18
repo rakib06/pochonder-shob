@@ -1,51 +1,97 @@
 {% load static %}
 
+
+
+
 <section>
-    <div class="container" style="border: transparent;">
-        <div class="row">
+    <div class="phoneContent">
 
-            <div class="card w-100" style="border: transparent;">
-                <div class="card-body" style="border: transparent;">
-                    <h5 style="text-align: center;" class="card-title"></h5>
-                    <div class="categories__slider owl-carousel">
-                        {% for item in markets %}
-                        <a href="{{ item.get_absolute_url }}">
-                            <div class=" col-lg-3">
 
-                                <img src="{{ item.image.url }}" class="img-circle" alt="Pochonder-Shob.com" width="60">
 
-                                <h5 style="color:white; text-align: center; background-image: linear-gradient(to right, rgba(255,255,255,0.6), rgb(255, 253, 249));
-                    ">
-                                    <div class="neons ">
-                                        <p style="color: black;">
-                                            <b>
-                                                {{ item.name }}
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="card w-100">
+                    <div class="card-body">
+                        <div class=" col-12" style="text-align: center; padding-top: 0%;">
+                            <a style=" text-transform: uppercase; text-align:justify; padding-left: 10px;
+    font-size: 1em;"><span style="color: black;"><b> Finding your
+                                        favourite Market? </b> </span>
+                            </a>
+
+
+                        </div>
+                        <hr style="color: black; background-color: black;">
+
+
+                        <div class="container">
+                            {% for item in markets %}
+
+
+                            <div class="column" style="  overflow: hidden; float: left; margin:0 auto; padding:20px 0;">
+
+                                <!-- Product Image -->
+
+
+                                <a href="{{ item.get_absolute_url }}">
+
+
+
+
+
+                                    <img src="{{ item.image.url }}" class="img-circle" alt="Pochonder-Shob.com">
+                                    <h5 style="color:white; text-align: center; background-image: linear-gradient(to right, rgba(255, 255, 255, 0.6), rgb(255, 255, 255));
+                                            ">
+
+                                        {%  if item.shops_count > 10 %}
+                                        <span style="color: black; size: 2px;">
+                                            <small>{{ item.shops_count }} Shops </small>
+                                        </span>
+                                        {% endif %}
+                                        {% if item.items_count > 10 %}
+                                        <span style="color: black; size: 2px;">
+                                            <small>, {{ item.items_count }} Items </small>
+                                        </span>
+                                        {% endif %}
+
+                                        <div style=" padding: center;">
+                                            <b style="color: black; size: 5px;">{{item.name}}
                                             </b>
-                                        </p>
+                                        </div>
 
-                                    </div>
-                                </h5>
+
+
+                                    </h5>
+
+
+
+
+                                </a>
+
 
 
 
                             </div>
+                            {% endfor %}
+                        </div>
 
-                        </a>
-                        {% endfor %}
                     </div>
+
                 </div>
             </div>
         </div>
 
-        <div class="row"
-            style=" position:-webkit-sticky; background-image: linear-gradient(to right, rgba(255,255,255,0.6), rgb(5, 205, 223, .4));">
 
-            <a href="{% url 'core:shops' %}" style="color: black;" id="myBtn1" class="btn btn-lg btn-block"
-                title="See all shops">
-                <div class="neons">
-                    <span>Find Your Most Wished Markets </span>
-                </div>
-            </a>
-        </div>
+
     </div>
+
+
+    </div>
+
+
+
+
+
 </section>

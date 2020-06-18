@@ -70,6 +70,16 @@ class Area(TimeStampMixin):
         x = Shop.objects.filter(area=self.id).count()
         print('*********************8888', x)
         return x
+    @property
+    def items_count(self):
+        shops = Shop.objects.filter(area=self.id).count()
+        n = 0
+        for item in shops:
+            n = Item.objects.filter(shop=item.id).count()
+            n += n
+        print('*********************8888', x)
+        return n
+    
     '''
     def save(self):
         super().save()  # saving image first

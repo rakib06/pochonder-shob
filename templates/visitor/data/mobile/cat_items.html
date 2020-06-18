@@ -93,10 +93,13 @@
 
 </section>
 
-{% if  forloop.counter == 1 %}
-<p>
+{% if  forloop.counter == 5 %}
+{% include 'visitor/data/mobile/markets.html' %}
+{% endif %}
 
-</p>
+
+{% if  forloop.counter == 3 %}
+{% include 'visitor/data/mobile/shops.html' %}
 {% endif %}
 
 {% endfor %}
