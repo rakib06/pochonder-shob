@@ -7,13 +7,13 @@
         <a href="/"><img src="{% static 'visitor/img/logo.png' %}" width="100%" height="3em" alt="" /></a>
     </div>
 
-    <nav class="humberger__menu__nav mobile-menu">
-        <ul style="background-color: black;">
+    <nav class="humberger__menu__nav mobile-menu" style="background-color: white;">
+        <ul style="background-color: rgb(252, 245, 245);">
             <li><a href="{% url 'core:home' %}">Home</a></li>
             <!-- {% if request.user.is_authenticated %}
             <li><a href="{% url 'core:shops' %}">Shops</a></li>
             {% endif %} -->
-            <li><a href="{% url 'core:customer-order' %}">My Order</a></li>
+
             <li>
                 <a>Categories</a>
                 <ul class="header__menu__dropdown">
@@ -24,7 +24,7 @@
 
                         {% for ccat in item.category %}
 
-                        <li><a style="color: black; padding-left: 10px; "
+                        <li><a style="color: black;  "
                                 href="{% url 'core:category-view' ccat.slug %}">{{ ccat.name }}</a>
                         </li>
                         {% endfor %}
@@ -37,8 +37,50 @@
                     <li><a href="#">Blog Details</a></li> -->
                 </ul>
             </li>
-            <!-- <li><a href="./blog.html">Blog</a></li> -->
-            <li><a href="#footer_content">Contact</a></li>
+
+            <li>
+                <a href="#">Shops</a>
+                <ul class="header__menu__dropdown">
+
+
+
+                    {% for item in shops %}
+
+
+
+
+                    <li><a style="color: black; " href="{{ item.get_absolute_url }}"><b>
+                                {{ item.title }}</b></a>
+                    </li>
+
+
+                    {% endfor %}
+
+                </ul>
+
+            </li>
+            <li>
+                <a href="#">Markets</a>
+                <ul class="header__menu__dropdown" style="background-color:rgb(251, 244, 244) ;height: 100%;  ">
+
+
+
+                    {% for item in markets %}
+
+
+
+
+                    <li><a style="color: black; padding-right: 5px;" href="{{ item.get_absolute_url }}"><b>
+                                {{ item.name }}</b> </a>
+                    </li>
+
+
+                    {% endfor %}
+
+                </ul>
+
+            </li>
+            <li><a href="{% url 'core:customer-order' %}">My Order</a></li>
             {% if request.user.is_authenticated %}
             <li><a href="\accounts\logout\">Logout</a></li>
             {% else %}
@@ -82,13 +124,13 @@
                         <li>
                             <a href="#">Categories</a>
                             <ul class="header__menu__dropdown"
-                                style="background-color:rgb(251, 244, 244) ; width: 900px; height: 100%;  ">
+                                style="background-color:rgb(251, 244, 244) ; width: 750px; height: 100%;  ">
 
 
 
                                 <div class="row" style="background-color:rgb(255, 255, 255)">
                                     {% for item in root_cat %}
-                                    <div style="size: 50%; float: left; width: 33.33%; padding: 2px;">
+                                    <div style=" float: left; width: 33.33%; padding: 0px;">
                                         <li><a style="color: black;"><b>{{ item.title }} </b> </li>
                                         {% for ccat in item.category %}
 
@@ -102,8 +144,54 @@
                             </ul>
 
                         </li>
+                        <li>
+                            <a href="#">Shops</a>
+                            <ul class="header__menu__dropdown"
+                                style="background-color:rgb(251, 244, 244) ;height: 100%;  ">
+
+
+                                <br>
+                                <div class="row" style="background-color:rgb(255, 255, 255)">
+                                    {% for item in shops %}
+
+
+
+
+                                    <li><a style="color: black; padding-right: 5px;"
+                                            href="{{ item.get_absolute_url }}"><b> {{ item.title }}</b></a>
+                                    </li>
+
+
+                                    {% endfor %}
+                                </div>
+                            </ul>
+
+                        </li>
+                        <li>
+                            <a href="#">Markets</a>
+                            <ul class="header__menu__dropdown"
+                                style="background-color:rgb(251, 244, 244) ;height: 100%;  ">
+
+
+                                <br>
+                                <div class="row" style="background-color:rgb(255, 255, 255)">
+                                    {% for item in markets %}
+
+
+
+
+                                    <li><a style="color: black; padding-right: 5px;"
+                                            href="{{ item.get_absolute_url }}"><b> {{ item.name }}</b> </a>
+                                    </li>
+
+
+                                    {% endfor %}
+                                </div>
+                            </ul>
+
+                        </li>
                         <li><a href=" {% url 'core:customer-order' %}">My Order</a></li>
-                        <li><a href="#footer_content">Contact</a></li>
+
                         {% if request.user.is_authenticated %}
                         <li><a href="\accounts\logout\">Logout</a></li>
                         {% else %}
