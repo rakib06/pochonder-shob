@@ -759,7 +759,10 @@ def category_viewS(request, slug, shop):
     cat = Category.objects.get(id=id)
     cats = Category.objects.all().order_by('-updated_at')
     cat_items = {}
-    shop = Shop.objects.get(title__icontains=shop)
+    try:
+        shop = Shop.objects.get(slug__icontains=shop)
+    except:    
+        shop = Shop.objects.get(title__icontains=shop)
     category = Category.objects.filter(for_shop=shop.id)
     
     for ca in cats:
