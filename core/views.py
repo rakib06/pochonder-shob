@@ -755,7 +755,7 @@ def category_viewS(request, slug, shop):
     id = cat.id
     print('Shop',shop)
     
-    items = Item.objects.filter(category=id).filter(shop__title__icontains=shop)
+    items = Item.objects.filter(category=id).filter(shop__slug__icontains=shop)
     cat = Category.objects.get(id=id)
     cats = Category.objects.all().order_by('-updated_at')
     cat_items = {}
