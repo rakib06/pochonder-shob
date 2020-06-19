@@ -715,7 +715,7 @@ class RequestRefundView(View):
                 return redirect("core:request-refund")
 '''
 
-
+# for all category
 def category_view(request, slug):
     try:
         cat = get_object_or_404(Category, name=slug)
@@ -744,6 +744,43 @@ def category_view(request, slug):
         'root_cat': RootCat.objects.all()
     }
     return render(request, "visitor/category_view.html", context)
+
+# for shop category
+def category_viewS(request, slug, shop):
+    try:
+        cat = get_object_or_404(Category, name=slug)
+    except:
+        
+        cat = get_object_or_404(Category, slug=slug)
+    id = cat.id
+    print('Shop',shop)
+    
+    items = Item.objects.filter(category=id).filter(shop__title__icontains=shop)
+    cat = Category.objects.get(id=id)
+    cats = Category.objects.all().order_by('-updated_at')
+    cat_items = {}
+    shop = Shop.objects.get(title__icontains=str(shop))
+    category = Category.objects.filter(for_shop=shop.id)
+    
+    for ca in cats:
+
+        content = Item.objects.filter(category=ca)
+        if cat.name not in cat_items.keys():
+            print("CAT NAME", ca.name)
+            if len(content) > 0:
+                cat_items[str(ca.name)] = content
+            print(content)
+    context = {
+        'shop':shop,
+        'items': items,
+        'cat': cat,
+        'cat_items': cat_items,
+        'category': category,
+        'root_cat': RootCat.objects.all()
+    }
+    return render(request, "visitor/shop/cat.html", context)
+    # return render(request, "visitor/shop/get_cat_items.html", context)
+
 
 
 def conditions_of_use_view(request):
@@ -776,7 +813,7 @@ def get_items(request, id):
             self.request, "Sorry! Hopefully they will update their products soon!")
         return redirect("core:checkout")
 
-
+# to get shop items
 def get_items_slug(request, slug):
     try:
         my_shop = get_object_or_404(Shop, slug=slug)
@@ -794,7 +831,7 @@ def get_items_slug(request, slug):
                    'cats_all': cats_all,}
         print(items)
         # return render(request, 'a/main/items.html', context)
-        return render(request, 'visitor/getItems.html', context)
+        return render(request, 'visitor/shop/getItems.html', context)
     except ObjectDoesNotExist:
         messages.info(
             self.request, "Sorry! Hopefully they will update their products soon!")

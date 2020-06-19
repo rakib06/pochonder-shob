@@ -10,13 +10,13 @@
     <div class=" container">
         <div class="row">
             <div class="col-lg-6 text-center">
-                <div class="breadcrumb__text"
-                    style="width:100%; background-image: linear-gradient(to right, rgba(48, 204, 224, 0.6), rgba(0,0,0,.7));">
+                <div class="breadcrumb__text">
 
 
-                    <h2>
-
-                        <sup style="size: 1px;">Category-wise Shoping </sup></h2>
+                    <span style="color: black;">
+                        <b style="font-size: 20px;">({{cat}})</b>
+                        <sup> from {{shop}} </sup>
+                    </span>
 
                 </div>
 
@@ -43,8 +43,7 @@
                 <div class="single-product-wrapper" id="product_box">
                     <!-- Product Image -->
                     <div class="product-img">
-                        <sup style="color: black; size: 5px;"> from {{ item.shop }}
-                        </sup>
+
                         <a href="{{ item.get_absolute_url }}">
                             <!-- <img src="{{ item.image.url }}" alt=""> -->
                             <div class="product_img">
@@ -85,7 +84,7 @@
         </div>
 </div>
 <br>
-     
+        
                 <br>
             </div>
         </div>

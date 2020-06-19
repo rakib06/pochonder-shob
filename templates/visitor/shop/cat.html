@@ -18,15 +18,16 @@
         </div>
     </div>
 </section>
-<!-- <div class=" shop-cover" style="background-image: url({{shop.photo.url}}); ">
-                    <h2>{{ shop.title }}</h2>
-                </div> -->
-                <div class="row">
-                    <div class="col-12 col-sm-2 col-md-2 col-xl-2 p-3">
-                        <div class="container" style="text-align: center;">
-                            <div class="sidebar">
 
-                                <div class="sidebar__item">
+<section>
+                {% include 'visitor/shop/sticky.html'%}
+                <div class=" row">
+                    <div class="col-12 col-sm-2 col-md-2 col-xl-2 p-3" id="stickytypeheader" style="overflow-y: scroll;
+                    ">
+                        <div class="container" style="text-align: center;" id="stickytypeheader">
+                            <div class="sidebar" id="stickytypeheader">
+
+                                <div class="sidebar__item" id="stickytypeheader">
                                     <h5 style="text-align: left;">CATEGORY</h5>
 
                                     <ul>
@@ -34,7 +35,7 @@
                                         {% for item in category %}
                                         <small>
                                             <li><a style=" text-transform: uppercase; text-align:justify; padding-left: 10px;
-        font-size: 1em;" href="{% url 'core:category-view' item.slug %}">{{item.name}}</a>
+        font-size: 1em;" href="{% url 'core:category-view' item.slug shop.slug %} ">{{item.name}}</a>
                                             </li>
                                         </small>
                                         {% endfor %}
@@ -102,9 +103,14 @@
 
                         </div>
                     </div>
+
+
+
+
                 </div>
 
-            </div>
-
+            
+            
             <!-- Product Catagories Area End -->
             {% endblock %}
+        </section>
