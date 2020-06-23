@@ -106,6 +106,7 @@ class ItemAdmin(admin.ModelAdmin):
     search_fields = [
         'title','category__name',]
 
+    list_display_links=('image_tag',)
 
 
     def changelist_view(self, request, extra_context=None):
@@ -114,6 +115,9 @@ class ItemAdmin(admin.ModelAdmin):
                                  'category' ,'description',)
             self.list_editable = ['in_stock', 'title',  'description',
                       ]
+            self.list_display_links = (None,)
+        else:
+            list_display_links = ('title',)
         return super().changelist_view(request, extra_context)
 
     def get_fields(self, request, obj=None):
