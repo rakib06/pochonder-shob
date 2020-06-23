@@ -34,6 +34,21 @@
                                 <div class=" col-lg-3">
                                     <sup style="color: black; size: 5px;"> from {{ item.shop }}
                                     </sup>
+                                    <style>
+                                        .img-circle:hover {
+                                            overflow: hidden;
+
+                                            object-fit: cover;
+                                            height: 100%;
+                                            width: 100%;
+                                            display: block;
+                                            cursor: pointer;
+                                            -moz-transform: scale(1.5);
+                                            -webkit-transform: scale(1.5);
+                                            -o-transform: scale(1.5);
+                                            transform: scale(1.5);
+                                        }
+                                    </style>
                                     <div id="image_with_price">
 
                                         <img src="{{ item.image.url }}" class="img-circle" alt="Pochonder-Shob.com"
