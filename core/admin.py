@@ -112,6 +112,8 @@ class ItemAdmin(admin.ModelAdmin):
         if not request.user.is_superuser:
             self.list_display = ('image_tag', 'title', 'price',
                                  'category' ,'description',)
+            self.list_editable = ['in_stock', 'title',  'description',
+                      ]
         return super().changelist_view(request, extra_context)
 
     def get_fields(self, request, obj=None):
