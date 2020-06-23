@@ -111,7 +111,7 @@ class ItemAdmin(admin.ModelAdmin):
     def changelist_view(self, request, extra_context=None):
         if not request.user.is_superuser:
             self.list_display = ('image_tag', 'title', 'price',
-                                 'discount_price', 'category',)
+                                 'category' ,'description',)
         return super().changelist_view(request, extra_context)
 
     def get_fields(self, request, obj=None):
