@@ -7,7 +7,7 @@ admin.site.site_title = 'Pochonder-Shob.com'
 admin.site.index_title = "Welcome to Pochonder-Shob.com"
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('shop/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('', include('core.urls', namespace='core'))
 ]
