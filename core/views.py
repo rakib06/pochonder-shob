@@ -199,7 +199,9 @@ class CheckoutView(View):
                 print('payment_option = ', payment_option)
                 mobile_number = form.cleaned_data.get(
                     'mobile_number')
-
+                mobile_number = str(mobile_number)
+                if "+" in mobile_number:
+                    mobile_number = mobile_number[1:]
                 comment = form.cleaned_data.get(
                     'comment')
                 customer_name = form.cleaned_data.get(
