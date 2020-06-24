@@ -112,7 +112,7 @@ class ItemAdmin(admin.ModelAdmin):
     def changelist_view(self, request, extra_context=None):
         if not request.user.is_superuser:
             self.list_display = ('image_tag', 'title', 'price',
-                                 'category' ,'description',)
+                                  'in_stock','description', 'category')
             self.list_editable = ['in_stock', 'title',  'description',
                       ]
             self.list_display_links = (None,)
