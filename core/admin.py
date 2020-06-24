@@ -192,7 +192,7 @@ class OrderAdmin(admin.ModelAdmin):
     list_display = ['get_products', 'customer_name', 'comment', 'mobile_number', 'shipping_address',
                     'ordered', 'being_packed', 'being_delivered', 'received',  'user', 'created_at', 'updated_at']
     list_editable = ['being_packed', 'being_delivered', 'received']
-
+    readonly_fields = ['created_at', 'updated_at']
     def get_products(self, obj):
         return ", ".join([str(p.item.title) + " = " + str(p.quantity) + " Shop ID = " + str(p.item.shop.id) for p in obj.items.all()])
 
@@ -244,5 +244,7 @@ class OrderItemAdmin(admin.ModelAdmin):
 
     list_display = ['image_tag', 'user', 'item', 'ordered',
                 'created_at', 'updated_at', 'quantity_available' ]
+
+    readonly_fields = ['created_at', 'updated_at']
   
    
