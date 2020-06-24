@@ -1,8 +1,7 @@
 {%load static %}
 <!DOCTYPE html>
 <html lang="zxx">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="description" content="LinB1 " />
     <meta name="keywords" content="LinB1, unica, creative, html" />
@@ -11,45 +10,45 @@
     <title>Pochonder-Shob</title>
 
     <style>
-        @media (max-width: 768px) {
-            .hero__categories ul {
-                display: none;
-            }
+      @media (max-width: 768px) {
+        .hero__categories ul {
+          display: none;
         }
+      }
 
-        @media (max-width: 760px) {
-            .categories__slider.owl-carousel .owl-nav {
-                display: none;
-            }
+      @media (max-width: 760px) {
+        .categories__slider.owl-carousel .owl-nav {
+          display: none;
         }
+      }
 
-        #shop_name:hover {
-            color: black;
-        }
+      #shop_name:hover {
+        color: black;
+      }
 
-        .socialaccount_providers li {
-            list-style-type: none;
-            font-size: 25px;
-            display: inline;
-        }
+      .socialaccount_providers li {
+        list-style-type: none;
+        font-size: 25px;
+        display: inline;
+      }
 
-        .socialaccount_providers a {
-            color: white;
-            background-color: blue;
-            padding: 0px 12px;
-            border-radius: 7px;
-            opacity: .8;
-        }
+      .socialaccount_providers a {
+        color: white;
+        background-color: blue;
+        padding: 0px 12px;
+        border-radius: 7px;
+        opacity: 0.8;
+      }
 
-        .socialaccount_providers a:hover {
-            opacity: 1;
-        }
+      .socialaccount_providers a:hover {
+        opacity: 1;
+      }
 
-        #condition_header {
-            color: black;
-        }
+      #condition_header {
+        color: black;
+      }
 
-        /* .header__menu ul li .header__menu__dropdown {
+      /* .header__menu ul li .header__menu__dropdown {
             position: absolute;
             left: 0;
             top: 50px;
@@ -67,37 +66,84 @@
         } */
     </style>
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
-        rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
+      rel="stylesheet"
+    />
 
-    <link rel="stylesheet" href="{% static 'visitor/css/bootstrap.min.css' %}" type="text/css" />
-    <link rel="stylesheet" href="{% static 'visitor/css/font-awesome.min.css' %}" type="text/css" />
-    <link rel="stylesheet" href="{% static 'visitor/css/elegant-icons.css' %}" type="text/css" />
-    <link rel="stylesheet" href="{% static 'visitor/css/nice-select.css' %}" type="text/css" />
-    <link rel="stylesheet" href="{% static 'visitor/css/jquery-ui.min.css' %}" type="text/css" />
-    <link rel="stylesheet" href="{% static 'visitor/css/owl.carousel.min.css' %}" type="text/css" />
-    <link rel="stylesheet" href="{% static 'visitor/css/slicknav.min.css' %}" type="text/css" />
-    <link rel="stylesheet" href="{% static 'visitor/css/style.css' %}" type="text/css" />
-    <link rel="stylesheet" href="{% static 'visitor/css/ordersummary.css' %}" type="text/css" />
-    <link rel="stylesheet" href="{% static 'visitor/css/style1.css' %}" type="text/css" />
-    <link rel="stylesheet" href="{% static 'visitor/css/style2.css' %}" type="text/css" />
-    <link rel="stylesheet" href="{% static 'visitor/css/style3.css' %}">
-    <link rel="stylesheet" href="{% static 'visitor/css/style4.css' %}">
-    <link rel="stylesheet" href="{% static 'visitor/css/style5.css' %}">
-</head>
+    <link
+      rel="stylesheet"
+      href="{% static 'visitor/css/bootstrap.min.css' %}"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'visitor/css/font-awesome.min.css' %}"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'visitor/css/elegant-icons.css' %}"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'visitor/css/nice-select.css' %}"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'visitor/css/jquery-ui.min.css' %}"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'visitor/css/owl.carousel.min.css' %}"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'visitor/css/slicknav.min.css' %}"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'visitor/css/style.css' %}"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'visitor/css/ordersummary.css' %}"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'visitor/css/style1.css' %}"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'visitor/css/style2.css' %}"
+      type="text/css"
+    />
+    <link rel="stylesheet" href="{% static 'visitor/css/style3.css' %}" />
+    <link rel="stylesheet" href="{% static 'visitor/css/style4.css' %}" />
+    <link rel="stylesheet" href="{% static 'visitor/css/style5.css' %}" />
+  </head>
 
-<body>
-
-    {% block logo %}
-    {% include 'visitor/layout/h.html' %}
-    {% endblock logo %}
-
+  <body>
+    {% block logo %} {% include 'visitor/layout/h.html' %} {% endblock logo %}
     {% block page_content %}
     <!-- here will be the main content -->
-    {% endblock %}
-
-    {% include 'visitor/layout/footer.html' %}
+    {% endblock %} {% include 'visitor/layout/footer.html' %}
     <!-- Js Plugins -->
+    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+    <df-messenger
+      intent="WELCOME"
+      chat-title="Pochonder-shob"
+      agent-id="491c015c-9dfd-4447-a9b0-def6b259128f"
+      language-code="en"
+    ></df-messenger>
     <script src="{% static 'visitor/js/jquery-3.3.1.min.js' %}"></script>
     <script src="{% static 'visitor/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'visitor/js/jquery.nice-select.min.js' %}"></script>
@@ -107,6 +153,5 @@
     <script src="{% static 'visitor/js/owl.carousel.min.js' %}"></script>
     <script src="{% static 'visitor/js/main.js' %}"></script>
     <script src="{% static 'visitor/js/new.js' %}"></script>
-</body>
-
+  </body>
 </html>
