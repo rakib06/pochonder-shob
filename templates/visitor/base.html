@@ -133,14 +133,14 @@
 
   <body>
     {% block logo %} {% include 'visitor/layout/h.html' %} {% endblock logo %}
-    {% block page_content %}
+    {% include 'visitor/fb_bot.html' %} {% block page_content %}
     <!-- here will be the main content -->
     {% endblock %} {% include 'visitor/layout/footer.html' %}
     <!-- Js Plugins -->
     <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
     <df-messenger
       intent="WELCOME"
-      chat-title="Pochonder-shob"
+      chat-title="Pochonder-Shob"
       agent-id="491c015c-9dfd-4447-a9b0-def6b259128f"
       language-code="en"
     ></df-messenger>
