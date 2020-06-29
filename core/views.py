@@ -36,7 +36,7 @@ def home_view(request):
     
     cats_all = Category.objects.all().order_by('-updated_at') 
     cats = Category.objects.all()
-    cats = random.sample(list(cats), len(cats))
+    cats = random.sample(list(cats), 5)
     cats_nav = cats[:5]
     root_cat = RootCat.objects.all()
     cat_items = {}
