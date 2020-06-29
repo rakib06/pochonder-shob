@@ -97,7 +97,7 @@ class ShopType(admin.ModelAdmin):
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
 
-    list_display = ['image_tag', 'title', 'in_stock',
+    list_display = ['id','image_tag', 'title', 'in_stock',
                     'price', 'discount_price', 'category', 'description', 'created_at', 'updated_at']
 
     list_editable = ['in_stock', 'title', 'category', 'in_stock', 'description',
@@ -106,16 +106,15 @@ class ItemAdmin(admin.ModelAdmin):
     search_fields = [
         'title','category__name',]
 
-    list_display_links=('image_tag',)
-
+    list_display_links=('id',)
 
     def changelist_view(self, request, extra_context=None):
         if not request.user.is_superuser:
-            self.list_display = ('image_tag', 'title', 'price',
+            self.list_display = ('id','image_tag', 'title', 'price',
                                   'in_stock','description', 'category')
             self.list_editable = ['in_stock', 'title',  'description',
                       ]
-            self.list_display_links = (None,)
+            self.list_display_links = ('id',)
         else:
             list_display_links = ('title',)
         return super().changelist_view(request, extra_context)
