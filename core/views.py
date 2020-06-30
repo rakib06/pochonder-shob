@@ -11,7 +11,7 @@ from django.shortcuts import redirect
 from django.utils import timezone
 from .forms import ItemForm, ShopForm, CheckoutForm, CouponForm, RefundForm, PaymentForm, CreateProductForm
 from .models import Item, RootCat, OrderItem, Order, Address, Refund, UserProfile, Slider, Shop, Category, Offer, Area
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 import random
 import string
@@ -36,11 +36,16 @@ def home_view(request):
     
     cats_all = Category.objects.all().order_by('-updated_at') 
     cats = Category.objects.all()
-    cats = random.sample(list(cats), 5)
+    try:
+        cats = random.sample(list(cats), 5)
+    except:
+        cats = random.sample(list(cats), len(cats))
     cats_nav = cats[:5]
     root_cat = RootCat.objects.all()
     cat_items = {}
    
+
+
     for cat in cats:
         
         content1 = Item.objects.filter(category=cat)
@@ -68,7 +73,23 @@ def home_view(request):
             
             if len(content)>0 :
                 cat_items[str(cat.name)] = content
-                
+
+    '''
+    we want to show item using paginator
+    '''
+    
+   
+    cat_items_t = tuple(cat_items)
+    
+    page = request.GET.get('page', 1)
+    paginator = Paginator(cat_items_t, 2)
+    try:
+        cat_items1 = paginator.page(page)
+    except PageNotAnInteger:
+        cat_items1 = paginator.page(1)
+    except EmptyPage:
+        cat_items1 = paginator.page(paginator.num_pages)
+
     # print(request.user.shop)
     # print(cat_items['cloth'])
     # slide1 = Slider.objects.all().order_by('-updated_at').first()
@@ -820,20 +841,34 @@ def get_items(request, id):
 
 # to get shop items
 def get_items_slug(request, slug):
+    global context
     try:
         my_shop = get_object_or_404(Shop, slug=slug)
         id = my_shop.id
         print('...............................', type(slug))
         items = Item.objects.filter(shop=id)
+        
+        items = random.sample(list(items), len(items))
+        
         category = Category.objects.filter(for_shop=id)
         offer = Offer.objects.filter(for_shop=id)
         shop = Shop.objects.get(pk=id)
         cats_all = Category.objects.filter(for_shop=shop).order_by('-updated_at') 
     
-   
-        context = {'items': items, 'category': category,
+        page = request.GET.get('page', 1)
+        try:
+            paginator = Paginator(items, 20)
+        except:
+            paginator = Paginator(items, len(items))
+        try:
+            item_p = paginator.page(page)
+        except PageNotAnInteger:
+            item_p = paginator.page(1)
+        except EmptyPage:
+            item_p = paginator.page(paginator.num_pages)
+        context.update ({'items': item_p, 'category': category,
                    'offer': offer, 'shop': shop,'root_cat' : RootCat.objects.all(),
-                   'cats_all': cats_all,}
+                   'cats_all': cats_all,})
         print(items)
         # return render(request, 'a/main/items.html', context)
         return render(request, 'visitor/shop/getItems.html', context)
