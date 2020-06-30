@@ -1,13 +1,21 @@
 {% if object_list_shops %}
 <section>
-    <div class="neons col-12">
-        <h1><em>Shop</em></h1>
-    </div>
-    <br>
+    <div class="card w-100" style="border: transparent;">
+        <div class="card-body">
+          <div class="col-12" style="text-align: center; padding-top: 0%;">
+            
+            <div class="alert alert-warning" style="color: black;" role="alert">
+                Yes! <b> Shops</b> related to <i style="color: black;">{{ search }}</i> has been found for you 
+              </div>
+            
+          </div>
+         
+        </div>
+      </div>
     <div class="container">
         <div class="row">
 
-            <div class="card w-100">
+            <div class="card w-100" style="border: transparent;">
                 <div class="card-body">
 
 
@@ -20,11 +28,10 @@
                                     <img src="{{ item.photo.url }}" class="img-circle" alt="Pochonder-Shob.com">
 
 
-                                    <div style=" text-size-adjust:inherit;" id="price_tag"><small>New</small>
-                                    </div>
+                                   
 
 
-                                    <h5 style="color:white; text-align: center; background-image: linear-gradient(to right, rgba(255,0,0,0.6), rgba(0,0,0,1));
+                                    <h5 style="color:black; text-align: center; background-image: linear-gradient(to right, white);
                     ">
                                         <b>
                                             {{ item.title }}

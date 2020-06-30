@@ -947,7 +947,10 @@ def search_all(request):
     if no_result:
 
         items = Item.objects.all().order_by('-updated_at')
-        suggestion = random.sample(list(items), 30)
+        try:
+            suggestion = random.sample(list(items), 15)
+        except:
+            suggestion = random.sample(list(items), len(items))
 
     context = {'object_list': object_list,
                'object_list_shops': object_list_shops,
@@ -955,7 +958,9 @@ def search_all(request):
                'no_result': no_result,
                'suggestion': suggestion,
                'cats': cats,
-               'root_cat': RootCat.objects.all()
+               'root_cat': RootCat.objects.all(),
+               'search': query,
+
                }
 
     # return render(request, 'a/main/items.html', context)
