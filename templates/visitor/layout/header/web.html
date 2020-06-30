@@ -1,0 +1,115 @@
+{% load static %}
+<header class="header" style="z-index: 2;">
+    <div class="container" style="color: white;  height: 5em;;">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="header__logo">
+                    <a href="{% url 'core:home' %}"><img src="{% static 'visitor/img/logo.png' %}" alt="" /></a>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <nav class="header__menu">
+                    <ul>
+                        <li><a href="{% url 'core:home' %}">Home</a></li>
+                        <li>
+                            <a href="#">Categories</a>
+                            <ul class="header__menu__dropdown"
+                                style="background-color:rgb(251, 244, 244) ; width: 750px; height: 100%;  ">
+
+
+
+                                <div class="row" style="background-color:rgb(255, 255, 255)">
+                                    {% for item in root_cat %}
+                                    <div style=" float: left; width: 33.33%; padding: 0px;">
+                                        <li><a style="color: black;"><b>{{ item.title }} </b> </li>
+                                        {% for ccat in item.category %}
+
+                                        <li><a style="color: black; padding-right: 5px;"
+                                                href="{% url 'core:category-view' ccat.slug %}">{{ ccat.name }}</a>
+                                        </li>
+                                        {% endfor %}
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </ul>
+
+                        </li>
+                        <li>
+                            <a >Shops</a>
+                            <ul class="header__menu__dropdown"
+                                style="background-color: white ;height: 100%;  ">
+                            
+                                {% for item in shops %}
+
+                                <li><a style="color: black; padding-right: 5px;" href="{{ item.get_absolute_url }}"><b>
+                                            {{ item.title }}</b></a>
+                                </li>
+
+
+                                {% endfor %}
+
+                            </ul>
+
+                        </li>
+                        <li>
+                            <a >Markets</a>
+                            <ul class="header__menu__dropdown"
+                                style="background-color:white ;  ">
+
+
+                            
+
+                                {% for item in markets %}
+
+
+
+
+                                <li><a style="color: black; padding-right: 5px;" href="{{ item.get_absolute_url }}"><b>
+                                            {{ item.name }}</b> </a>
+                                </li>
+
+
+                                {% endfor %}
+
+                            </ul>
+
+                        </li>
+                        <li><a href=" {% url 'core:customer-order' %}">My Order</a></li>
+
+                        <;
+                        {% if request.user.is_authenticated %}
+                        <li><a href="\accounts\logout\">Logout</a></li>
+                        {% else %}
+                        <li><a href="\accounts\login\">Login</a></li>
+                        {% endif %}
+
+                    </ul>
+
+
+                </nav>
+            </div>
+        </div>
+        <div class="humberger__open">
+            <i class="fa fa-bars"></i>
+        </div>
+    </div>
+    <div class="hero__search" style="margin-left: 30%;;">
+        {% include 'visitor/layout/search.html' %}
+        <div class="deskContent">
+            <div class="hero__search__phone">
+                <div class="hero__search__phone__icon">
+
+                    <a style="color: black;" href="tel:+8801950641081"><i class="fa fa-phone"></i> </a>
+
+                </div>
+
+                <div class="hero__search__phone__text">
+                    <h5>
+                        <a style="color: black;" href="tel:+8801950641081"> +88 01950 641 081</a>
+                    </h5>
+                    <span>Tap to call</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

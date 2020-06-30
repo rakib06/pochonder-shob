@@ -1,0 +1,22 @@
+{% load static %}
+<div class="sticky_form">
+  <form
+    action="{% url 'core:search_results' %}"
+    method="get"
+    style="width: 100%;"
+  >
+    <input
+      name="q"
+      type="text"
+      placeholder="What do yo u need?"
+      style="width: 57%;"
+    />
+    <button
+      type="submit"
+      class="site-btn"
+      style="background-color: transparent; color: black;"
+    >
+      <i class="fa fa-search"> Search</i>
+    </button>
+  </form>
+</div>

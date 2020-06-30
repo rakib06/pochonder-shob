@@ -1,93 +1,79 @@
 {% load static %}
 <section>
-    <div class="deskContent">
-
-        <div class="container">
-
+  <div class="deskContent">
+    <div class="container">
+      <div class="row">
+        <div class="card w-100" style="border: transparent;">
+          <div class="card-body">
             <div class="row">
-
-                <div class="card w-100">
-                    <div class="card-body">
-                        <div class=" row ">
-
-
-
-                            <div class=" col-12" style="text-align: left; padding-top: 0%; ">
-                                <a style=" text-transform: uppercase; text-align:justify; padding-left: 10px;
-        font-size: 1em;" href="{% url 'core:category-view' name=key %}"><span style="color: black;">
-                                        <b>Finding your
-                                            favourite Shop?</b></span></a>
-
-
-                            </div>
-                            <hr>
-                        </div>
-                        <hr style="color: black; background-color: black;">
-                        <div class="categories__slider owl-carousel">
-                            {% for item in shops %}
-
-
-                            <div class="column" style="  overflow: hidden; float: left; margin:0 auto; padding:20px 0;">
-
-                                <!-- Product Image -->
-
-
-                                <a href="{{ item.get_absolute_url }}">
-
-
-
-
-
-                                    <img src="{{ item.photo.url }}" class="img-circle" alt="Pochonder-Shob.com">
-                                    <h5 style="color:white; text-align: center; background-image: linear-gradient(to right, rgba(255, 255, 255, 0.6), rgb(255, 255, 255));
-                                            ">
-
-
-                                        {% if item.items_count > 0 %}
-                                        <span style="color: black; size: 2px;">
-                                            <small> {{ item.items_count }} Items </small>
-                                        </span>
-                                        {% else %}
-                                        <span style="color: black; size: 2px;">
-                                            <small> New </small>
-                                        </span>
-                                        {% endif %}
-                                        <div style=" padding: center;">
-                                            <b style="color: black; size: 5px;">{{item.title}}
-                                            </b>
-                                        </div>
-
-
-
-                                    </h5>
-
-
-
-
-                                </a>
-
-
-
-
-                            </div>
-                            {% endfor %}
-
-
-
-                        </div>
-                    </div>
-                </div>
+              <div class="col-12" style="text-align: left; padding-top: 0%;">
+                <a
+                  style="
+                    text-transform: uppercase;
+                    text-align: justify;
+                    padding-left: 10px;
+                    font-size: 1em;
+                  "
+                  href="{% url 'core:category-view' name=key %}"
+                  ><span style="color: black;">
+                    <b>Finding your favourite Shop?</b></span
+                  ></a
+                >
+              </div>
+              <hr />
             </div>
+            <hr style="color: black; background-color: black;" />
+            <div class="categories__slider owl-carousel">
+              {% for item in shops %}
 
+              <div
+                class="column"
+                style="
+                  overflow: hidden;
+                  float: left;
+                  margin: 0 auto;
+                  padding: 20px 0;
+                "
+              >
+                <!-- Product Image -->
 
-
-
-
-
+                <a href="{{ item.get_absolute_url }}">
+                  <img
+                    src="{{ item.photo.url }}"
+                    class="img-circle"
+                    alt="Pochonder-Shob.com"
+                  />
+                  <h5
+                    style="
+                      color: white;
+                      text-align: center;
+                      background-image: linear-gradient(
+                        to right,
+                        rgba(255, 255, 255, 0.6),
+                        rgb(255, 255, 255)
+                      );
+                    "
+                  >
+                    {% if item.items_count > 0 %}
+                    <span style="color: black; size: 2px;">
+                      <small> {{ item.items_count }} Items </small>
+                    </span>
+                    {% else %}
+                    <span style="color: black; size: 2px;">
+                      <small> New </small>
+                    </span>
+                    {% endif %}
+                    <div style="padding: center;">
+                      <b style="color: black; size: 5px;">{{item.title}} </b>
+                    </div>
+                  </h5>
+                </a>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-
-
-
-
+  </div>
 </section>

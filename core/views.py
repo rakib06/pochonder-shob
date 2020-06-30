@@ -89,7 +89,8 @@ def home_view(request):
         cat_items1 = paginator.page(1)
     except EmptyPage:
         cat_items1 = paginator.page(paginator.num_pages)
-
+    print(cat_items_t, 'GGGGGGGGG')
+    print(cat_items1, "PPPPPPPPPppp")
     # print(request.user.shop)
     # print(cat_items['cloth'])
     # slide1 = Slider.objects.all().order_by('-updated_at').first()
@@ -776,7 +777,7 @@ def category_viewS(request, slug, shop):
         
         cat = get_object_or_404(Category, slug=slug)
     id = cat.id
-    print('Shop',shop)
+    # print('Shop',shop)
     
     items = Item.objects.filter(category=id).filter(shop__slug__icontains=shop)
     cat = Category.objects.get(id=id)
@@ -786,8 +787,18 @@ def category_viewS(request, slug, shop):
         shop = Shop.objects.get(slug__icontains=shop)
     except:    
         shop = Shop.objects.get(title__icontains=shop)
-    category = Category.objects.filter(for_shop=shop.id)
-    
+
+    # category = Category.objects.filter(for_shop=shop.id)
+     # get all shop category
+    sc = []
+    for ic in Item.objects.filter(shop=shop):
+        sc.append(ic.category)
+
+    unique_cat_list = [i for n, i in enumerate(sc) if i not in sc[:n]] 
+    print("___________> ", unique_cat_list)
+    category = Category.objects.filter(name__in=unique_cat_list)
+    # end of get all cat
+
     for ca in cats:
 
         content = Item.objects.filter(category=ca)
@@ -802,6 +813,7 @@ def category_viewS(request, slug, shop):
         'cat': cat,
         'cat_items': cat_items,
         'category': category,
+        'this_cat': cat,
         'root_cat': RootCat.objects.all()
     }
     return render(request, "visitor/shop/cat.html", context)
@@ -850,7 +862,19 @@ def get_items_slug(request, slug):
         
         items = random.sample(list(items), len(items))
         
-        category = Category.objects.filter(for_shop=id)
+        
+        # category = Category.objects.filter(for_shop=id)
+        # get all shop category
+        sc = []
+        for ic in items:
+            sc.append(ic.category)
+
+        unique_cat_list = [i for n, i in enumerate(sc) if i not in sc[:n]] 
+        print("___________> ", unique_cat_list)
+        category = Category.objects.filter(name__in=unique_cat_list)
+        # end of get all shop category
+
+
         offer = Offer.objects.filter(for_shop=id)
         shop = Shop.objects.get(pk=id)
         cats_all = Category.objects.filter(for_shop=shop).order_by('-updated_at') 
@@ -866,6 +890,7 @@ def get_items_slug(request, slug):
             item_p = paginator.page(1)
         except EmptyPage:
             item_p = paginator.page(paginator.num_pages)
+
         context.update ({'items': item_p, 'category': category,
                    'offer': offer, 'shop': shop,'root_cat' : RootCat.objects.all(),
                    'cats_all': cats_all,})
