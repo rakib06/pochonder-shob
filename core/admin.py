@@ -193,7 +193,7 @@ class OrderAdmin(admin.ModelAdmin):
     list_editable = ['being_packed', 'being_delivered', 'received']
     readonly_fields = ['created_at', 'updated_at']
     def get_products(self, obj):
-        return ", ".join([str(p.item.title) + " = " + str(p.quantity) + " Shop ID = " + str(p.item.shop.id) for p in obj.items.all()])
+        return ", ".join([str(p.item.title) + ", product id = " + str(p.item.id) +",Q= "+str(p.quantity) + ", Shop ID = " + str(p.item.shop.title) for p in obj.items.all()])
 
     def get_exclude(self, request, obj=None):
         excluded = super().get_exclude(request, obj) or []  # get overall excluded fields

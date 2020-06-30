@@ -51,7 +51,7 @@
               class="badge badge-light m-1"
               href="{% url 'core:category-view' item.slug shop.slug %} "
             >
-              <b style=" font-size:medium;">{{ item.name }} </b>
+              <b style=" font-size:medium;">{{ item.name }} </b> 
             </a>
          
           {% endfor %}
@@ -115,7 +115,7 @@
                             </div>
                             <div class="latest-product__item__text">
                                 <h6>{{ item.title }}</h6>
-
+                                <small style="font-size: xx-small; color: black;"> Product ID: 2020{{item.id}}</small>
                                 {% if item.discount_price  %}
 
                                 <span class=" mr-1" ">
