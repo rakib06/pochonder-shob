@@ -748,6 +748,7 @@ def category_view(request, slug):
         cat = get_object_or_404(Category, slug=slug)
     id = cat.id
     items = Item.objects.filter(category=id)
+    items = random.sample(list(items), len(items))
     cat = Category.objects.get(id=id)
     cats = Category.objects.all().order_by('-updated_at')
     cat_items = {}
@@ -760,13 +761,31 @@ def category_view(request, slug):
             if len(content) > 0:
                 cat_items[str(ca.name)] = content
             print(content)
+
+    page = request.GET.get('page', 1)
+    try:
+        paginator = Paginator(items, 12)
+    except:
+        paginator = Paginator(items, len(items))
+    try:
+        item_p = paginator.page(page)
+    except PageNotAnInteger:
+        item_p = paginator.page(1)
+    except EmptyPage:
+        item_p = paginator.page(paginator.num_pages)
+
     context = {
-        'items': items,
+        'items': item_p,
         'cat': cat,
         'cat_items': cat_items,
         'cats_all': cats_all,
-        'root_cat': RootCat.objects.all()
+        'root_cat': RootCat.objects.all(),
+        'shops': Shop.objects.all(),
+        'markets': Area.objects.all(),
+        
     }
+
+    
     return render(request, "visitor/category_view.html", context)
 
 # for shop category
@@ -780,6 +799,7 @@ def category_viewS(request, slug, shop):
     # print('Shop',shop)
     
     items = Item.objects.filter(category=id).filter(shop__slug__icontains=shop)
+    items = random.sample(list(items), len(items))
     cat = Category.objects.get(id=id)
     cats = Category.objects.all().order_by('-updated_at')
     cat_items = {}
@@ -807,14 +827,27 @@ def category_viewS(request, slug, shop):
             if len(content) > 0:
                 cat_items[str(ca.name)] = content
             print(content)
+    page = request.GET.get('page', 1)
+    try:
+        paginator = Paginator(items, 12)
+    except:
+        paginator = Paginator(items, len(items))
+    try:
+        item_p = paginator.page(page)
+    except PageNotAnInteger:
+        item_p = paginator.page(1)
+    except EmptyPage:
+        item_p = paginator.page(paginator.num_pages)        
     context = {
         'shop':shop,
-        'items': items,
+        'items': item_p,
         'cat': cat,
         'cat_items': cat_items,
         'category': category,
         'this_cat': cat,
-        'root_cat': RootCat.objects.all()
+        'root_cat': RootCat.objects.all(),
+        'shops': Shop.objects.all(),
+        'markets': Area.objects.all(),
     }
     return render(request, "visitor/shop/cat.html", context)
     # return render(request, "visitor/shop/get_cat_items.html", context)
@@ -834,6 +867,7 @@ def get_items(request, id):
     try:
         # print('...............................', type(slug))
         items = Item.objects.filter(shop=id)
+        items = random.sample(list(items), len(items))
         category = Category.objects.filter(for_shop=id)
         offer = Offer.objects.filter(for_shop=id)
         shop = Shop.objects.get(pk=id)
@@ -842,7 +876,10 @@ def get_items(request, id):
         context = {'items': items, 'category': category,
                    'offer': offer, 'shop': shop,
                    'cats_all': cats_all,
-                   'root_cat': RootCat.objects.all()}
+                  'root_cat': RootCat.objects.all(),
+                'shops': Shop.objects.all(),
+                'markets': Area.objects.all(),
+                   }
         print(items)
         # return render(request, 'a/main/items.html', context)
         return render(request, 'visitor/getItems.html', context)
@@ -881,7 +918,7 @@ def get_items_slug(request, slug):
     
         page = request.GET.get('page', 1)
         try:
-            paginator = Paginator(items, 20)
+            paginator = Paginator(items, 16)
         except:
             paginator = Paginator(items, len(items))
         try:
@@ -892,7 +929,9 @@ def get_items_slug(request, slug):
             item_p = paginator.page(paginator.num_pages)
 
         context.update ({'items': item_p, 'category': category,
-                   'offer': offer, 'shop': shop,'root_cat' : RootCat.objects.all(),
+                   'offer': offer, 'shop': shop,'root_cat': RootCat.objects.all(),
+        'shops': Shop.objects.all(),
+        'markets': Area.objects.all(),
                    'cats_all': cats_all,})
         print(items)
         # return render(request, 'a/main/items.html', context)
@@ -932,6 +971,7 @@ def search_all(request):
 
     object_list = Item.objects.filter(
         title__icontains=query).order_by('-updated_at')
+    object_list = random.sample(list(object_list), len(object_list))
 
     object_list_shops = Shop.objects.filter(title__icontains=query)
     # object_list_cat = Category.objects.filter(title__icontains=query)
@@ -960,6 +1000,9 @@ def search_all(request):
                'cats': cats,
                'root_cat': RootCat.objects.all(),
                'search': query,
+               
+        'shops': Shop.objects.all(),
+        'markets': Area.objects.all(),
 
                }
 
