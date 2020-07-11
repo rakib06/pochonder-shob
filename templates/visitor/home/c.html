@@ -46,6 +46,16 @@
               {% endif %}
             </h5>
           </a>
+          <a style="padding-left: 35%;" class="badge badge-light m-1" href="{{ item.get_add_to_cart_url }} ">
+            <button type="button" class="btn btn-outline-dark btn-sm" style="
+    font-size: smaller;
+    width: 100%;
+    font-family: 'Times New Roman', Times, serif;
+    
+  ">
+              Add to cart
+            </button>
+          </a>
       </div>
       {% if  forloop.counter == 18 %}
       {% include 'visitor/cat/rcmd.html' %}
