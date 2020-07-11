@@ -100,12 +100,12 @@ def home_view(request):
     items = random.sample(list(items), len(items))
     
     try:
-        cats_all = random.sample(list(cats_all), 20)
+        cats_all = random.sample(list(cats_all), len(cats_all))
     except:
         cats_all = random.sample(list(cats_all), len(cats_all))
     page = request.GET.get('page', 1)
     try:
-        paginator = Paginator(items, 36)
+        paginator = Paginator(items, 24)
     except:
         paginator = Paginator(items, 2)
     try:
@@ -114,6 +114,17 @@ def home_view(request):
         item_p = paginator.page(1)
     except EmptyPage:
         item_p = paginator.page(paginator.num_pages)
+    # Get the index of the current page
+    index = item_p.number - 1  # edited to something easier without index
+    # This value is maximum index of your pages, so the last page - 1
+    max_index = len(paginator.page_range)
+    # You want a range of 7, so lets calculate where to slice the list
+    start_index = index - 3 if index >= 3 else 0
+    end_index = index + 3 if index <= max_index - 3 else max_index
+    # Get our new page range. In the latest versions of Django page_range returns 
+    # an iterator. Thus pass it to list, to make our slice possible again.
+    page_range = list(paginator.page_range)[start_index:end_index]
+
     slider = Slider.objects.all().order_by('-updated_at')[:5]
     context = { 'shops': shops,'items': item_p,
                'markets': markets, 'cats': cats, 'cats_nav': cats_nav,
@@ -125,6 +136,7 @@ def home_view(request):
                'cats_all': cats_all,
                'cats_all_phn': cats_all[:6],
                'root_cat': root_cat,
+               'page_range': page_range,
 
                }
     # for key, value in con.items():
