@@ -47,6 +47,9 @@
           </h5>
         </a>
       </div>
+      {% if  forloop.counter == 18 %}
+      {% include 'visitor/cat/rcmd.html' %}
+      {% endif %}
       {% endfor %}
     </div>
     <div class="container">
