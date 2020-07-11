@@ -100,7 +100,7 @@ def home_view(request):
     items = random.sample(list(items), len(items))
     
     try:
-        cats_all = random.sample(list(cats_all), 15)
+        cats_all = random.sample(list(cats_all), 20)
     except:
         cats_all = random.sample(list(cats_all), len(cats_all))
     page = request.GET.get('page', 1)
