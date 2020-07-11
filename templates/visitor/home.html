@@ -1,53 +1,77 @@
-{% extends "visitor/base.html" %}
-{% load static %}
-
-{% block page_content %}
-{% include 'visitor/layout/show-case.html' %}
+{% extends "visitor/base.html" %} {% load static %} {% block page_content %}
 <!-- Categories Section Begin -->
 
 <!-- Categories Section End -->
 
+<div class="container">
+  <div class="row">
+    <div class="card w-100" style="border: transparent;">
+      <div class="col-12">
+        <div class="container">
+          <div class="col-12" style="
+              text-align: center;
+              padding-top: 0%;
+              font-family: Georgia, 'Times New Roman', Times, serif;
+            ">
+            <a style="
+                text-transform: uppercase;
+                text-align: justify;
+                padding-left: 10px;
+                font-size: 1em;
+              "><span style="color: black;"><b> this week's top Items </b>
+              </span>
+            </a>
 
+            <hr style="color: black; size: 2px;" />
+          </div>
+          <div class="deskContent">
+            {% for item in cats_all %}
 
+            <a class="badge badge-light m-1" href="{% url 'core:category-view' item.slug %} ">
+              <button type="button" class="btn btn-outline-dark btn-sm" style="
+                  font-size: small;
+                  width: 100%;
+                  font-family: 'Times New Roman', Times, serif;
+                ">
+                {{ item.name }}
+              </button>
+            </a>
 
+            {% endfor %}
+          </div>
 
-<div class="deskContent">
-    <div class="container">
-        <div class="row">
-            <div class=" col-md-6">
+          <div class="phoneContent">
+            {% for item in cats_all_phn %}
 
+            <a class="badge badge-light m-1" href="{% url 'core:category-view' item.slug %} ">
+              <button type="button" class="btn btn-outline-dark btn-sm" style="
+                  font-size: small;
+                  width: 100%;
+                  font-family: 'Times New Roman', Times, serif;
+                ">
+                {{ item.name }}
+              </button>
+            </a>
 
-
-            </div>
-            <div class=" col-md-6">
-
-
-            </div>
+            {% endfor %}
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
 
-<!-- Featured Section End -->
-{% include 'visitor/data/cat_items.html' %}
+{% include 'visitor/home/b.html' %} {% include 'visitor/home/c.html' %}
 
-
-
-</div>
 <!-- Latest Product Section Begin -->
-<section class=" latest-product spad">
-    <div class="container">
-        <div class="row">
-
-
-            {% include 'visitor/vulval/top.html' %}
-            {% include 'visitor/vulval/new.html' %}
-            {% include 'visitor/vulval/lat.html' %}
-
-
-
-        </div>
+<section class="latest-product spad">
+  <div class="container">
+    <div class="row">
+      {% include 'visitor/vulval/top.html' %}
+      {% include 'visitor/vulval/new.html' %}
+      {% include 'visitor/vulval/lat.html'%}
     </div>
+  </div>
 </section>
-
 
 {% endblock %}

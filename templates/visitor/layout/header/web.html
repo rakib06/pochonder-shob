@@ -35,10 +35,9 @@
 
                         </li>
                         <li>
-                            <a >Shops</a>
-                            <ul class="header__menu__dropdown"
-                                style="background-color: white ;height: 100%;  ">
-                            
+                            <a>Shops</a>
+                            <ul class="header__menu__dropdown" style="background-color: white ;height: 100%;  ">
+
                                 {% for item in shops %}
 
                                 <li><a style="color: black; padding-right: 5px;" href="{{ item.get_absolute_url }}"><b>
@@ -52,12 +51,11 @@
 
                         </li>
                         <li>
-                            <a >Markets</a>
-                            <ul class="header__menu__dropdown"
-                                style="background-color:white ;  ">
+                            <a>Markets</a>
+                            <ul class="header__menu__dropdown" style="background-color:white ;  ">
 
 
-                            
+
 
                                 {% for item in markets %}
 
@@ -76,12 +74,10 @@
                         </li>
                         <li><a href=" {% url 'core:customer-order' %}">My Order</a></li>
 
-                        <;
-                        {% if request.user.is_authenticated %}
-                        <li><a href="\accounts\logout\">Logout</a></li>
-                        {% else %}
-                        <li><a href="\accounts\login\">Login</a></li>
-                        {% endif %}
+                        <; {% if request.user.is_authenticated %} <li><a href="\accounts\logout\">Logout</a></li>
+                            {% else %}
+                            <li><a href="\accounts\login\">Login</a></li>
+                            {% endif %}
 
                     </ul>
 
@@ -95,21 +91,6 @@
     </div>
     <div class="hero__search" style="margin-left: 30%;;">
         {% include 'visitor/layout/search.html' %}
-        <div class="deskContent">
-            <div class="hero__search__phone">
-                <div class="hero__search__phone__icon">
 
-                    <a style="color: black;" href="tel:+8801950641081"><i class="fa fa-phone"></i> </a>
-
-                </div>
-
-                <div class="hero__search__phone__text">
-                    <h5>
-                        <a style="color: black;" href="tel:+8801950641081"> +88 01950 641 081</a>
-                    </h5>
-                    <span>Tap to call</span>
-                </div>
-            </div>
-        </div>
     </div>
 </header>

@@ -25,13 +25,13 @@ from django.core.files.images import get_image_dimensions
 
 def home_view(request):
     global context
-    markets = Area.objects.all().order_by('-updated_at')[:10]
-    shops = Shop.objects.all().order_by('-updated_at')[:10]
+    markets = Area.objects.all().order_by('-updated_at')[:4]
+    shops = Shop.objects.all().order_by('-updated_at')[:4]
     # items = Item.objects.all().order_by('-updated_at')[:10]
-    top = Item.objects.all().order_by('-created_at')[:10]
-    new = Item.objects.all().order_by('updated_at')[:10]
+    top = Item.objects.all().order_by('-created_at')[:5]
+    new = Item.objects.all().order_by('created_at')[:5]
     # temp
-    latest = Item.objects.all().order_by('category')[:10]
+    latest = Item.objects.all().order_by('category')[:5]
 
     
     cats_all = Category.objects.all().order_by('-updated_at') 
@@ -94,8 +94,28 @@ def home_view(request):
     # print(request.user.shop)
     # print(cat_items['cloth'])
     # slide1 = Slider.objects.all().order_by('-updated_at').first()
+    items = Item.objects.all()
+    
+
+    items = random.sample(list(items), len(items))
+    
+    try:
+        cats_all = random.sample(list(cats_all), 15)
+    except:
+        cats_all = random.sample(list(cats_all), len(cats_all))
+    page = request.GET.get('page', 1)
+    try:
+        paginator = Paginator(items, 2)
+    except:
+        paginator = Paginator(items, 2)
+    try:
+        item_p = paginator.page(page)
+    except PageNotAnInteger:
+        item_p = paginator.page(1)
+    except EmptyPage:
+        item_p = paginator.page(paginator.num_pages)
     slider = Slider.objects.all().order_by('-updated_at')[:5]
-    context = { 'shops': shops,
+    context = { 'shops': shops,'items': item_p,
                'markets': markets, 'cats': cats, 'cats_nav': cats_nav,
                'slider': slider,
                'cat_items': cat_items,
@@ -103,13 +123,18 @@ def home_view(request):
                'new': new,
                'latest': latest,
                'cats_all': cats_all,
+               'cats_all_phn': cats_all[:6],
                'root_cat': root_cat,
 
                }
     # for key, value in con.items():
     #     print('---------------------->>>>>>>>>>>>>......', key, value)
     #     context[key] = value
+    # return render(request, 'visitor/home/a.html', context)
     return render(request, 'visitor/home.html', context)
+
+
+    
 
 
 def side_bar(request):

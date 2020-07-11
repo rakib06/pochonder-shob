@@ -1,100 +1,130 @@
 {%load static %}
 <!-- Footer Section Begin -->
-<div class="bg-warning ">
-
-    <button onclick="topFunction()" style="color: black;" id="myBtn" class="btn btn-lg btn-block" title="Go to top">
-        <small>Back to Top</small>
-    </button>
+<div class="bg-warning">
+  <button
+    onclick="topFunction()"
+    style="color: black;"
+    id="myBtn"
+    class="btn btn-lg btn-block"
+    title="Go to top"
+  >
+    <small>Back to Top</small>
+  </button>
 </div>
 
-<footer class="footer spad" style="background-color: black; height: 20px; width: 100%;">
-
-
-    <div class=" row " id="footer_content" style="background-color: black;">
-        <div class=" col-lg-4 col-md-6 col-sm-6 " style="background-color: black; padding-left: 10%;">
-            <div class="footer__about " style="background-color: black;">
-                <div class="footer__about__logo">
-                    <a href="/"><img src="{% static 'visitor/img/logo.png' %}" alt="" /></a>
-                </div>
-                <ul>
-                    <li>Address: 48, Khan Jahan Ali Road, Khulna. </li>
-                    <li><a class="btn " style="background-color: red;" href="tel:+8801950641081">
-                            +88 01950-641081</a></li>
-                    <li>Email: linb1ltd@gmail.com</li>
-                </ul>
-
-                <div class="footer__widget__social">
-
-                    <a href="https://www.facebook.com/%E0%A6%AA%E0%A6%9B%E0%A6%A8%E0%A7%8D%E0%A6%A6%E0%A7%87%E0%A6%B0-%E0%A6%B8%E0%A6%AC%E0%A6%95%E0%A6%AE-106914437718816"
-                        target="_blank">
-                        Join With Us On <i style="font-size: 20px;padding: 5px;" class="fa fa-facebook">
-
-                        </i>
-                    </a>
-                </div>
-            </div>
+<footer class="footer spad" style="background-color: black; width: 100%;">
+  <div
+    class="row"
+    id="footer_content"
+    style="background-color: black; width: 100%;"
+  >
+    <div
+      class="col-lg-4 col-md-6 col-sm-6"
+      style="background-color: black; width: 100%;"
+    >
+      <div class="footer__about" style="background-color: black;">
+        <div class="footer__about__logo">
+          <a href="/"
+            ><img src="{% static 'visitor/img/logo.png' %}" alt=""
+          /></a>
         </div>
-        <div class="col-lg-7 col-md-6 col-sm-6 offset-lg-1" style="background-color: black; padding-left: 10%;">
-            <div class="footer__widget">
+        <ul>
+          <li>Address: 48, Khan Jahan Ali Road, Khulna.</li>
+          <li>
+            <a
+              class="btn"
+              style="background-color: red;"
+              href="tel:+8801950641081"
+            >
+              +88 01950-641081</a
+            >
+          </li>
+          <li>Email: linb1ltd@gmail.com</li>
+        </ul>
 
-                <ul>
-                    <li><a href="{% url 'core:condition_of_use' %}">About Us</a></li>
-                    <li><a href="{% url 'core:condition_of_use' %}">About Our Shop</a></li>
-                    <li><a href="{% url 'core:condition_of_use' %}">Secure Shopping</a></li>
-                    <li><a href="{% url 'core:condition_of_use' %}">Delivery infomation</a></li>
-                    <li><a href="{% url 'core:condition_of_use' %}">Privacy Policy</a></li>
-                </ul>
-                <ul>
-                    <li><a href="{% url 'core:condition_of_use' %}">Conditions Of Use</a></li>
-                    <li><a href="{% url 'core:condition_of_use' %}">Who We Are</a></li>
-                    <li><a href="{% url 'core:condition_of_use' %}">Our Services</a></li>
-                    <li><a href="{% url 'core:condition_of_use' %}">Projects</a></li>
-                    <li><a href="{% url 'core:condition_of_use' %}">Contact</a></li>
-                </ul>
-            </div>
-
-            <div class="footer__copyright">
-                <div>
-                    <p style="text-align:center; color: rgb(243, 240, 240);">
-                        <!-- Link back to LinB1 can't be removed.  is licensed under CC BY 3.0. -->
-                        Copyright &copy;
-                        <script>
-                            document.write(new Date().getFullYear());
-                        </script>
-                        All rights reserved by
-                        <a style="color: white;" href="https://LinB1.com" target="_blank">LinB1 Software Development
-                            & Consultancy
-                            Ltd.</a>
-                        <!-- Link back to LinB1 can't be removed.  is licensed under CC BY 3.0. -->
-                    </p>
-                </div>
-
-            </div>
+        <div class="footer__widget__social">
+          <a
+            href="https://www.facebook.com/%E0%A6%AA%E0%A6%9B%E0%A6%A8%E0%A7%8D%E0%A6%A6%E0%A7%87%E0%A6%B0-%E0%A6%B8%E0%A6%AC%E0%A6%95%E0%A6%AE-106914437718816"
+            target="_blank"
+          >
+            Join With Us On
+            <i style="font-size: 20; padding: 5;" class="fa fa-facebook"> </i>
+          </a>
         </div>
-
-
-
+      </div>
     </div>
+    <div
+      class="col-lg-7 col-md-6 col-sm-6 offset-lg-1"
+      style="background-color: black; width: 100%;"
+    >
+      <div class="footer__widget" style="width: 100%;">
+        <ul>
+          <li><a href="{% url 'core:condition_of_use' %}">About Us</a></li>
+          <li>
+            <a href="{% url 'core:condition_of_use' %}">About Our Shop</a>
+          </li>
+          <li>
+            <a href="{% url 'core:condition_of_use' %}">Secure Shopping</a>
+          </li>
+          <li>
+            <a href="{% url 'core:condition_of_use' %}">Delivery infomation</a>
+          </li>
+          <li>
+            <a href="{% url 'core:condition_of_use' %}">Privacy Policy</a>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <a href="{% url 'core:condition_of_use' %}">Conditions Of Use</a>
+          </li>
+          <li><a href="{% url 'core:condition_of_use' %}">Who We Are</a></li>
+          <li><a href="{% url 'core:condition_of_use' %}">Our Services</a></li>
+          <li><a href="{% url 'core:condition_of_use' %}">Projects</a></li>
+          <li><a href="{% url 'core:condition_of_use' %}">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__copyright" style="width: 100%;">
+        <p style="text-align: center; color: rgb(243, 240, 240);">
+          <!-- Link back to LinB1 can't be removed.  is licensed under CC BY 3.0. -->
+          Copyright &copy;
+          <script>
+            document.write(new Date().getFullYear());
+          </script>
+          All rights reserved by
+          <a style="color: white;" href="https://LinB1.com" target="_blank"
+            >LinB1 Software Development & Consultancy Ltd.</a
+          >
+          <!-- Link back to LinB1 can't be removed.  is licensed under CC BY 3.0. -->
+        </p>
+      </div>
+    </div>
+  </div>
 </footer>
 <!-- Footer Section End -->
 <script>
-    //Get the button
-    var mybutton = document.getElementById("myBtn");
+  //Get the button
+  var mybutton = document.getElementById("myBtn");
 
-    // When the user scrolls down 20px from the top of the document, show the button
-    window.onscroll = function () { scrollFunction() };
+  // When the user scrolls down 20 from the top of the document, show the button
+  window.onscroll = function () {
+    scrollFunction();
+  };
 
-    function scrollFunction() {
-        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-            mybutton.style.display = "block";
-        } else {
-            mybutton.style.display = "none";
-        }
+  function scrollFunction() {
+    if (
+      document.body.scrollTop > 20 ||
+      document.documentElement.scrollTop > 20
+    ) {
+      mybutton.style.display = "block";
+    } else {
+      mybutton.style.display = "none";
     }
+  }
 
-    // When the user clicks on the button, scroll to the top of the document
-    function topFunction() {
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
-    }
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
 </script>
