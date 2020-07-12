@@ -1043,6 +1043,8 @@ def search_all(request):
     except EmptyPage:
         cat_p = paginator.page(paginator.num_pages)
     # Get the index of the current page
+    
+
     index = cat_p.number - 1  # edited to something easier without index
     # This value is maximum index of your pages, so the last page - 1
     max_index = len(paginator.page_range)
@@ -1060,7 +1062,7 @@ def search_all(request):
                'suggestion': suggestion,
                'cats': cat_p,
                'root_cat': RootCat.objects.all(),
-               'search': query,
+               'search': query, 'page_range': page_range,
                
         'shops': Shop.objects.all(),
         'markets': Area.objects.all(),
