@@ -1,86 +1,44 @@
 {%load static %}
 <!-- Footer Section Begin -->
 <div class="bg-warning">
-  <button
-    onclick="topFunction()"
-    style="color: black;"
-    id="myBtn"
-    class="btn btn-lg btn-block"
-    title="Go to top"
-  >
+  <button onclick="topFunction()" style="color: black;" id="myBtn" class="btn btn-lg btn-block" title="Go to top">
     <small>Back to Top</small>
   </button>
 </div>
 
 <footer class="footer spad" style="background-color: black; width: 100%;">
-  <div
-    class="row"
-    id="footer_content"
-    style="background-color: black; width: 100%;"
-  >
-    <div
-      class="col-lg-4 col-md-6 col-sm-6"
-      style="background-color: black; width: 100%;"
-    >
+  <div class="row" id="footer_content" style="background-color: black; width: 100%;">
+    <div class="col-lg-4 col-md-6 col-sm-6" style="background-color: black; width: 100%;">
       <div class="footer__about" style="background-color: black;">
         <div class="footer__about__logo">
-          <a href="/"
-            ><img src="{% static 'visitor/img/logo.png' %}" alt=""
-          /></a>
+          <a href="/"><img src="{% static 'visitor/img/logo.png' %}" alt="" /></a>
         </div>
-        <ul>
-          <li>Address: 48, Khan Jahan Ali Road, Khulna.</li>
-          <li>
-            <a
-              class="btn"
-              style="background-color: red;"
-              href="tel:+8801950641081"
-            >
-              +88 01950-641081</a
-            >
-          </li>
-          <li>Email: linb1ltd@gmail.com</li>
-        </ul>
 
-        <div class="footer__widget__social">
-          <a
-            href="https://www.facebook.com/%E0%A6%AA%E0%A6%9B%E0%A6%A8%E0%A7%8D%E0%A6%A6%E0%A7%87%E0%A6%B0-%E0%A6%B8%E0%A6%AC%E0%A6%95%E0%A6%AE-106914437718816"
-            target="_blank"
-          >
-            Join With Us On
-            <i style="font-size: 20; padding: 5;" class="fa fa-facebook"> </i>
-          </a>
-        </div>
+
+
       </div>
     </div>
-    <div
-      class="col-lg-7 col-md-6 col-sm-6 offset-lg-1"
-      style="background-color: black; width: 100%;"
-    >
+    <div class="col-lg-7 col-md-6 col-sm-6 offset-lg-1" style="background-color: black; width: 100%;">
       <div class="footer__widget" style="width: 100%;">
         <ul>
-          <li><a href="{% url 'core:condition_of_use' %}">About Us</a></li>
           <li>
-            <a href="{% url 'core:condition_of_use' %}">About Our Shop</a>
+            <a href="{% url 'core:condition_of_use' %}">About Us</a>
           </li>
-          <li>
-            <a href="{% url 'core:condition_of_use' %}">Secure Shopping</a>
-          </li>
-          <li>
-            <a href="{% url 'core:condition_of_use' %}">Delivery infomation</a>
-          </li>
-          <li>
-            <a href="{% url 'core:condition_of_use' %}">Privacy Policy</a>
-          </li>
+          <li><a
+              href="https://www.facebook.com/%E0%A6%AA%E0%A6%9B%E0%A6%A8%E0%A7%8D%E0%A6%A6%E0%A7%87%E0%A6%B0-%E0%A6%B8%E0%A6%AC%E0%A6%95%E0%A6%AE-106914437718816"
+              target="_blank">
+
+              <i style="font-size: 20; padding: 5;" class="fa fa-facebook"> Page </i>
+            </a></li>
+
         </ul>
         <ul>
+
           <li>
-            <a href="{% url 'core:condition_of_use' %}">Conditions Of Use</a>
+            <a href="{% url 'core:condition_of_use' %}">+8801728750427, +8801950641081 </a>
           </li>
-          <li><a href="{% url 'core:condition_of_use' %}">Who We Are</a></li>
-          <li><a href="{% url 'core:condition_of_use' %}">Our Services</a></li>
-          <li><a href="{% url 'core:condition_of_use' %}">Projects</a></li>
-          <li><a href="{% url 'core:condition_of_use' %}">Contact</a></li>
+          <li>48, Khan Jahan Ali Road, Khulna, Bangladesh.</li>
+
         </ul>
       </div>
 
@@ -92,9 +50,8 @@
             document.write(new Date().getFullYear());
           </script>
           All rights reserved by
-          <a style="color: white;" href="https://LinB1.com" target="_blank"
-            >LinB1 Software Development & Consultancy Ltd.</a
-          >
+          <a style="color: white;" href="https://LinB1.com" target="_blank">LinB1 Software Development & Consultancy
+            Ltd.</a>
           <!-- Link back to LinB1 can't be removed.  is licensed under CC BY 3.0. -->
         </p>
       </div>
