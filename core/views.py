@@ -25,8 +25,8 @@ from django.core.files.images import get_image_dimensions
 
 def home_view(request):
     global context
-    markets = Area.objects.all().order_by('-updated_at')[:4]
-    shops = Shop.objects.all().order_by('-updated_at')[:4]
+    markets = Area.objects.all().order_by('-updated_at')
+    shops = Shop.objects.all().order_by('-updated_at')
     # items = Item.objects.all().order_by('-updated_at')[:10]
     top = Item.objects.all().order_by('-created_at')[:5]
     new = Item.objects.all().order_by('created_at')[:5]

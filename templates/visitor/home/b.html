@@ -5,9 +5,9 @@
 
   <div class="deskContent">
 
-    <div style=" -moz-column-count: 3;
-    -webkit-column-count: 3;
-    column-count: 3;">
+    <div style=" -moz-column-count: 4;
+    -webkit-column-count: 4;
+    column-count: 4;">
       {% for item in items %}
 
       <div class="col-12 col-sm-10 col-md-10 col-xl-10 p-3">
@@ -34,9 +34,9 @@
                 <span style="color: black;">
                   {{ item.title }}
                 </span>
-                <p>
 
-                  {% if item.discount_price  %}
+
+                {% if item.discount_price  %}
                 <div style=" padding: center;">
                   <b style="color: black; size: 5px;">{{item.discount_price}}
                     BDT </b>
@@ -47,28 +47,25 @@
                 </div>
                 {% endif %}
 
-                <a class="badge badge-light m-1" href="{{ item.get_add_to_cart_url }} ">
-                  <button type="button" class="btn btn-outline-dark btn-sm" style="
-          font-size: small;
-          width: 100%;
-          font-family: 'Times New Roman', Times, serif;
-        ">
-                    Add to cart
-                  </button>
-                </a>
 
 
-                </p>
+
+
             </a>
-            <p>
 
-
-
-
-              </h5>
+            </h5>
+            <a class="badge badge-light m-1" href="{{ item.get_add_to_cart_url }} ">
+              <button type="button" class="btn btn-outline-dark btn-sm" style="
+      font-size: small;
+      width: 100%;
+      font-family: 'Times New Roman', Times, serif;
+    ">
+                Add to cart
+              </button>
+            </a>
 
           </div>
-        </a>
+
       </div>
       {% endfor %}
     </div>
