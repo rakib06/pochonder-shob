@@ -1043,7 +1043,7 @@ def search_all(request):
     except EmptyPage:
         cat_p = paginator.page(paginator.num_pages)
     # Get the index of the current page
-    index = item_p.number - 1  # edited to something easier without index
+    index = cat_p.number - 1  # edited to something easier without index
     # This value is maximum index of your pages, so the last page - 1
     max_index = len(paginator.page_range)
     # You want a range of 7, so lets calculate where to slice the list
