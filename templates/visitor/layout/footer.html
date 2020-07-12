@@ -6,11 +6,15 @@
   </button>
 </div>
 
-<footer class="footer spad" style="background-color: black; width: 100%;">
-  <div class="row" id="footer_content" style="background-color: black; width: 100%;">
-    <div class="col-lg-4 col-md-6 col-sm-6" style="background-color: black; width: 100%;">
-      <div class="footer__about" style="background-color: black;">
-        <div class="footer__about__logo">
+<footer class="footer spad" style="background-image: linear-gradient(
+  to right,
+  rgba(18, 180, 209, 0.6),
+  rgba(56, 9, 9, 0.7)
+); width: 100%;">
+  <div class="row" id="footer_content" style="background:transparent; width: 100%;">
+    <div class="col-lg-4 col-md-6 col-sm-6" style=" width: 100%;">
+      <div class="footer__about" style="background: transparent;">
+        <div class="footer__about__logo" style="background: transparent;">
           <a href="/"><img src="{% static 'visitor/img/logo.png' %}" alt="" /></a>
         </div>
 
@@ -18,8 +22,8 @@
 
       </div>
     </div>
-    <div class="col-lg-7 col-md-6 col-sm-6 offset-lg-1" style="background-color: black; width: 100%;">
-      <div class="footer__widget" style="width: 100%;">
+    <div class="col-lg-7 col-md-6 col-sm-6 offset-lg-1" style=" width: 100%;">
+      <div class="footer__widget" style="width: 100%; background-color: transparent;">
         <ul>
           <li>
             <a href="{% url 'core:condition_of_use' %}">About Us</a>
