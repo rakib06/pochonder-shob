@@ -1005,17 +1005,47 @@ def search_all(request):
     # template_name = 'visitor/search/search_new.html'
     # def get_queryset(self): # new
     query = request.GET.get('q')
+    object_list, object_list_shops, object_list_markets, cats,cat_p, page_range = [[],[],[],[],[],[]]
+    if query != "":
 
-    object_list = Item.objects.filter(
-        title__icontains=query).order_by('-updated_at')
-    object_list = random.sample(list(object_list), len(object_list))
+        object_list = Item.objects.filter(
+            title__icontains=query).order_by('-updated_at')
+        object_list = random.sample(list(object_list), len(object_list))
 
-    object_list_shops = Shop.objects.filter(title__icontains=query)
-    # object_list_cat = Category.objects.filter(title__icontains=query)
-    object_list_markets = Area.objects.filter(name__icontains=query)
+        object_list_shops = Shop.objects.filter(title__icontains=query)
+        # object_list_cat = Category.objects.filter(title__icontains=query)
+        object_list_markets = Area.objects.filter(name__icontains=query)
 
-    cats = Item.objects.filter(category__name__icontains=query)
-    print(cats, ".................................dufhsdurih")
+        cats = Item.objects.filter(category__name__icontains=query)
+        print(cats, ".................................dufhsdurih")
+        
+
+
+        # page f     for categories products
+        page = request.GET.get('page', 1)
+        try:
+            paginator = Paginator(cats, 20)
+        except:
+            paginator = Paginator(cats, len(cats))
+        try:
+            cat_p = paginator.page(page)
+        except PageNotAnInteger:
+            cat_p = paginator.page(1)
+        except EmptyPage:
+            cat_p = paginator.page(paginator.num_pages)
+        # Get the index of the current page
+        
+
+        index = cat_p.number - 1  # edited to something easier without index
+        # This value is maximum index of your pages, so the last page - 1
+        max_index = len(paginator.page_range)
+        # You want a range of 7, so lets calculate where to slice the list
+        start_index = index - 3 if index >= 3 else 0
+        end_index = index + 3 if index <= max_index - 3 else max_index
+        # Get our new page range. In the latest versions of Django page_range returns 
+        # an iterator. Thus pass it to list, to make our slice possible again.
+        page_range = list(paginator.page_range)[start_index:end_index]
+
     no_result = False
     if len(object_list) == 0 and len(object_list_markets) == 0 and len(object_list_shops) == 0 and len(cats) == 0:
         no_result = True
@@ -1028,39 +1058,12 @@ def search_all(request):
             suggestion = random.sample(list(items), 15)
         except:
             suggestion = random.sample(list(items), len(items))
-
-
-    # page f     for categories products
-    page = request.GET.get('page', 1)
-    try:
-        paginator = Paginator(cats, 20)
-    except:
-        paginator = Paginator(cats, len(cats))
-    try:
-        cat_p = paginator.page(page)
-    except PageNotAnInteger:
-        cat_p = paginator.page(1)
-    except EmptyPage:
-        cat_p = paginator.page(paginator.num_pages)
-    # Get the index of the current page
-    
-
-    index = cat_p.number - 1  # edited to something easier without index
-    # This value is maximum index of your pages, so the last page - 1
-    max_index = len(paginator.page_range)
-    # You want a range of 7, so lets calculate where to slice the list
-    start_index = index - 3 if index >= 3 else 0
-    end_index = index + 3 if index <= max_index - 3 else max_index
-    # Get our new page range. In the latest versions of Django page_range returns 
-    # an iterator. Thus pass it to list, to make our slice possible again.
-    page_range = list(paginator.page_range)[start_index:end_index]
-
-    context = {'object_list': object_list,
-               'object_list_shops': object_list_shops,
-               'object_list_markets': object_list_markets,
-               'no_result': no_result,
-               'suggestion': suggestion,
-               'cats': cat_p,
+    context = {'object_list': object_list ,
+               'object_list_shops': object_list_shops ,
+               'object_list_markets': object_list_markets ,
+               'no_result': no_result ,
+               'suggestion': suggestion ,
+               'cats': cat_p or None,
                'root_cat': RootCat.objects.all(),
                'search': query, 'page_range': page_range,
                
