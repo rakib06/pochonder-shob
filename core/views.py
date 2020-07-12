@@ -1017,10 +1017,12 @@ def search_all(request):
         object_list_markets = Area.objects.filter(name__icontains=query)
 
         cats = Item.objects.filter(category__name__icontains=query)
-        print(cats, ".................................dufhsdurih")
+        cats = random.sample(list(cats), len(cats))
+        # print(cats, ".................................dufhsdurih")
         
 
-
+        if len(cats)>0:
+            object_list = []
         # page f     for categories products
         page = request.GET.get('page', 1)
         try:
@@ -1055,7 +1057,7 @@ def search_all(request):
 
         items = Item.objects.all().order_by('-updated_at')
         try:
-            suggestion = random.sample(list(items), 15)
+            suggestion = random.sample(list(items), 16)
         except:
             suggestion = random.sample(list(items), len(items))
     context = {'object_list': object_list ,
