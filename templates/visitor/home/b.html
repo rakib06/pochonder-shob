@@ -1,17 +1,13 @@
 {% load static %}
 
-<style>
-  #images-wrapper {
-    -moz-column-count: 3;
-    -webkit-column-count: 3;
-    column-count: 3;
-  }
-</style>
+
 <div class="container">
 
   <div class="deskContent">
 
-    <div id="images-wrapper">
+    <div style=" -moz-column-count: 3;
+    -webkit-column-count: 3;
+    column-count: 3;">
       {% for item in items %}
 
       <div class="col-12 col-sm-10 col-md-10 col-xl-10 p-3">

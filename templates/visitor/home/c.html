@@ -1,12 +1,17 @@
 {% load static %}
 
-<div class="phoneContent">
-  <div class="container">
-    <div class="row">
+
+<div class="container">
+  <br>
+
+  <div class="phoneContent">
+    <div style="-moz-column-count: 2;
+    -webkit-column-count: 2;
+    column-count: 2;">
 
       {% for item in items %}
 
-      <div class="column" style="overflow: hidden; float: left; margin: 0 auto; padding: 20px 0;">
+      <div class="col-12 col-sm-10 col-md-10 col-xl-10 p-3">
         <!-- Product Image -->
 
         <a href="{{ item.get_absolute_url }}">
