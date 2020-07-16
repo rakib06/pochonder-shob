@@ -12,12 +12,11 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup" style="padding: left;">
         <div class="navbar-nav" style="padding: left; ">
 
-            <a style="color: tomato;" class="nav-item nav-link " href="{% url 'core:home' %}"> <b>
-                    <i style="color: tomato;" class="fa fa-home"></i> Home</b></a>
+            <a class="nav-item nav-link " href="{% url 'core:home' %}"> <b>
+                    <i class="fa fa-home"></i> Home</b></a>
 
             <li class="nav-item dropdown">
-                <a style="color: green;" class="nav-link dropdown-toggle" href="#" id="navbardrop"
-                    data-toggle="dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                     <b>Shops </b>
                 </a>
                 <div class="dropdown-menu" style="border: transparent;">
@@ -30,8 +29,7 @@
             {% for item in root_cat %}
             {% if forloop.counter <= 4 %}
             <li class="nav-item dropdown">
-                <a style="color: black;" class="nav-link dropdown-toggle" href="#" id="navbardrop"
-                    data-toggle="dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                     <b>
                         {{ item.title }}
                     </b>
@@ -60,13 +58,12 @@
             <a class="nav-item nav-link disabled" href="{% url 'core:customer-order' %}"> <i class="
                 fa fa-spinner"> My Order</i></a>
             {% else %}
-            <a class="nav-item nav-link" href="\accounts\login\"> <i style="color: blue" class="fa fa-user">
+            <a class="nav-item nav-link" href="\accounts\login\"> <i class="fa fa-user">
                     Login</i></a>
             <a class="nav-item nav-link disabled" href="{% url 'core:customer-order' %}"> <i class="
                 fa fa-spinner"> My Order</i></a>
             </li>
             {% endif %}
-
 
 
 

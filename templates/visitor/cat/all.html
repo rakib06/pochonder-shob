@@ -9,7 +9,7 @@
                         </span>
                         {% for item in cats_all %}
 
-                        <a class="badge badge-warning m-1" style="font-family: 'Times New Roman', Times, serif;"
+                        <a class="badge badge-dark m-1" style=" font-family: 'Times New Roman', Times, serif;"
                             href="{% url 'core:category-view' item.slug %} ">
 
                             {{ item.name }}
@@ -20,18 +20,14 @@
                     </div>
 
                     <div class="phoneContent">
-                        {% for item in cats_all_phn %}
+                        {% for item in cats_all %}
+                        {% if forloop.counter < 10 %}
+                        <a class="badge badge-warning m-1" href="{% url 'core:category-view' item.slug %} ">
 
-                        <a class="badge badge-light m-1" href="{% url 'core:category-view' item.slug %} ">
-                            <button type="button" class="btn btn-outline-dark btn-sm" style="
-                    font-size: small;
-                    width: 100%;
-                    font-family: 'Times New Roman', Times, serif;
-                  ">
-                                {{ item.name }}
-                            </button>
+                            {{ item.name }}
+
                         </a>
-
+                        {% endif %}
                         {% endfor %}
                     </div>
                 </div>

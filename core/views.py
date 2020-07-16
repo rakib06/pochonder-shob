@@ -590,6 +590,8 @@ def ItemDetailView(request, slug):
         'market_id': market_id,
         'shop_id': shop_id,
         'cats_all': cats_all,
+        'shops': Shop.objects.all(),
+        'root_cat': RootCat.objects.all(),
     }
     return render(request, "visitor/product-details.html", context)
 
