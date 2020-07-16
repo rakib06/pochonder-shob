@@ -22,7 +22,7 @@
                     <div class="phoneContent">
                         {% for item in cats_all %}
                         {% if forloop.counter < 10 %}
-                        <a class="badge badge-warning m-1" href="{% url 'core:category-view' item.slug %} ">
+                        <a class="badge badge-dark m-1" href="{% url 'core:category-view' item.slug %} ">
 
                             {{ item.name }}
 
