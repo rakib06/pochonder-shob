@@ -51,6 +51,38 @@
             </li>
             {% endif %}
             {% endfor %}
+
+            <li class="nav-item dropdown">
+                <a style="color: black;" class="nav-link dropdown-toggle" href="#" id="navbardrop"
+                    data-toggle="dropdown">
+                    <b>See more</b>
+                </a>
+                {% for item in root_cat %}
+                {% if forloop.counter <= 4 %}
+            <li class="nav-item dropdown">
+                <a style="color: black;" class="nav-link dropdown-toggle" href="#" id="navbardrop"
+                    data-toggle="dropdown">
+                    <b>
+                        {{ item.title }}
+                    </b>
+
+                </a>
+                <div class="dropdown-menu" style="border: transparent;">
+                    {% for ccat in item.category %}
+                    <a class="dropdown-item" style="border: transparent;"
+                        href="{% url 'core:category-view' ccat.slug %}">
+
+                        {{ ccat.name }}
+
+                    </a>
+                    {% endfor %}
+
+                </div>
+            </li>
+            {% endif %}
+            {% endfor %}
+
+            </li>
             {% if request.user.is_authenticated %}
             <a class="nav-item nav-link" href="\accounts\logout\">Logout</a></li>
             <a class="nav-item nav-link disabled" href="{% url 'core:customer-order' %}"> <i class="
@@ -70,8 +102,11 @@
     </div>
 
 </nav>
+
+{% include 'visitor/layout/header/mobile.html' %}
+
+{% include 'visitor/cat/all.html' %}
 <div class="hero__search" style="margin-left: 30%;;">
     {% include 'visitor/layout/search.html' %}
 
 </div>
-{% include 'visitor/layout/header/mobile.html' %}
