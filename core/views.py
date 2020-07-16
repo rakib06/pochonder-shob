@@ -42,6 +42,7 @@ def home_view(request):
         cats = random.sample(list(cats), len(cats))
     cats_nav = cats[:5]
     root_cat = RootCat.objects.all()
+    root_cat = random.sample(list(root_cat), len(root_cat))
     cat_items = {}
    
 
