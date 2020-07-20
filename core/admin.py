@@ -134,6 +134,7 @@ class ItemAdmin(admin.ModelAdmin):
 
         return excluded
     ordering = ('-created_at',)
+    '''
     # sudhu matro tar shop er item gulo e dekhabe
     def get_queryset(self, request):
 
@@ -147,7 +148,7 @@ class ItemAdmin(admin.ModelAdmin):
         print('>>>>>>>>>>>>>>>>>>>>>>>>>>>>', qs)
         # return qs.filter(shop=request.shop.id)
         return qs.filter(shop=qs1)
-
+    '''
 
 # admin.site.register(Item, ItemAdmin)
 
