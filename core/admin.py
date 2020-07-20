@@ -107,7 +107,7 @@ class ItemAdmin(admin.ModelAdmin):
         'title','category__name',]
 
     list_display_links=('id',)
-
+    '''
     def changelist_view(self, request, extra_context=None):
         if not request.user.is_superuser:
             self.list_display = ('id','image_tag', 'title', 'price',
@@ -118,7 +118,7 @@ class ItemAdmin(admin.ModelAdmin):
         else:
             list_display_links = ('title',)
         return super().changelist_view(request, extra_context)
-
+    '''
     def get_fields(self, request, obj=None):
         fields = list(super().get_fields(request, obj))
         exclude_set = set()
