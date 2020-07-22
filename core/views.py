@@ -33,7 +33,8 @@ def home_view(request):
     # temp
     latest = Item.objects.all().order_by('category')[:5]
 
-    
+    slider = Slider.objects.all()
+    slider = random.sample(list(slider), len(slider))
     cats_all = Category.objects.all().order_by('-updated_at') 
     cats = Category.objects.all()
     try:
@@ -126,7 +127,7 @@ def home_view(request):
     # an iterator. Thus pass it to list, to make our slice possible again.
     page_range = list(paginator.page_range)[start_index:end_index]
 
-    slider = Slider.objects.all().order_by('-updated_at')[:5]
+
     context = { 'shops': shops,'items': item_p,
                'markets': markets, 'cats': cats, 'cats_nav': cats_nav,
                'slider': slider,
