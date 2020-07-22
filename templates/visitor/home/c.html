@@ -11,14 +11,14 @@
 
       {% for item in items %}
 
-      <div class="col-12 col-sm-10 col-md-10 col-xl-10 p-3">
+      <div class="col-12 col-sm-10 col-md-10 col-xl-10 p-1" style="margin: 0%;">
         <!-- Product Image -->
 
-        <a href="{{ item.get_absolute_url }}">
-          <button onclick="topFunction()" style="color: black;" id="myBtn" class="btn btn-lg btn-block"
-            title="See all from {{item.shop}}">
-            <a href="{{ item.shop.get_absolute_url }}">
-              <!--
+        <a href="{{ item.get_absolute_url }} >
+          <button onclick=" topFunction()" style="color: black;" id="myBtn" class="btn btn-lg btn-block"
+          title="See all from {{item.shop}}">
+          <a href="{{ item.shop.get_absolute_url }}">
+            <!--
  <sup style="font-size: 10px; color: black;">
                 {{item.category}}
               </sup>
@@ -26,7 +26,7 @@
                 from <b>{{item.shop}}</b></sup>
               -->
 
-            </a>
+          </a>
           </button>
           <a href="{{ item.get_absolute_url }}">
             {% if item.thumb %}
@@ -34,43 +34,31 @@
             {% else %}
             <img src="{{ item.image.url }}" class="img-circle" alt="Pochonder-Shob.com" />
             {% endif %}
-            <h5 style="
-            color: white;
-            text-align: center;
-            background-image: linear-gradient(
-              to right,
-              rgba(255, 255, 255, 0.6),
-              rgb(255, 255, 255)
-            );
-          ">
-              <span>
 
-                <p style="font-size:xx-small;">{{ item.title }} </p>
 
-              </span>
 
-              {% if item.discount_price %}
-              <div style="padding: center;">
-                <p style="font-size: xx-small;">
-                  <b>
-                    {{item.discount_price}} BDT
-                  </b>
+            {% if item.discount_price %}
 
-                </p>
+            <p style="font-size: xx-small;">
 
-              </div>
-              {% else %}
-              <div style="padding: center;">
+              {{item.discount_price}} ৳
 
-                <p style="font-size: xx-small;">
-                  <b>
-                    {{item.price}} BDT
-                  </b>
 
-                </p>
-              </div>
-              {% endif %}
-            </h5>
+            </p>
+
+
+            {% else %}
+
+
+            <p style="font-size: xx-small; margin-bottom: 0%;">
+
+              {{item.price}} ৳
+
+
+            </p>
+
+            {% endif %}
+
           </a>
           <!--
 
@@ -97,6 +85,7 @@
       {% include 'visitor/cat/rcmd.html' %}
       {% endif %}
       -->
+
       {% endfor %}
     </div>
     <div class="container">
