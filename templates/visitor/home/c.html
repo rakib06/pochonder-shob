@@ -11,7 +11,8 @@
 
       {% for item in items %}
       {% if forloop.counter == 4 %}
-      <div class="col-12 col-sm-10 col-md-10 col-xl-10 p-1" style="margin: 0%;">
+      <div class="col-12 col-sm-10 col-md-10 col-xl-10 p-1"
+        style="column-span: all; margin: 0%; display: inline-block;">
         {% for sld in slider %}
         <img src="{{ sld.image.url }}" class="img-circle" alt="" />
         {% endfor %}
