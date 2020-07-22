@@ -88,7 +88,14 @@
                     <a href="{{ item.get_absolute_url }}">
                       <!-- <img src="{{ item.image.url }}" alt=""> -->
                       <div class="product_img">
+                        <!-- <img src="{{ item.image.url }}" alt=""> -->
+                        {% if item.thumb %}
+                        <img id="img" src="{{ item.thumb.url }}" alt="">
+                        {% else %}
                         <img id="img" src="{{ item.image.url }}" alt="">
+                        {% endif %}
+
+
                         <div class="middle">
                           {% if item.discount_price  %}
                           <div class="text">

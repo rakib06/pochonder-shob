@@ -25,10 +25,15 @@
             </a>
           </button>
           <a href="{{ item.get_absolute_url }}">
-
+            {% if item.thumb %}
+            <img src="{{ item.thumb.url }}" class="img-circle" style="
+            vertical-align: middle;
+            width: 100%;" alt="Pochonder-Shob.com">
+            {% else %}
             <img src="{{ item.image.url }}" class="img-circle" style="
             vertical-align: middle;
             width: 100%;" alt="Pochonder-Shob.com">
+            {% endif %}
 
             <p>
               <span style="color: black;">

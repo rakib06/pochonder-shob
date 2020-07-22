@@ -253,14 +253,14 @@ class Item(TimeStampMixin):
         return self.Offer
 
     def thumb_tag(self):
-        if self.image:
-            return mark_safe('<img src="%s" style="width: 45px; height:45px;" />' % self.image.url)
+        if self.thumb:
+            return mark_safe('<img src="%s" style="width: 45px; height:45px;" />' % self.thumb.url)
         else:
             return 'No Image Found'
     thumb_tag.short_description = 'Image'
     def image_tag(self):
         if self.image:
-            return mark_safe('<img src="%s" style="width: 45px; height:45px;" />' % self.thumb.url)
+            return mark_safe('<img src="%s" style="width: 45px; height:45px;" />' % self.imgae.url)
         else:
             return 'No Image Found'
     image_tag.short_description = 'Thumb'

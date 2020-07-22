@@ -29,7 +29,11 @@
                             style="color: black; font-size: 10px;"> from
                             <b>{{item.shop}}</b></sup>
                         </p>
-                        <img src="{{ item.image.url }}" class="img-circle" alt="Pochonder-Shob.com">
+                        {% if item.thumb %}
+                        <img id="img" src="{{ item.thumb.url }}" alt="">
+                        {% else %}
+                        <img id="img" src="{{ item.image.url }}" alt="">
+                        {% endif %}
 
                         <h5 style="color:white; text-align: center; background-image: linear-gradient(to right, rgba(255,255,255,0.6), rgba(255,255,255,1));
                     ">

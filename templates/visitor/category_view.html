@@ -24,8 +24,11 @@
                         <a href="{{ item.get_absolute_url }}">
                             <!-- <img src="{{ item.image.url }}" alt=""> -->
                             <div class="product_img">
+                                {% if item.thumb %}
+                                <img id="img" src="{{ item.thumb.url }}" alt="">
+                                {% else %}
                                 <img id="img" src="{{ item.image.url }}" alt="">
-
+                                {% endif %}
                             </div>
                             <!-- Hover Content -->
                     </div>
