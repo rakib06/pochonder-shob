@@ -1,17 +1,9 @@
 {%load static %}
 
-<div class="humberger__menu__wrapper">
-  <nav
-    class="humberger__menu__nav mobile-menu"
-    style="background-color: white;"
-  >
+<div class="humberger__menu__wrapper" style="width: 100%;">
+  <nav class="humberger__menu__nav mobile-menu" style="background-color: white; width: 100% ; padding-left: 0%;">
     <ul style="background-color: white;">
-      <a href="/"
-        ><img
-          src="{% static 'visitor/img/logo.png' %}"
-          style="width: auto;"
-          alt=""
-      /></a>
+      <a href="/"><img src="{% static 'visitor/img/logo.png' %}" style="width: auto;" alt="" /></a>
     </ul>
     <ul style="background-color: white;">
       <li><a href="{% url 'core:home' %}">Home</a></li>
@@ -28,11 +20,7 @@
             {% for ccat in item.category %}
 
             <li>
-              <a
-                style="color: black;"
-                href="{% url 'core:category-view' ccat.slug %}"
-                >{{ ccat.name }}</a
-              >
+              <a style="color: black;" href="{% url 'core:category-view' ccat.slug %}">{{ ccat.name }}</a>
             </li>
             {% endfor %}
           </ul>
@@ -51,9 +39,7 @@
           {% for item in shops %}
 
           <li>
-            <a style="color: black;" href="{{ item.get_absolute_url }}"
-              ><b> {{ item.title }}</b></a
-            >
+            <a style="color: black;" href="{{ item.get_absolute_url }}"><b> {{ item.title }}</b></a>
           </li>
 
           {% endfor %}
@@ -61,17 +47,11 @@
       </li>
       <li>
         <a href="#">Markets</a>
-        <ul
-          class="header__menu__dropdown"
-          style="background-color: white; height: 100%;"
-        >
+        <ul class="header__menu__dropdown" style="background-color: white; height: 100%;">
           {% for item in markets %}
 
           <li>
-            <a
-              style="color: black; padding-right: 5px;"
-              href="{{ item.get_absolute_url }}"
-              ><b> {{ item.name }}</b>
+            <a style="color: black; padding-right: 5px;" href="{{ item.get_absolute_url }}"><b> {{ item.name }}</b>
             </a>
           </li>
 

@@ -240,6 +240,7 @@ class Item(TimeStampMixin):
     description = models.TextField(
         null=True, default="No description available")
     image = models.ImageField(upload_to='products/')
+    thumb = models.ImageField(upload_to='products/thumb/', null=True, blank=True)
     in_stock = models.BooleanField(default=True)
     @property
     def discount(self):
@@ -251,12 +252,18 @@ class Item(TimeStampMixin):
 
         return self.Offer
 
-    def image_tag(self):
+    def thumb_tag(self):
         if self.image:
             return mark_safe('<img src="%s" style="width: 45px; height:45px;" />' % self.image.url)
         else:
             return 'No Image Found'
-    image_tag.short_description = 'Image'
+    thumb_tag.short_description = 'Image'
+    def image_tag(self):
+        if self.image:
+            return mark_safe('<img src="%s" style="width: 45px; height:45px;" />' % self.thumb.url)
+        else:
+            return 'No Image Found'
+    image_tag.short_description = 'Thumb'
     @property
     def image_test(self):
         if self.image:
