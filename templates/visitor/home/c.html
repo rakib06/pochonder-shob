@@ -18,11 +18,14 @@
           <button onclick="topFunction()" style="color: black;" id="myBtn" class="btn btn-lg btn-block"
             title="See all from {{item.shop}}">
             <a href="{{ item.shop.get_absolute_url }}">
-              <sup style="font-size: 10px; color: black;">
+              <!--
+ <sup style="font-size: 10px; color: black;">
                 {{item.category}}
               </sup>
               <sup style="color: black; font-size: 10px;">
                 from <b>{{item.shop}}</b></sup>
+              -->
+
             </a>
           </button>
           <a href="{{ item.get_absolute_url }}">
@@ -46,15 +49,20 @@
 
               {% if item.discount_price %}
               <div style="padding: center;">
-                <b style="color: black; size: 5px;">{{item.discount_price}} BDT </b>
+                <b style="color: black; size: 2px;">{{item.discount_price}} BDT </b>
               </div>
               {% else %}
               <div style="padding: center;">
-                <b style="color: black; size: 5px;">{{item.price}} BDT </b>
+                <b style="color: black; size: 2px;">{{item.price}} BDT </b>
               </div>
               {% endif %}
             </h5>
           </a>
+          <!--
+
+          -->
+          <!---
+         
           <a style="padding-left: 35%;" class="badge badge-light m-1" href="{{ item.get_add_to_cart_url }} ">
             <button type="button" class="btn btn-outline-dark btn-sm" style="
     font-size: small;
@@ -65,10 +73,16 @@
               Add to cart
             </button>
           </a>
+          --->
+
       </div>
+      <!--
+
+      
       {% if  forloop.counter == 18 %}
       {% include 'visitor/cat/rcmd.html' %}
       {% endif %}
+      -->
       {% endfor %}
     </div>
     <div class="container">
