@@ -97,10 +97,10 @@ class ShopType(admin.ModelAdmin):
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
 
-    list_display = ['id','thumb_tag', 'title', 'in_stock',
+    list_display = ['id','thumb_tag', 'title', 'thumb', 'in_stock',
                     'price', 'discount_price', 'category', 'description', 'created_at', 'updated_at']
 
-    list_editable = ['in_stock', 'title', 'category', 'in_stock', 'description',
+    list_editable = ['in_stock', 'title', 'thumb','category', 'in_stock', 'description',
                      'price', 'discount_price', ]
 
     search_fields = [
