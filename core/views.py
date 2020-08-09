@@ -1,3 +1,4 @@
+from django.core.files.images import get_image_dimensions
 from django.db.models import Q
 from django.views.generic import ListView
 from django.conf import settings
@@ -20,8 +21,6 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 
 context = dict()
 
-from django.core.files.images import get_image_dimensions
-
 
 def home_view(request):
     global context
@@ -35,7 +34,7 @@ def home_view(request):
 
     slider = Slider.objects.all()
     slider = random.sample(list(slider), len(slider))
-    cats_all = Category.objects.all().order_by('-updated_at') 
+    cats_all = Category.objects.all().order_by('-updated_at')
     cats = Category.objects.all()
     try:
         cats = random.sample(list(cats), 5)
@@ -45,44 +44,41 @@ def home_view(request):
     root_cat = RootCat.objects.all()
     root_cat = random.sample(list(root_cat), len(root_cat))
     cat_items = {}
-   
-
 
     for cat in cats:
-        
+
         content1 = Item.objects.filter(category=cat)
         for item in content1:
-            print (len(item.title))
-            
-       
+            print(len(item.title))
+
         content = sorted(content1, key=lambda x: len(x.title), reverse=False)
-     
-        
+
         try:
-            
+
             content = random.sample(list(content), 4)
-            content = sorted(content, key=lambda x: len(x.title), reverse=False)
+            content = sorted(content, key=lambda x: len(
+                x.title), reverse=False)
         except:
-            if (len(content)<6):
+            if (len(content) < 6):
                 content = random.sample(list(content), len(content))
-                content = sorted(content, key=lambda x: len(x.title), reverse=False)
-                
+                content = sorted(content, key=lambda x: len(
+                    x.title), reverse=False)
 
             else:
                 content = random.sample(list(content), len(content))
-                content = sorted(content, key=lambda x: len(x.title), reverse=False)
+                content = sorted(content, key=lambda x: len(
+                    x.title), reverse=False)
         if cat.name not in cat_items.keys():
-            
-            if len(content)>0 :
+
+            if len(content) > 0:
                 cat_items[str(cat.name)] = content
 
     '''
     we want to show item using paginator
     '''
-    
-   
+
     cat_items_t = tuple(cat_items)
-    
+
     page = request.GET.get('page', 1)
     paginator = Paginator(cat_items_t, 2)
     try:
@@ -97,17 +93,16 @@ def home_view(request):
     # print(cat_items['cloth'])
     # slide1 = Slider.objects.all().order_by('-updated_at').first()
     items = Item.objects.all()
-    
 
     items = random.sample(list(items), len(items))
-    
+
     try:
         cats_all = random.sample(list(cats_all), len(cats_all))
     except:
         cats_all = random.sample(list(cats_all), len(cats_all))
     page = request.GET.get('page', 1)
     try:
-        paginator = Paginator(items, 25)
+        paginator = Paginator(items, 28)
     except:
         paginator = Paginator(items, 2)
     try:
@@ -123,12 +118,11 @@ def home_view(request):
     # You want a range of 7, so lets calculate where to slice the list
     start_index = index - 3 if index >= 3 else 0
     end_index = index + 3 if index <= max_index - 3 else max_index
-    # Get our new page range. In the latest versions of Django page_range returns 
+    # Get our new page range. In the latest versions of Django page_range returns
     # an iterator. Thus pass it to list, to make our slice possible again.
     page_range = list(paginator.page_range)[start_index:end_index]
 
-
-    context = { 'shops': shops,'items': item_p,
+    context = {'shops': shops, 'items': item_p,
                'markets': markets, 'cats': cats, 'cats_nav': cats_nav,
                'slider': slider,
                'cat_items': cat_items,
@@ -148,14 +142,11 @@ def home_view(request):
     return render(request, 'visitor/home.html', context)
 
 
-    
-
-
 def side_bar(request):
     shops = Shop.objects.all().order_by('-updated_at')[:10]
     root_cat = RootCat.objects.all()
     context = {'shoping': shops,
-    'root_cat': root_cat }
+               'root_cat': root_cat}
     return render(request, 'layouts/sidebar.html', context)
 
 
@@ -474,14 +465,14 @@ class ProductsView(ListView):
 
 
 class OrderSummaryView(LoginRequiredMixin, View):
-    
+
     def get(self, *args, **kwargs):
         try:
             cats_all = Category.objects.all().order_by('-updated_at')
             order = Order.objects.get(user=self.request.user, ordered=False)
             context = {
                 'object': order,
-                'cats_all': cats_all,}
+                'cats_all': cats_all, }
             # return render(self.request, 'a/cart.html', context)
             return render(self.request, 'visitor/cart.html', context)
         except ObjectDoesNotExist:
@@ -499,7 +490,7 @@ class CustomerOrderStatusView(LoginRequiredMixin, View):
             print('...............................', user_orders)
 
             context = {'object': user_orders,
-            'cats_all': cats_all}
+                       'cats_all': cats_all}
             print(user_orders)
             # return render(self.request, 'a/my_order.html', context)
             return render(self.request, 'visitor/my_order.html', context)
@@ -552,7 +543,7 @@ def get_shop_cat_items(request, id):
         offer = Offer.objects.filter(for_shop=id)
         # print('-------77777777777777777777777777777777777-----------------', category)
         context = {'items': items, 'category': category, 'offer': offer,
-        'root_cat': RootCat.objects.all()}
+                   'root_cat': RootCat.objects.all()}
 
         print(items)
         return render(request, 'shop-items.html', context)
@@ -571,8 +562,8 @@ def get_shopoffe(request, id):
         items = Item.objects.filter(Offer=id)
         offer = Offer.objects.filter(for_shop=id)
         # print('-------77777777777777777777777777777777777-----------------', category)
-        context = {'items': items, 'category': category, 'offer': offer,'root_cat': RootCat.objects.all() 
-        }
+        context = {'items': items, 'category': category, 'offer': offer, 'root_cat': RootCat.objects.all()
+                   }
 
         # print(items)
         return render(request, 'shop-items.html', context)
@@ -781,11 +772,13 @@ class RequestRefundView(View):
 '''
 
 # for all category
+
+
 def category_view(request, slug):
     try:
         cat = get_object_or_404(Category, name=slug)
     except:
-        
+
         cat = get_object_or_404(Category, slug=slug)
     id = cat.id
     items = Item.objects.filter(category=id)
@@ -821,7 +814,7 @@ def category_view(request, slug):
     # You want a range of 7, so lets calculate where to slice the list
     start_index = index - 3 if index >= 3 else 0
     end_index = index + 3 if index <= max_index - 3 else max_index
-    # Get our new page range. In the latest versions of Django page_range returns 
+    # Get our new page range. In the latest versions of Django page_range returns
     # an iterator. Thus pass it to list, to make our slice possible again.
     page_range = list(paginator.page_range)[start_index:end_index]
     context = {
@@ -833,22 +826,23 @@ def category_view(request, slug):
         'shops': Shop.objects.all(),
         'markets': Area.objects.all(),
         'page_range': page_range,
-        
+
     }
 
-    
     return render(request, "visitor/category_view.html", context)
 
 # for shop category
+
+
 def category_viewS(request, slug, shop):
     try:
         cat = get_object_or_404(Category, name=slug)
     except:
-        
+
         cat = get_object_or_404(Category, slug=slug)
     id = cat.id
     # print('Shop',shop)
-    
+
     items = Item.objects.filter(category=id).filter(shop__slug__icontains=shop)
     items = random.sample(list(items), len(items))
     cat = Category.objects.get(id=id)
@@ -856,7 +850,7 @@ def category_viewS(request, slug, shop):
     cat_items = {}
     try:
         shop = Shop.objects.get(slug__icontains=shop)
-    except:    
+    except:
         shop = Shop.objects.get(title__icontains=shop)
 
     # category = Category.objects.filter(for_shop=shop.id)
@@ -865,7 +859,7 @@ def category_viewS(request, slug, shop):
     for ic in Item.objects.filter(shop=shop):
         sc.append(ic.category)
 
-    unique_cat_list = [i for n, i in enumerate(sc) if i not in sc[:n]] 
+    unique_cat_list = [i for n, i in enumerate(sc) if i not in sc[:n]]
     print("___________> ", unique_cat_list)
     category = Category.objects.filter(name__in=unique_cat_list)
     # end of get all cat
@@ -888,7 +882,7 @@ def category_viewS(request, slug, shop):
     except PageNotAnInteger:
         item_p = paginator.page(1)
     except EmptyPage:
-        item_p = paginator.page(paginator.num_pages)   
+        item_p = paginator.page(paginator.num_pages)
     # Get the index of the current page
     index = item_p.number - 1  # edited to something easier without index
     # This value is maximum index of your pages, so the last page - 1
@@ -896,11 +890,11 @@ def category_viewS(request, slug, shop):
     # You want a range of 7, so lets calculate where to slice the list
     start_index = index - 3 if index >= 3 else 0
     end_index = index + 3 if index <= max_index - 3 else max_index
-    # Get our new page range. In the latest versions of Django page_range returns 
+    # Get our new page range. In the latest versions of Django page_range returns
     # an iterator. Thus pass it to list, to make our slice possible again.
-    page_range = list(paginator.page_range)[start_index:end_index]     
+    page_range = list(paginator.page_range)[start_index:end_index]
     context = {
-        'shop':shop,
+        'shop': shop,
         'items': item_p,
         'cat': cat,
         'cat_items': cat_items,
@@ -913,7 +907,6 @@ def category_viewS(request, slug, shop):
     }
     return render(request, "visitor/shop/cat.html", context)
     # return render(request, "visitor/shop/get_cat_items.html", context)
-
 
 
 def conditions_of_use_view(request):
@@ -938,9 +931,9 @@ def get_items(request, id):
         context = {'items': items, 'category': category,
                    'offer': offer, 'shop': shop,
                    'cats_all': cats_all,
-                  'root_cat': RootCat.objects.all(),
-                'shops': Shop.objects.all(),
-                'markets': Area.objects.all(),
+                   'root_cat': RootCat.objects.all(),
+                   'shops': Shop.objects.all(),
+                   'markets': Area.objects.all(),
                    }
         print(items)
         # return render(request, 'a/main/items.html', context)
@@ -951,6 +944,8 @@ def get_items(request, id):
         return redirect("core:checkout")
 
 # to get shop items
+
+
 def get_items_slug(request, slug):
     global context
     try:
@@ -958,26 +953,25 @@ def get_items_slug(request, slug):
         id = my_shop.id
         print('...............................', type(slug))
         items = Item.objects.filter(shop=id)
-        
+
         items = random.sample(list(items), len(items))
-        
-        
+
         # category = Category.objects.filter(for_shop=id)
         # get all shop category
         sc = []
         for ic in items:
             sc.append(ic.category)
 
-        unique_cat_list = [i for n, i in enumerate(sc) if i not in sc[:n]] 
+        unique_cat_list = [i for n, i in enumerate(sc) if i not in sc[:n]]
         print("___________> ", unique_cat_list)
         category = Category.objects.filter(name__in=unique_cat_list)
         # end of get all shop category
 
-
         offer = Offer.objects.filter(for_shop=id)
         shop = Shop.objects.get(pk=id)
-        cats_all = Category.objects.filter(for_shop=shop).order_by('-updated_at') 
-    
+        cats_all = Category.objects.filter(
+            for_shop=shop).order_by('-updated_at')
+
         page = request.GET.get('page', 1)
         try:
             paginator = Paginator(items, 16)
@@ -989,7 +983,7 @@ def get_items_slug(request, slug):
             item_p = paginator.page(1)
         except EmptyPage:
             item_p = paginator.page(paginator.num_pages)
-        
+
         # Get the index of the current page
         index = item_p.number - 1  # edited to something easier without index
         # This value is maximum index of your pages, so the last page - 1
@@ -997,15 +991,15 @@ def get_items_slug(request, slug):
         # You want a range of 7, so lets calculate where to slice the list
         start_index = index - 3 if index >= 3 else 0
         end_index = index + 3 if index <= max_index - 3 else max_index
-        # Get our new page range. In the latest versions of Django page_range returns 
+        # Get our new page range. In the latest versions of Django page_range returns
         # an iterator. Thus pass it to list, to make our slice possible again.
-        page_range = list(paginator.page_range)[start_index:end_index]      
+        page_range = list(paginator.page_range)[start_index:end_index]
 
-        context.update ({'items': item_p, 'category': category,
-                   'offer': offer, 'shop': shop,'root_cat': RootCat.objects.all(),
-        'shops': Shop.objects.all(),
-        'markets': Area.objects.all(),
-                   'cats_all': cats_all, 'page_range': page_range})
+        context.update({'items': item_p, 'category': category,
+                        'offer': offer, 'shop': shop, 'root_cat': RootCat.objects.all(),
+                        'shops': Shop.objects.all(),
+                        'markets': Area.objects.all(),
+                        'cats_all': cats_all, 'page_range': page_range})
         print(items)
         # return render(request, 'a/main/items.html', context)
         return render(request, 'visitor/shop/getItems.html', context)
@@ -1018,6 +1012,7 @@ def get_items_slug(request, slug):
 class SearchResultsView(ListView):
     model = Item
     template_name = 'visitor/search/search_new.html'
+
     def get_queryset(self):  # new
 
         query = self.request.GET.get('q')
@@ -1041,7 +1036,8 @@ def search_all(request):
     # template_name = 'visitor/search/search_new.html'
     # def get_queryset(self): # new
     query = request.GET.get('q')
-    object_list, object_list_shops, object_list_markets, cats,cat_p, page_range = [[],[],[],[],[],[]]
+    object_list, object_list_shops, object_list_markets, cats, cat_p, page_range = [
+        [], [], [], [], [], []]
     if query != "":
 
         object_list = Item.objects.filter(
@@ -1055,9 +1051,8 @@ def search_all(request):
         cats = Item.objects.filter(category__name__icontains=query)
         cats = random.sample(list(cats), len(cats))
         # print(cats, ".................................dufhsdurih")
-        
 
-        if len(cats)>0:
+        if len(cats) > 0:
             object_list = []
         # page f     for categories products
         page = request.GET.get('page', 1)
@@ -1072,7 +1067,6 @@ def search_all(request):
         except EmptyPage:
             cat_p = paginator.page(paginator.num_pages)
         # Get the index of the current page
-        
 
         index = cat_p.number - 1  # edited to something easier without index
         # This value is maximum index of your pages, so the last page - 1
@@ -1080,7 +1074,7 @@ def search_all(request):
         # You want a range of 7, so lets calculate where to slice the list
         start_index = index - 3 if index >= 3 else 0
         end_index = index + 3 if index <= max_index - 3 else max_index
-        # Get our new page range. In the latest versions of Django page_range returns 
+        # Get our new page range. In the latest versions of Django page_range returns
         # an iterator. Thus pass it to list, to make our slice possible again.
         page_range = list(paginator.page_range)[start_index:end_index]
 
@@ -1096,20 +1090,19 @@ def search_all(request):
             suggestion = random.sample(list(items), 16)
         except:
             suggestion = random.sample(list(items), len(items))
-    context = {'object_list': object_list ,
-               'object_list_shops': object_list_shops ,
-               'object_list_markets': object_list_markets ,
-               'no_result': no_result ,
-               'suggestion': suggestion ,
+    context = {'object_list': object_list,
+               'object_list_shops': object_list_shops,
+               'object_list_markets': object_list_markets,
+               'no_result': no_result,
+               'suggestion': suggestion,
                'cats': cat_p or None,
                'root_cat': RootCat.objects.all(),
                'search': query, 'page_range': page_range,
-               
-        'shops': Shop.objects.all(),
-        'markets': Area.objects.all(),
+
+               'shops': Shop.objects.all(),
+               'markets': Area.objects.all(),
 
                }
 
     # return render(request, 'a/main/items.html', context)
     return render(request, 'visitor/search/search_all.html', context)
-
