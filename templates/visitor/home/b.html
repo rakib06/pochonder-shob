@@ -10,11 +10,12 @@
     <div style=" width: 100%;">
       {% for item in items %}
 
-      <div class="col-12 col-sm-10 col-md-10 col-xl-10 p-3" style="display: inline-block;">
+      <div class="col-12 col-sm-10 col-md-10 col-xl-10 p-3" style="display: inline-block; ">
 
 
-        <div class="single-product-wrapper" id="product_box" style="margin: 0em;">
-
+        <div class="single-product-wrapper" id="product_box" style="width:auto; margin:0 auto; background-position:center center;
+        background-repeat:no-repeat;
+        background-clip:content-box;">
           <div class="product-img">
             <button onclick="topFunction()" style="color: black;" id="myBtn" class="btn btn-lg btn-block"
               title="See all from {{item.shop}}">
