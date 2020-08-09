@@ -13,66 +13,71 @@
       <div class="col-12 col-sm-10 col-md-10 col-xl-10 p-3" style="display: inline-block;">
 
 
+        <div class="single-product-wrapper" id="product_box" style="margin: 0em;">
 
-        <div id="image_with_price">
-          <button onclick="topFunction()" style="color: black;" id="myBtn" class="btn btn-lg btn-block"
-            title="See all from {{item.shop}}">
-            <a href="{{ item.shop.get_absolute_url }}">
-              <sup style="font-size: 10px; color: black;"> {{item.category}} </sup> <sup
-                style="color: black; font-size: 10px;"> from
-                <b>{{item.shop}}</b></sup>
+          <div class="product-img">
+            <button onclick="topFunction()" style="color: black;" id="myBtn" class="btn btn-lg btn-block"
+              title="See all from {{item.shop}}">
+              <a href="{{ item.shop.get_absolute_url }}">
+                <sup style="font-size: 10px; color: black;"> {{item.category}} </sup> <sup
+                  style="color: black; font-size: 10px;"> from
+                  <b>{{item.shop}}</b></sup>
 
-            </a>
-          </button>
-          <a href="{{ item.get_absolute_url }}">
-            {% if item.thumb %}
-            <img src="{{ item.thumb.url }}" class="img-circle" style="
+              </a>
+            </button>
+            <a href="{{ item.get_absolute_url }}">
+              {% if item.thumb %}
+              <img src="{{ item.thumb.url }}" class="img-circle" style="
             vertical-align: middle;
             width: 100%;" alt="Pochonder-Shob.com">
-            {% else %}
-            <img src="{{ item.image.url }}" class="img-circle" style="
+              {% else %}
+              <img src="{{ item.image.url }}" class="img-circle" style="
             vertical-align: middle;
             width: 100%;" alt="Pochonder-Shob.com">
-            {% endif %}
+              {% endif %}
 
-            <p>
-              <span style="color: black;">
-                {{ item.title }}
-                <sup>
+
+              <p class="lead" style="text-align: center;">
+                <strong>
                   {% if item.discount_price  %}
-                  <b style="color: tomato;">
-                    {{item.discount_price}}
-                    BDT
-                  </b>
+                  <span class="mr-1" style="font-size: small;">
+                    <del style="color: rgb(33, 206, 139);"> {{item.price }}0 ‎</del>
+                  </span>
+                  <span class="mr-1" style="font-weight: bold; font-size: medium;">
+                    {{ item.discount_price }}0 ‎BDT
+                  </span>
+
                   {% else %}
-                  <b>
-                    {{item.price}}
-                    BDT
-                  </b>
+                  <span style="font-weight: bold; font-size: medium; ">
 
+                    {{ item.price }}0 BDT
+                  </span>
                   {% endif %}
-                </sup>
-
-
-              </span>
-          </a>
-          </p>
-          <p>
-
-
-            <a style="padding: 5%;" class="badge badge-pill badge-warning" href="{{ item.get_add_to_cart_url }} ">
-
-              Add to cart +
-
+                </strong>
+              </p>
             </a>
 
-          </p>
+            <!--
+              <p>
+
+
+              <a style="padding: 5%;" class="badge badge-pill badge-warning" href="{{ item.get_add_to_cart_url }} ">
+
+                Add to cart +
+
+              </a>
+
+            </p>
+
+            -->
 
 
 
 
 
 
+
+          </div>
         </div>
 
       </div>
@@ -85,25 +90,26 @@
 
 
 
-    <div class="container">
-      <ul class="pagination justify-content-center">
-        {% if items.has_previous %}
-        <li class="page-item"><a class="page-link" href="?page={{items.previous_page_number}}"> Prev</a>
-        </li>
-        {% endif %}
+
+  </div>
+  <div class="container">
+    <ul class="pagination justify-content-center">
+      {% if items.has_previous %}
+      <li class="page-item"><a class="page-link" href="?page={{items.previous_page_number}}"> Prev</a>
+      </li>
+      {% endif %}
 
 
-        {% for pg in page_range %}
-        {% if items.number == pg %}
-        <li class="page-item"><a class="page-link" href="?page={{pg}}">{{pg}}</a></li>
-        {% else %}
-        <li class="page-item"><a class="page-link" href="?page={{pg}}">{{pg}}</a></li>
-        {% endif %}
-        {% endfor %}
-        {% if items.has_next %}
-        <li class="page-item"><a class="page-link" href="?page={{items.next_page_number}}">Next</a></li>
-        {% endif %}
-      </ul>
-    </div>
+      {% for pg in page_range %}
+      {% if items.number == pg %}
+      <li class="page-item"><a class="page-link" href="?page={{pg}}">{{pg}}</a></li>
+      {% else %}
+      <li class="page-item"><a class="page-link" href="?page={{pg}}">{{pg}}</a></li>
+      {% endif %}
+      {% endfor %}
+      {% if items.has_next %}
+      <li class="page-item"><a class="page-link" href="?page={{items.next_page_number}}">Next</a></li>
+      {% endif %}
+    </ul>
   </div>
 </div>
