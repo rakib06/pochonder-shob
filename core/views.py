@@ -102,7 +102,7 @@ def home_view(request):
         cats_all = random.sample(list(cats_all), len(cats_all))
     page = request.GET.get('page', 1)
     try:
-        paginator = Paginator(items, 28)
+        paginator = Paginator(items, 24)
     except:
         paginator = Paginator(items, 2)
     try:
