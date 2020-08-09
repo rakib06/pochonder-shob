@@ -34,7 +34,7 @@ def home_view(request):
 
     slider = Slider.objects.all()
     slider = random.sample(list(slider), len(slider))
-    cats_all = Category.objects.all().order_by('-updated_at')
+    cats_all = Category.objects.all().order_by('name')
     cats = Category.objects.all()
     try:
         cats = random.sample(list(cats), 5)
@@ -97,9 +97,9 @@ def home_view(request):
     items = random.sample(list(items), len(items))
 
     try:
-        cats_all = random.sample(list(cats_all), len(cats_all))
+        cats_all_1 = random.sample(list(cats_all), len(cats_all))
     except:
-        cats_all = random.sample(list(cats_all), len(cats_all))
+        cats_all_1 = random.sample(list(cats_all), len(cats_all))
     page = request.GET.get('page', 1)
     try:
         paginator = Paginator(items, 24)
