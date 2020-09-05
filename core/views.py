@@ -252,8 +252,18 @@ class CheckoutView(View):
                 mobile_number = form.cleaned_data.get(
                     'mobile_number')
                 mobile_number = str(mobile_number)
-                if "+" in mobile_number:
-                    mobile_number = mobile_number[1:]
+
+                mb = mobile_number
+                a = mb[:]
+                b = "1234567890"
+                for char in b:
+                    a = a.replace(char, "")
+                print(a)
+                for char in a:
+                    mb = mb.replace(char, "")
+                mobile_number = mb
+                print(mb)
+                print(mobile_number)
                 comment = form.cleaned_data.get(
                     'comment')
                 customer_name = form.cleaned_data.get(
