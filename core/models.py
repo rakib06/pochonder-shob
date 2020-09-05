@@ -39,9 +39,9 @@ class RootCat(TimeStampMixin):
             return mark_safe('<img src="%s" style="width: 45px; height:45px;" />' % self.image.url)
         else:
             return 'No Image Found'
-    
+
     image_tag.short_description = 'Image'
-    
+
     def get_absolute_url(self):
 
         return reverse("core:area-shops", kwargs={
@@ -51,6 +51,8 @@ class RootCat(TimeStampMixin):
     # shop category
 
 # class area for jolil tower, shopping complex, nixon market etc
+
+
 class Area(TimeStampMixin):
     name = models.CharField(max_length=100)
     image = models.ImageField(
@@ -65,11 +67,13 @@ class Area(TimeStampMixin):
         else:
             return 'No Image Found'
     image_tag.short_description = 'Image'
+
     @property
     def shops_count(self):
         x = Shop.objects.filter(area=self.id).count()
         print('*********************8888', x)
         return x
+
     @property
     def items_count(self):
         shops = Shop.objects.filter(area=self.id)
@@ -79,7 +83,7 @@ class Area(TimeStampMixin):
             n += n
         print('*********************8888= n ', n)
         return n
-    
+
     '''
     def save(self):
         super().save()  # saving image first
@@ -197,6 +201,7 @@ class Category(TimeStampMixin):
     for_shop = models.ManyToManyField(Shop)
     slug = models.SlugField(verbose_name="Cat URL", null=False, unique=True)
     tags = models.CharField(max_length=500)
+
     def __str__(self):
         return self.name
 
@@ -240,8 +245,10 @@ class Item(TimeStampMixin):
     description = models.TextField(
         null=True, default="No description available")
     image = models.ImageField(upload_to='products/')
-    thumb = models.ImageField(upload_to='products/thumb/', null=True, blank=True)
+    thumb = models.ImageField(
+        upload_to='products/thumb/', null=True, blank=True)
     in_stock = models.BooleanField(default=True)
+
     @property
     def discount(self):
         dp = -((self.price - self.discount_price) / self.price) * 100
@@ -258,12 +265,14 @@ class Item(TimeStampMixin):
         else:
             return 'No Image Found'
     thumb_tag.short_description = 'Image'
+
     def image_tag(self):
         if self.image:
             return mark_safe('<img src="%s" style="width: 45px; height:45px;" />' % self.image.url)
         else:
             return 'No Image Found'
     image_tag.short_description = 'Thumb'
+
     @property
     def image_test(self):
         if self.image:
@@ -410,7 +419,7 @@ class Order(TimeStampMixin):
 
     refund_requested = models.BooleanField(default=False)
     refund_granted = models.BooleanField(default=False)
-    mobile_number = models.CharField(max_length=11)
+    mobile_number = models.CharField(max_length=200)
     payment_option = models.CharField(
         choices=PAYMENT_CHOICES, max_length=2, null=True)
 
