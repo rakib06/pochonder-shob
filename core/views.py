@@ -243,27 +243,29 @@ class CheckoutView(View):
 
         try:
             order = Order.objects.get(user=self.request.user, ordered=False)
+            mobile_number = form.data.get(
+                'mobile_number')
+            mobile_number = str(mobile_number)
+
+            mb = mobile_number
+            a = mb[:]
+            b = "1234567890"
+            for char in b:
+                a = a.replace(char, "")
+            print(a)
+            for char in a:
+                mb = mb.replace(char, "")
+            mobile_number = mb
+            print(mb)
+            print(mobile_number)
+
             if form.is_valid():
 
                 payment_option = form.cleaned_data.get(
                     'payment_option')
                 order.payment_option = payment_option
                 print('payment_option = ', payment_option)
-                mobile_number = form.cleaned_data.get(
-                    'mobile_number')
-                mobile_number = str(mobile_number)
 
-                mb = mobile_number
-                a = mb[:]
-                b = "1234567890"
-                for char in b:
-                    a = a.replace(char, "")
-                print(a)
-                for char in a:
-                    mb = mb.replace(char, "")
-                mobile_number = mb
-                print(mb)
-                print(mobile_number)
                 comment = form.cleaned_data.get(
                     'comment')
                 customer_name = form.cleaned_data.get(
