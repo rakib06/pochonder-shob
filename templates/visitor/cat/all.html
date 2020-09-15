@@ -6,20 +6,25 @@
                 <div style="width:100%">
 
                     <div class="deskContent">
-                        </span>
-                        {% for item in cats_all %}
 
-                        <a class="badge badge-dark m-1" style=" font-family: 'Times New Roman', Times, serif;"
-                            href="{% url 'core:category-view' item.slug %} ">
+                        {% for item in cats_all %}
+                        <button id="{{ item.slug }}" type=" button" class="btn btn-danger">
+                            <script type="text/javascript">
+                                document.getElementById("{{ item.slug }}").onclick = function () {
+                                    location.href = "{% url 'core:category-view' item.slug %}";
+                                };
+                            </script>
+
 
                             {{ item.name }}
 
-                        </a>
+
+                        </button>
 
                         {% endfor %}
                     </div>
 
-                    <div class="phoneContent">
+                    <div class=" phoneContent">
                         {% for item in cats_all %}
                         {% if forloop.counter < 15 %}
                         <a class="badge badge-warning m-1" href="{% url 'core:category-view' item.slug %} ">
